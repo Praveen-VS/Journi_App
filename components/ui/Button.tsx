@@ -5,7 +5,7 @@ import { motion, HTMLMotionProps } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
 
 export interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
-  variant?: 'sunset' | 'burgundy' | 'secondary' | 'ghost' | 'outline';
+  variant?: 'sunset' | 'burgundy' | 'secondary' | 'ghost' | 'outline' | 'journey';
   size?: 'sm' | 'md' | 'lg' | 'icon';
   isLoading?: boolean;
   leftIcon?: React.ReactNode;
@@ -38,6 +38,8 @@ export default function Button({
   const variantStyles = {
     sunset:
       'bg-gradient-to-r from-[#FF4F7A] via-[#FF7A3D] to-[#FFC83D] text-white shadow-sunset hover:opacity-95 active:opacity-90',
+    journey:
+      'bg-gradient-to-r from-[#C2185B] via-[#E91E63] to-[#FF5252] text-white shadow-md hover:shadow-lg hover:opacity-95 active:opacity-90',
     burgundy:
       'bg-[#5B0B24] text-white shadow-soft hover:bg-[#4a081d] active:bg-[#3a0616]',
     secondary:

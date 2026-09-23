@@ -30,7 +30,11 @@ export default function LandingPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const handlePromptSubmit = (promptText: string) => {
-    router.push(`/ai?prompt=${encodeURIComponent(promptText)}`);
+    if (promptText && promptText.trim()) {
+      router.push(`/ai?prompt=${encodeURIComponent(promptText.trim())}`);
+    } else {
+      router.push('/ai');
+    }
   };
 
   const handlePromptChipClick = (promptText: string) => {
@@ -368,7 +372,7 @@ export default function LandingPage() {
 
             <div className="flex flex-wrap items-center gap-4">
               <Link href="/ai">
-                <Button variant="sunset" size="lg" leftIcon={<Sparkles className="w-4 h-4" />}>
+                <Button variant="journey" size="lg" leftIcon={<Sparkles className="w-4 h-4" />}>
                   Start Planning with AI
                 </Button>
               </Link>

@@ -37,7 +37,11 @@ export default function HomePage() {
   const upcomingTrip = MOCK_TRIPS[0];
 
   const handlePromptSubmit = (prompt: string) => {
-    router.push(`/ai?prompt=${encodeURIComponent(prompt)}`);
+    if (prompt && prompt.trim()) {
+      router.push(`/ai?prompt=${encodeURIComponent(prompt.trim())}`);
+    } else {
+      router.push('/ai');
+    }
   };
 
   const handleCategorySelect = (category: string) => {

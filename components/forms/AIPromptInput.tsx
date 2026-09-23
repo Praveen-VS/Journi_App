@@ -22,9 +22,7 @@ export default function AIPromptInput({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (prompt.trim()) {
-      onSubmit(prompt.trim());
-    }
+    onSubmit(prompt.trim());
   };
 
   return (
@@ -47,12 +45,11 @@ export default function AIPromptInput({
 
         <Button
           type="submit"
-          variant="sunset"
+          variant="journey"
           size="md"
           isLoading={isLoading}
-          disabled={!prompt.trim()}
           rightIcon={<ArrowRight className="w-4 h-4" />}
-          className="flex-shrink-0"
+          className="flex-shrink-0 font-bold opacity-100 disabled:opacity-100 shadow-md hover:shadow-lg"
         >
           Plan with AI
         </Button>
