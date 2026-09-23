@@ -63,7 +63,7 @@ function OnboardingContent() {
     return (
       <main
         onClick={() => setCurrentStep(1)}
-        className="relative min-h-screen w-full flex flex-col items-center justify-between p-6 cursor-pointer overflow-hidden select-none bg-[#1F060F]"
+        className="fixed inset-0 z-40 w-full h-full flex flex-col items-center justify-between p-6 cursor-pointer overflow-hidden select-none bg-[#1F060F]"
       >
         {/* Background Artwork */}
         <div className="absolute inset-0 z-0">
@@ -116,7 +116,7 @@ function OnboardingContent() {
 
   // M02, M03, M04: Interactive Onboarding Flow
   return (
-    <main className="relative min-h-screen w-full flex flex-col justify-between overflow-x-hidden select-none bg-[#FFF7FA]">
+    <main className="fixed inset-0 z-40 w-full h-full flex flex-col justify-between overflow-x-hidden overflow-y-auto select-none bg-[#FFF7FA]">
       {/* Background Hero Stage */}
       <div className="absolute top-0 inset-x-0 h-[62%] sm:h-[65%] z-0 overflow-hidden">
         <AnimatePresence mode="wait">
