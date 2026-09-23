@@ -1,0 +1,16 @@
+{
+  "name": "Journi",
+  "short_name": "Journi",
+  "description": "Every journey begins a story. Premium travel planning platform.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF4F6",
+  "theme_color": "#5B0B24",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

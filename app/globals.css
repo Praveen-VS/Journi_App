@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Journi Locked Brand Palette */
+  --primary-burgundy: #5B0B24;
+  --pink: #C2185B;
+  --coral: #FF4F7A;
+  --sun-orange: #FF7A3D;
+  --golden: #FFC83D;
+  --background: #FFF7FA;
+  --foreground: #2E0513;
+
+  /* Card and border tokens */
+  --card: #FFFFFF;
+  --card-foreground: #2E0513;
+  --border: rgba(91, 11, 36, 0.08);
+  --muted: #8E7079;
+}
+
+.dark {
+  --primary-burgundy: #FF8BA7;
+  --pink: #F472B6;
+  --coral: #FB7185;
+  --sun-orange: #FDBA74;
+  --golden: #FDE047;
+  --background: #19050C;
+  --foreground: #FFF7FA;
+
+  --card: #280814;
+  --card-foreground: #FFF7FA;
+  --border: rgba(255, 139, 167, 0.15);
+  --muted: #C498A6;
+}
+
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background-color: var(--background);
+  font-family: var(--font-poppins), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* WCAG Focus Rings */
+:focus-visible {
+  outline: 2px solid #FF4F7A;
+  outline-offset: 2px;
+}
+
+/* Sunset Gradient Text Utility */
+.text-sunset {
+  background: linear-gradient(135deg, #FF4F7A 0%, #FF7A3D 50%, #FFC83D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Sunset Gradient Background Utility */
+.bg-sunset {
+  background: linear-gradient(135deg, #FF4F7A 0%, #FF7A3D 100%);
+}
+
+.bg-sunset-rich {
+  background: linear-gradient(135deg, #5B0B24 0%, #C2185B 40%, #FF4F7A 75%, #FF7A3D 100%);
+}
+
+.bg-sunset-subtle {
+  background: linear-gradient(180deg, rgba(255, 79, 122, 0.06) 0%, rgba(255, 122, 61, 0.03) 100%);
+}
+
+/* Glassmorphism Card Utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(91, 11, 36, 0.06);
+}
+
+.dark .glass-panel {
+  background: rgba(40, 8, 20, 0.85);
+  border: 1px solid rgba(255, 139, 167, 0.12);
+}
+
+/* Shimmer Animation for Skeleton Loaders */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(91, 11, 36, 0.04) 25%,
+    rgba(91, 11, 36, 0.08) 50%,
+    rgba(91, 11, 36, 0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.dark .animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Prefers-reduced-motion override */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

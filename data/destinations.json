@@ -1,0 +1,5492 @@
+[
+  {
+    "id": "dest_kyoto",
+    "name": "Kyoto",
+    "country": "Japan",
+    "continent": "Asia",
+    "tagline": "Ancient temples, bamboo groves & quiet morning teas",
+    "description": "Immerse in timeless Japanese serenity, walking through thousand vermilion Torii gates and centuries-old zen gardens.",
+    "coverImage": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#C2185B] to-[#FF7A3D]",
+    "bestSeason": "Spring & Autumn",
+    "averageTemp": "18°C",
+    "idealDays": 5,
+    "vibes": [
+      "Cultural",
+      "Peaceful",
+      "Culinary"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Fine Dining",
+      "Authentic Spicy",
+      "Cafes & Bakeries",
+      "Plant-Based"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Solo",
+      "Couple",
+      "Family"
+    ],
+    "highlights": [
+      "Fushimi Inari Taisha",
+      "Arashiyama Bamboo Grove",
+      "Kinkaku-ji",
+      "Gion Tea Ceremony"
+    ],
+    "cuisines": [
+      "Kaiseki Feast",
+      "Matcha Parfait",
+      "Yudofu Tofu",
+      "Kamo Nanban Soba"
+    ]
+  },
+  {
+    "id": "dest_tokyo",
+    "name": "Tokyo",
+    "country": "Japan",
+    "continent": "Asia",
+    "tagline": "Neon skylines, ancient shrines & Michelin culinary mastery",
+    "description": "A dazzling convergence of hyper-futuristic innovation, tranquil neighborhood shrines, and world-class street food alleys.",
+    "coverImage": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#C2185B] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "March – May & Sept – Nov",
+    "averageTemp": "20°C",
+    "idealDays": 6,
+    "vibes": [
+      "Futuristic",
+      "Culinary",
+      "Shopping"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Street Food",
+      "Fine Dining",
+      "Seafood",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Neon Metropolis",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Solo",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "Shibuya Crossing",
+      "Senso-ji Temple",
+      "teamLab Planets",
+      "Shinjuku Gyoen"
+    ],
+    "cuisines": [
+      "Omakase Sushi",
+      "Tsukemen Ramen",
+      "Yakitori in Omoide Yokocho",
+      "Fluffy Souffle Pancakes"
+    ]
+  },
+  {
+    "id": "dest_bali",
+    "name": "Bali (Ubud & Uluwatu)",
+    "country": "Indonesia",
+    "continent": "Asia",
+    "tagline": "Emerald rice terraces, spiritual retreats & sunset surf breaks",
+    "description": "From sacred forest temples and wellness retreats in Ubud to dramatic limestone cliffside beach clubs in Uluwatu.",
+    "coverImage": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "April – October",
+    "averageTemp": "28°C",
+    "idealDays": 7,
+    "vibes": [
+      "Relaxed",
+      "Spiritual",
+      "Beaches"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Street Food",
+      "Seafood",
+      "Plant-Based",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Solo",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "Tegallalang Rice Terrace",
+      "Uluwatu Temple Sunset",
+      "Monkey Forest Sanctuary",
+      "Nusa Penida Boat Trip"
+    ],
+    "cuisines": [
+      "Nasi Campur",
+      "Babi Guling",
+      "Jimbaran Grilled Seafood",
+      "Acai Smoothie Bowls"
+    ]
+  },
+  {
+    "id": "dest_phuket",
+    "name": "Phuket & Phi Phi",
+    "country": "Thailand",
+    "continent": "Asia",
+    "tagline": "Turquoise Andaman bays, limestone karsts & vibrant night markets",
+    "description": "Tropical paradise featuring pristine white-sand beaches, traditional longtail boat excursions, and fiery southern curries.",
+    "coverImage": "https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF4F7A] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "November – April",
+    "averageTemp": "30°C",
+    "idealDays": 5,
+    "vibes": [
+      "Beaches",
+      "Island Hopping",
+      "Nightlife"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Street Food",
+      "Seafood",
+      "Authentic Spicy"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Couple",
+      "Friends",
+      "Solo"
+    ],
+    "highlights": [
+      "Maya Bay",
+      "Big Buddha Viewpoint",
+      "Old Phuket Town Sino-Portuguese Walk",
+      "Bangla Night Market"
+    ],
+    "cuisines": [
+      "Pad Thai Goong",
+      "Tom Yum Goong",
+      "Mango Sticky Rice",
+      "Massaman Curry"
+    ]
+  },
+  {
+    "id": "dest_seoul",
+    "name": "Seoul",
+    "country": "South Korea",
+    "continent": "Asia",
+    "tagline": "Dynasty palaces, trendy cafe culture & sizzling BBQ alleys",
+    "description": "Dynamic capital blending centuries-old Joseon royal palaces with cutting-edge streetwear, K-beauty, and incredible street bites.",
+    "coverImage": "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#C2185B] to-[#FF4F7A]",
+    "bestSeason": "Spring & Autumn",
+    "averageTemp": "17°C",
+    "idealDays": 5,
+    "vibes": [
+      "Trendy",
+      "Cultural",
+      "Gastronomy"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Street Food",
+      "Authentic Spicy",
+      "Cafes & Bakeries",
+      "Fine Dining"
+    ],
+    "landscape": "Neon Metropolis",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Solo",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "Gyeongbokgung Palace",
+      "Bukchon Hanok Village",
+      "Hongdae Nightlife",
+      "N Seoul Tower"
+    ],
+    "cuisines": [
+      "Korean Hanwoo BBQ",
+      "Tteokbokki at Gwangjang Market",
+      "Crispy Chimaek",
+      "Bibimbap"
+    ]
+  },
+  {
+    "id": "dest_hoi_an",
+    "name": "Hoi An",
+    "country": "Vietnam",
+    "continent": "Asia",
+    "tagline": "Lantern-lit ancient canals, silk tailors & riverside cafes",
+    "description": "Magical UNESCO town with mustard-yellow colonial architecture, glowing river lanterns, and world-class Vietnamese gastronomy.",
+    "coverImage": "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "February – July",
+    "averageTemp": "27°C",
+    "idealDays": 4,
+    "vibes": [
+      "Romantic",
+      "Charming",
+      "Heritage"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Street Food",
+      "Authentic Spicy",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Couple",
+      "Solo",
+      "Family"
+    ],
+    "highlights": [
+      "Japanese Covered Bridge",
+      "An Bang Beach Sunset",
+      "Thu Bon River Lantern Release",
+      "Tra Que Herb Village"
+    ],
+    "cuisines": [
+      "Cao Lau Noodles",
+      "Banh Mi Phuong",
+      "White Rose Dumplings",
+      "Vietnamese Egg Coffee"
+    ]
+  },
+  {
+    "id": "dest_chiang_mai",
+    "name": "Chiang Mai",
+    "country": "Thailand",
+    "continent": "Asia",
+    "tagline": "Misty northern mountains, golden wats & artisan coffee roasters",
+    "description": "The cultural capital of Northern Thailand surrounded by lush rainforest valleys, ethical elephant sanctuaries, and temple bells.",
+    "coverImage": "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FFC83D] via-[#FF7A3D] to-[#5B0B24]",
+    "bestSeason": "November – February",
+    "averageTemp": "23°C",
+    "idealDays": 5,
+    "vibes": [
+      "Peaceful",
+      "Artisanal",
+      "Nature"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Street Food",
+      "Authentic Spicy",
+      "Cafes & Bakeries",
+      "Plant-Based"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Solo",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "Wat Phra That Doi Suthep",
+      "Sunday Walking Street Market",
+      "Elephant Nature Sanctuary",
+      "Nimman Cafe Hopping"
+    ],
+    "cuisines": [
+      "Khao Soi Curry Noodles",
+      "Sai Oua Sausage",
+      "Sticky Rice & Grilled Chicken",
+      "Artisanal Arabica Pour-overs"
+    ]
+  },
+  {
+    "id": "dest_singapore",
+    "name": "Singapore",
+    "country": "Singapore",
+    "continent": "Asia",
+    "tagline": "Futuristic vertical gardens, Michelin hawker stalls & urban luxury",
+    "description": "A green city-in-a-nature setting where Supertrees glow under nighttime skies and rich Peranakan culture meets cosmopolitan architecture.",
+    "coverImage": "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#C2185B] to-[#FF7A3D]",
+    "bestSeason": "Year-Round",
+    "averageTemp": "29°C",
+    "idealDays": 4,
+    "vibes": [
+      "Futuristic",
+      "Clean",
+      "Gastronomy"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Street Food",
+      "Seafood",
+      "Fine Dining",
+      "Authentic Spicy"
+    ],
+    "landscape": "Neon Metropolis",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Family",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "Gardens by the Bay Supertree Grove",
+      "Marina Bay Sands SkyPark",
+      "Chinatown & Little India",
+      "Sentosa Island"
+    ],
+    "cuisines": [
+      "Hainanese Chicken Rice",
+      "Singapore Chilli Crab",
+      "Laksa Noodle Soup",
+      "Kaya Toast & Kopi"
+    ]
+  },
+  {
+    "id": "dest_luang_prabang",
+    "name": "Luang Prabang",
+    "country": "Laos",
+    "continent": "Asia",
+    "tagline": "Monastic morning alms, tiered turquoise waterfalls & Mekong sunsets",
+    "description": "UNESCO World Heritage gem cradled by emerald jungle hills and the Mekong River, exuding deep serenity and French-Indochina charm.",
+    "coverImage": "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "October – April",
+    "averageTemp": "22°C",
+    "idealDays": 4,
+    "vibes": [
+      "Peaceful",
+      "Heritage",
+      "Nature"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Authentic Spicy",
+      "Cafes & Bakeries",
+      "Plant-Based"
+    ],
+    "landscape": "Lush Nature",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Solo",
+      "Couple"
+    ],
+    "highlights": [
+      "Kuang Si Falls",
+      "Morning Alms Giving Ceremony",
+      "Mount Phousi Sunset",
+      "Mekong River Cruise"
+    ],
+    "cuisines": [
+      "Larb Minced Herb Salad",
+      "Sticky Rice & Jeow Bong",
+      "Khao Piak Sen Soup",
+      "French Baguettes with Condensed Milk"
+    ]
+  },
+  {
+    "id": "dest_rajasthan",
+    "name": "Jaipur & Udaipur",
+    "country": "India",
+    "continent": "Asia",
+    "tagline": "Royal lake palaces, golden fortresses & vibrant desert heritage",
+    "description": "Step into fairy-tale Rajput royalty with majestic sandstone forts, mirror-like palace lakes, and colorful bazaars.",
+    "coverImage": "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "October – March",
+    "averageTemp": "22°C",
+    "idealDays": 6,
+    "vibes": [
+      "Royal",
+      "Historic",
+      "Cultural"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Authentic Spicy",
+      "Fine Dining",
+      "Street Food",
+      "Plant-Based"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Couple",
+      "Family",
+      "Friends"
+    ],
+    "highlights": [
+      "Amber Fort & Sheesh Mahal",
+      "Lake Pichola Boat Ride",
+      "Hawa Mahal Palace of Winds",
+      "City Palace Udaipur"
+    ],
+    "cuisines": [
+      "Dal Baati Churma",
+      "Laal Maas",
+      "Ghevar Sweet",
+      "Kachori with Tamarind Chutney"
+    ]
+  },
+  {
+    "id": "dest_kerala",
+    "name": "Kerala Backwaters & Munnar",
+    "country": "India",
+    "continent": "Asia",
+    "tagline": "Tranquil emerald backwaters, rolling tea estates & Ayurvedic bliss",
+    "description": "Glide on traditional thatched houseboats through palm-fringed canals and breathe the crisp mountain air of Munnar tea hills.",
+    "coverImage": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#C2185B] to-[#FFC83D]",
+    "bestSeason": "September – March",
+    "averageTemp": "26°C",
+    "idealDays": 6,
+    "vibes": [
+      "Serene",
+      "Nature",
+      "Wellness"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Seafood",
+      "Authentic Spicy",
+      "Plant-Based"
+    ],
+    "landscape": "Lush Nature",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Couple",
+      "Family",
+      "Solo"
+    ],
+    "highlights": [
+      "Alleppey Houseboat Cruise",
+      "Munnar Tea Plantation Walk",
+      "Periyar Wildlife Sanctuary",
+      "Varkala Cliff Sunset"
+    ],
+    "cuisines": [
+      "Karimeen Pollichathu",
+      "Appam with Stew",
+      "Kerala Sadya on Banana Leaf",
+      "Puttu and Kadala Curry"
+    ]
+  },
+  {
+    "id": "dest_ladakh",
+    "name": "Ladakh (Leh & Nubra Valley)",
+    "country": "India",
+    "continent": "Asia",
+    "tagline": "High-altitude deserts, cobalt glacial lakes & Buddhist monasteries",
+    "description": "The Land of High Passes featuring surreal moonscapes, ancient cliffside gompas, and crystal reflections at Pangong Tso.",
+    "coverImage": "https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#0B3C5D] to-[#FF7A3D]",
+    "bestSeason": "June – September",
+    "averageTemp": "15°C",
+    "idealDays": 7,
+    "vibes": [
+      "Adventure",
+      "Himalayan",
+      "Spiritual"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Street Food",
+      "Authentic Spicy",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Friends",
+      "Solo",
+      "Couple"
+    ],
+    "highlights": [
+      "Pangong Tso Lake",
+      "Nubra Valley Hunder Sand Dunes",
+      "Thiksey Monastery",
+      "Khardung La Pass"
+    ],
+    "cuisines": [
+      "Ladakhi Thukpa",
+      "Steamed Tingmo & Momos",
+      "Butter Tea (Gur Gur)",
+      "Yak Cheese Treats"
+    ]
+  },
+  {
+    "id": "dest_varanasi",
+    "name": "Varanasi",
+    "country": "India",
+    "continent": "Asia",
+    "tagline": "Ancient spiritual ghats, mesmerizing Ganga Aarti & mystic alleys",
+    "description": "One of the oldest continuously inhabited cities on Earth, where dawn boat rides and evening fire ceremonies create an unforgettable spiritual aura.",
+    "coverImage": "https://images.unsplash.com/photo-1561359313-0639aad49ca6?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "October – March",
+    "averageTemp": "21°C",
+    "idealDays": 3,
+    "vibes": [
+      "Spiritual",
+      "Historic",
+      "Mystic"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Street Food",
+      "Authentic Spicy",
+      "Plant-Based"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Solo",
+      "Couple",
+      "Family"
+    ],
+    "highlights": [
+      "Dashashwamedh Ghat Evening Aarti",
+      "Dawn Rowing Boat on the Ganges",
+      "Sarnath Buddhist Stupa",
+      "Silk Weavers Quarter"
+    ],
+    "cuisines": [
+      "Banarasi Kachori Sabzi",
+      "Blue Lassi Shop Creations",
+      "Makkhani Malaiyo",
+      "Banarasi Paan"
+    ]
+  },
+  {
+    "id": "dest_goa",
+    "name": "Goa (North & South)",
+    "country": "India",
+    "continent": "Asia",
+    "tagline": "Sunkissed Arabian beaches, Portuguese mansions & seaside shacks",
+    "description": "Golden sandy coves, swaying coconut groves, fragrant spice farms, and bohemian beachside sunset lounges.",
+    "coverImage": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "November – March",
+    "averageTemp": "28°C",
+    "idealDays": 5,
+    "vibes": [
+      "Coastal",
+      "Chill",
+      "Party"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Street Food",
+      "Authentic Spicy",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Friends",
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "Palolem Beach Kayaking",
+      "Fontainhas Latin Quarter",
+      "Anjuna Flea Market & Sunset",
+      "Dudhsagar Waterfalls"
+    ],
+    "cuisines": [
+      "Goan Fish Curry Thali",
+      "Prawn Balchao",
+      "Pork Vindaloo",
+      "Bebinca Layered Dessert"
+    ]
+  },
+  {
+    "id": "dest_kathmandu",
+    "name": "Kathmandu & Pokhara",
+    "country": "Nepal",
+    "continent": "Asia",
+    "tagline": "Himalayan peaks, sacred stupas & tranquil mountain lakes",
+    "description": "Gateway to the highest mountains on Earth, filled with Buddhist prayer flags, serene lake boating, and ancient Durbar squares.",
+    "coverImage": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#0B4F5B] to-[#FFC83D]",
+    "bestSeason": "September – November & March – May",
+    "averageTemp": "18°C",
+    "idealDays": 6,
+    "vibes": [
+      "Mountain",
+      "Spiritual",
+      "Trekking"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Street Food",
+      "Authentic Spicy",
+      "Plant-Based"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Solo",
+      "Friends",
+      "Couple"
+    ],
+    "highlights": [
+      "Boudhanath Stupa at Dusk",
+      "Phewa Lake Boating in Pokhara",
+      "Sarangkot Annapurna Sunrise",
+      "Bhaktapur Medieval Square"
+    ],
+    "cuisines": [
+      "Nepali Dal Bhat Power",
+      "Buff & Veg Momos with Achar",
+      "Sel Roti with Chai",
+      "Thukpa Noodle Soup"
+    ]
+  },
+  {
+    "id": "dest_ella",
+    "name": "Ella & Nuwara Eliya",
+    "country": "Sri Lanka",
+    "continent": "Asia",
+    "tagline": "Mist-clad hill country, iconic blue train journeys & tea estates",
+    "description": "Ride through dramatic green viaducts on the world-famous blue train, hike to panoramic peaks, and tour heritage Ceylon tea factories.",
+    "coverImage": "https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "December – April",
+    "averageTemp": "20°C",
+    "idealDays": 4,
+    "vibes": [
+      "Scenic Train",
+      "Nature",
+      "Tea Country"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Authentic Spicy",
+      "Plant-Based",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Solo",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "Nine Arches Bridge Train Crossing",
+      "Little Adam’s Peak Hike",
+      "Ravana Falls",
+      "Pedro Tea Estate Tasting"
+    ],
+    "cuisines": [
+      "Kottu Roti with Curry Sauce",
+      "Egg Hoppers with Lunu Miris",
+      "Ceylon Black Tea",
+      "Pol Sambol with Dhal"
+    ]
+  },
+  {
+    "id": "dest_taipei",
+    "name": "Taipei",
+    "country": "Taiwan",
+    "continent": "Asia",
+    "tagline": "Sizzling night markets, thermal hot springs & mountain teahouses",
+    "description": "A friendly metropolis surrounded by verdant mountains, world-renowned night market stalls, and thermal volcanic baths.",
+    "coverImage": "https://images.unsplash.com/photo-1508247967583-7d982ea01526?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#C2185B] to-[#FF7A3D]",
+    "bestSeason": "October – April",
+    "averageTemp": "22°C",
+    "idealDays": 5,
+    "vibes": [
+      "Night Markets",
+      "Foodie",
+      "Friendly"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Street Food",
+      "Authentic Spicy",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Neon Metropolis",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Solo",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "Shilin & Raohe Night Markets",
+      "Elephant Mountain Taipei 101 View",
+      "Jiufen Mountain Old Street",
+      "Beitou Hot Springs"
+    ],
+    "cuisines": [
+      "Taiwanese Beef Noodle Soup",
+      "Xiao Long Bao Soup Dumplings",
+      "Brown Sugar Boba Tea",
+      "Crispy Lu Rou Fan"
+    ]
+  },
+  {
+    "id": "dest_boracay",
+    "name": "Boracay",
+    "country": "Philippines",
+    "continent": "Asia",
+    "tagline": "Powder-white beaches, glowing paraw sunsets & turquoise waters",
+    "description": "Renowned for White Beach’s talcum-soft sand, crystal-clear warm shallows, and sunset sailing on traditional outrigger boats.",
+    "coverImage": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "November – May",
+    "averageTemp": "29°C",
+    "idealDays": 4,
+    "vibes": [
+      "Beach",
+      "Sunset",
+      "Relaxation"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "18-24",
+      "25-34"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Street Food",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Couple",
+      "Friends",
+      "Solo"
+    ],
+    "highlights": [
+      "White Beach Station 1 & 2",
+      "Paraw Sunset Sailing Cruise",
+      "Ariel’s Point Cliff Diving",
+      "Puka Shell Beach"
+    ],
+    "cuisines": [
+      "Fresh Grilled Lapu-Lapu",
+      "Calamansi Muffins",
+      "Halo-Halo Dessert",
+      "Kinilaw Ceviche"
+    ]
+  },
+  {
+    "id": "dest_bagan",
+    "name": "Bagan",
+    "country": "Myanmar",
+    "continent": "Asia",
+    "tagline": "Thousands of brick pagodas emerging from morning mist",
+    "description": "An archaeological wonderland where over 2,000 ancient Buddhist monuments dot the plains of the Ayeyarwady River.",
+    "coverImage": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "November – February",
+    "averageTemp": "24°C",
+    "idealDays": 3,
+    "vibes": [
+      "Ancient",
+      "Mystic",
+      "Spiritual"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Authentic Spicy",
+      "Plant-Based"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Solo",
+      "Couple"
+    ],
+    "highlights": [
+      "Hot Air Balloon Sunrise",
+      "Ananda Temple",
+      "E-bike Temple Exploration",
+      "Ayeyarwady Sunset Cruise"
+    ],
+    "cuisines": [
+      "Tea Leaf Salad (Lahpet Thoke)",
+      "Shan Noodles",
+      "Burmese Coconut Curry",
+      "Tamarind Candies"
+    ]
+  },
+  {
+    "id": "dest_almaty",
+    "name": "Almaty & Big Almaty Lake",
+    "country": "Kazakhstan",
+    "continent": "Asia",
+    "tagline": "Snowcapped Tian Shan mountains, alpine meadows & apple orchards",
+    "description": "A picturesque Central Asian cultural hub surrounded by dramatic alpine canyons, emerald mountain lakes, and nomadic heritage.",
+    "coverImage": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#5B0B24] to-[#FFC83D]",
+    "bestSeason": "May – October",
+    "averageTemp": "16°C",
+    "idealDays": 5,
+    "vibes": [
+      "Alpine",
+      "Central Asia",
+      "Adventure"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Authentic Spicy",
+      "Cafes & Bakeries",
+      "Street Food"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Solo",
+      "Friends",
+      "Couple"
+    ],
+    "highlights": [
+      "Big Almaty Lake",
+      "Charyn Canyon Day Trip",
+      "Shymbulak Mountain Resort",
+      "Zenkov Wooden Cathedral"
+    ],
+    "cuisines": [
+      "Beshbarmak Noodle Dish",
+      "Samsa Meat Pastries",
+      "Shashlik Skewers",
+      "Baursaki Fried Dough"
+    ]
+  },
+  {
+    "id": "dest_petra",
+    "name": "Petra & Wadi Rum",
+    "country": "Jordan",
+    "continent": "Asia",
+    "tagline": "Rose-red sandstone canyons & Bedouin desert starry nights",
+    "description": "Walk through the dramatic narrow Siq into the rose-red Treasury and camp under millions of stars in the Martian desert of Wadi Rum.",
+    "coverImage": "https://images.unsplash.com/photo-1579606032834-deecd1a48c6b?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "March – May & Sept – Nov",
+    "averageTemp": "22°C",
+    "idealDays": 4,
+    "vibes": [
+      "Archaeological",
+      "Desert",
+      "Adventure"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Authentic Spicy",
+      "Fine Dining",
+      "Street Food"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Couple",
+      "Solo",
+      "Friends"
+    ],
+    "highlights": [
+      "The Treasury (Al-Khazneh)",
+      "The Monastery (Ad-Deir) Hike",
+      "Wadi Rum 4x4 Jeep Safari",
+      "Petra by Night Candlelight"
+    ],
+    "cuisines": [
+      "Mansaf with Jameed",
+      "Bedouin Zarb Cooked Underground",
+      "Fresh Hummus & Moutabal",
+      "Cardamom Mint Tea"
+    ]
+  },
+  {
+    "id": "dest_cappadocia",
+    "name": "Cappadocia",
+    "country": "Turkey",
+    "continent": "Asia",
+    "tagline": "Fairy chimney caves, sunrise balloon horizons & underground cities",
+    "description": "Sleep in carved cave suites and watch hundreds of colorful hot air balloons drift over surreal volcanic valley landscapes at dawn.",
+    "coverImage": "https://images.unsplash.com/photo-1570939274717-7eda259b50ed?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#FF4F7A] to-[#5B0B24]",
+    "bestSeason": "April – June & Sept – Oct",
+    "averageTemp": "19°C",
+    "idealDays": 4,
+    "vibes": [
+      "Surreal",
+      "Romantic",
+      "Cave Stays"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Authentic Spicy",
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Couple",
+      "Friends",
+      "Solo"
+    ],
+    "highlights": [
+      "Sunrise Hot Air Balloon Flight",
+      "Göreme Open Air Museum",
+      "Love Valley & Pigeon Valley Hike",
+      "Derinkuyu Underground City"
+    ],
+    "cuisines": [
+      "Testi Pottery Kebab",
+      "Turkish Gozleme",
+      "Manti Dumplings",
+      "Baklava with Turkish Coffee"
+    ]
+  },
+  {
+    "id": "dest_muscat",
+    "name": "Muscat & Wahiba Sands",
+    "country": "Oman",
+    "continent": "Asia",
+    "tagline": "Pristine fjords, marble grand mosques & rolling desert dunes",
+    "description": "Authentic Arabian grace featuring sea turtle bays, turquoise wadis nestled between date palms, and warm Omani hospitality.",
+    "coverImage": "https://images.unsplash.com/photo-1549144511-f099e773c147?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B3C5D] via-[#5B0B24] to-[#FFC83D]",
+    "bestSeason": "October – April",
+    "averageTemp": "26°C",
+    "idealDays": 5,
+    "vibes": [
+      "Serene",
+      "Arabian",
+      "Desert"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Seafood",
+      "Authentic Spicy",
+      "Fine Dining"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Couple",
+      "Family",
+      "Solo"
+    ],
+    "highlights": [
+      "Sultan Qaboos Grand Mosque",
+      "Wadi Shab Emerald Pools",
+      "Muttrah Corniche & Souq",
+      "Wahiba Sands Desert Camp"
+    ],
+    "cuisines": [
+      "Omani Shuwa Roasted Lamb",
+      "Majboos Spiced Rice",
+      "Fresh Halwa with Kahwa Coffee",
+      "Grilled Kingfish"
+    ]
+  },
+  {
+    "id": "dest_dubai",
+    "name": "Dubai",
+    "country": "United Arab Emirates",
+    "continent": "Asia",
+    "tagline": "Record-breaking architecture, desert safaris & cosmopolitan luxury",
+    "description": "Gleaming towers rising from golden sand dunes, glamorous beach resorts, and world-class Michelin star dining.",
+    "coverImage": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "November – March",
+    "averageTemp": "27°C",
+    "idealDays": 5,
+    "vibes": [
+      "Luxury",
+      "Modern",
+      "Shopping"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Fine Dining",
+      "Street Food",
+      "Seafood"
+    ],
+    "landscape": "Neon Metropolis",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Family",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "Burj Khalifa Sky Deck",
+      "Dubai Mall & Fountain Show",
+      "Desert Dune Bashing & Camp",
+      "Palm Jumeirah Beach Club"
+    ],
+    "cuisines": [
+      "Shawarma & Falafel",
+      "Emirati Machboos",
+      "Camel Milk Gelato",
+      "Michelin Chef Tasting Menus"
+    ]
+  },
+  {
+    "id": "dest_osaka",
+    "name": "Osaka",
+    "country": "Japan",
+    "continent": "Asia",
+    "tagline": "Japan’s kitchen, neon Dotonbori canals & street food mania",
+    "description": "Renowned for vibrant nightlife, friendly locals, and endless rows of sizzling street food stalls along neon canal ways.",
+    "coverImage": "https://images.unsplash.com/photo-1590559899731-a382839e5549?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#C2185B] via-[#FF4F7A] to-[#FF7A3D]",
+    "bestSeason": "Spring & Autumn",
+    "averageTemp": "19°C",
+    "idealDays": 3,
+    "vibes": [
+      "Street Food",
+      "Nightlife",
+      "Lively"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Street Food",
+      "Seafood",
+      "Authentic Spicy"
+    ],
+    "landscape": "Neon Metropolis",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Friends",
+      "Solo",
+      "Couple"
+    ],
+    "highlights": [
+      "Dotonbori Glico Man & Food Walk",
+      "Osaka Castle Gardens",
+      "Shinsekai Retro District",
+      "Kuromon Ichiba Market"
+    ],
+    "cuisines": [
+      "Takoyaki Octopus Balls",
+      "Okonomiyaki Savory Pancakes",
+      "Kushikatsu Skewers",
+      "Kitsune Udon"
+    ]
+  },
+  {
+    "id": "dest_hakone",
+    "name": "Hakone & Mt. Fuji Views",
+    "country": "Japan",
+    "continent": "Asia",
+    "tagline": "Natural onsen hot springs, Lake Ashi pirate ships & Mt. Fuji panoramas",
+    "description": "Unwind in traditional cedar ryokans with volcanic hot springs overlooking the snow-capped silhouette of sacred Mount Fuji.",
+    "coverImage": "https://images.unsplash.com/photo-1528164344705-475426879c0d?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#0B4F5B] to-[#FF7A3D]",
+    "bestSeason": "October – May",
+    "averageTemp": "15°C",
+    "idealDays": 2,
+    "vibes": [
+      "Onsen",
+      "Mount Fuji",
+      "Serenity"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Fine Dining",
+      "Authentic Spicy",
+      "Plant-Based"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "Lake Ashi Cruise",
+      "Hakone Open-Air Museum",
+      "Owakudani Volcanic Black Eggs",
+      "Private Ryokan Onsen"
+    ],
+    "cuisines": [
+      "Multi-course Kaiseki Dinner",
+      "Black Eggs Boiled in Sulfur",
+      "Fresh Soba with Mountain Herbs",
+      "Yuba Tofu Skins"
+    ]
+  },
+  {
+    "id": "dest_langkawi",
+    "name": "Langkawi",
+    "country": "Malaysia",
+    "continent": "Asia",
+    "tagline": "UNESCO geoparks, curved sky bridges & duty-free island bays",
+    "description": "An archipelago of 99 tropical islands boasting ancient limestone rainforests, mangrove boat tours, and peaceful luxury resorts.",
+    "coverImage": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "November – April",
+    "averageTemp": "29°C",
+    "idealDays": 4,
+    "vibes": [
+      "Tropical",
+      "Nature",
+      "Relaxed"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Street Food",
+      "Authentic Spicy"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Family",
+      "Couple"
+    ],
+    "highlights": [
+      "Langkawi Sky Bridge & Cable Car",
+      "Kilim Geoforest Mangrove Tour",
+      "Pantai Cenang Sunset",
+      "Tanjung Rhu Beach"
+    ],
+    "cuisines": [
+      "Ikan Bakar Grilled Fish",
+      "Laksa Kedah",
+      "Nasi Lemak with Sambal Sotong",
+      "Roti Canai with Dhal"
+    ]
+  },
+  {
+    "id": "dest_palawan",
+    "name": "El Nido & Coron (Palawan)",
+    "country": "Philippines",
+    "continent": "Asia",
+    "tagline": "Towering limestone lagoons, secret white beaches & shipwreck diving",
+    "description": "Often crowned the world’s most scenic island escape, featuring emerald lagoons hidden inside limestone rock formations.",
+    "coverImage": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "December – May",
+    "averageTemp": "28°C",
+    "idealDays": 6,
+    "vibes": [
+      "Lagoons",
+      "Island Hopping",
+      "Pristine"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Seafood",
+      "Street Food",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Solo",
+      "Friends",
+      "Couple"
+    ],
+    "highlights": [
+      "Big Lagoon Kayaking",
+      "Secret Beach Swimming",
+      "Kayangan Lake in Coron",
+      "Barracuda Lake Dive"
+    ],
+    "cuisines": [
+      "Grilled Garlic Butter Prawns",
+      "Chicken Inasal with Garlic Rice",
+      "Fresh Mango Shakes",
+      "Pancit Canton"
+    ]
+  },
+  {
+    "id": "dest_hanoi",
+    "name": "Hanoi & Ha Long Bay",
+    "country": "Vietnam",
+    "continent": "Asia",
+    "tagline": "Bustling Old Quarter scooters, emerald karst bay cruises & egg coffee",
+    "description": "Sip creamy egg coffee on tree-lined French colonial boulevards and cruise past thousands of limestone karsts in Ha Long Bay.",
+    "coverImage": "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#0B4F5B] to-[#FF7A3D]",
+    "bestSeason": "October – April",
+    "averageTemp": "23°C",
+    "idealDays": 5,
+    "vibes": [
+      "Heritage",
+      "Bay Cruise",
+      "Street Food"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Street Food",
+      "Authentic Spicy",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Solo",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "Ha Long Bay Overnight Junk Boat",
+      "Hanoi Old Quarter 36 Streets Walk",
+      "Hoan Kiem Lake Dawn Stroll",
+      "Train Street Coffee"
+    ],
+    "cuisines": [
+      "Bun Cha Hanoi (Pork with Vermicelli)",
+      "Traditional Pho Bo",
+      "Ca Phe Trung (Egg Coffee)",
+      "Banh Cuon Steamed Rolls"
+    ]
+  },
+  {
+    "id": "dest_penang",
+    "name": "Penang (George Town)",
+    "country": "Malaysia",
+    "continent": "Asia",
+    "tagline": "Street art murals, heritage clan jetties & Asia’s top food capital",
+    "description": "A vibrant UNESCO city celebrated for interactive street art on heritage shophouse walls and an intoxicating blend of Malay, Chinese, and Indian cuisine.",
+    "coverImage": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "November – March",
+    "averageTemp": "28°C",
+    "idealDays": 3,
+    "vibes": [
+      "Foodie",
+      "Art",
+      "Heritage"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Street Food",
+      "Authentic Spicy",
+      "Seafood",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Solo",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "George Town Street Art Walk",
+      "Chew Jetty Floating Clan Village",
+      "Penang Hill Funicular Train",
+      "Kek Lok Si Temple"
+    ],
+    "cuisines": [
+      "Char Kway Teow with Duck Egg",
+      "Penang Assam Laksa",
+      "Cendol Shaved Ice",
+      "Nasi Kandar Feast"
+    ]
+  },
+  {
+    "id": "dest_siem_reap",
+    "name": "Siem Reap (Angkor Wat)",
+    "country": "Cambodia",
+    "continent": "Asia",
+    "tagline": "Monumental stone temples swallowed by banyan tree roots",
+    "description": "Witness early sunrise reflecting in the lotus ponds of Angkor Wat and explore Ta Prohm temple where massive jungle roots embrace ancient stone carvings.",
+    "coverImage": "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "November – March",
+    "averageTemp": "27°C",
+    "idealDays": 4,
+    "vibes": [
+      "Archaeological",
+      "Spiritual",
+      "Wonders"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Authentic Spicy",
+      "Street Food",
+      "Plant-Based"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Solo",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "Angkor Wat Sunrise Reflection",
+      "Ta Prohm Tomb Raider Temple",
+      "Bayon Temple Smiling Stone Faces",
+      "Tonle Sap Floating Villages"
+    ],
+    "cuisines": [
+      "Fish Amok Steamed in Banana Leaf",
+      "Lok Lak Stir-fried Beef",
+      "Nom Banh Chok Rice Noodles",
+      "Khmer Red Curry"
+    ]
+  },
+  {
+    "id": "dest_rishikesh",
+    "name": "Rishikesh",
+    "country": "India",
+    "continent": "Asia",
+    "tagline": "Yoga capital of the world, emerald holy river & Himalayan serenity",
+    "description": "Nestled in the Himalayan foothills where the emerald Ganga emerges from mountain gorges, filled with ashrams, meditation bells, and rafting adventures.",
+    "coverImage": "https://images.unsplash.com/photo-1588096344356-9a2c3a5e840d?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#5B0B24] to-[#FFC83D]",
+    "bestSeason": "September – November & March – May",
+    "averageTemp": "22°C",
+    "idealDays": 4,
+    "vibes": [
+      "Yoga",
+      "Spiritual",
+      "River Rafting"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "18-24",
+      "25-34"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Plant-Based",
+      "Cafes & Bakeries",
+      "Street Food"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Solo",
+      "Friends"
+    ],
+    "highlights": [
+      "Triveni Ghat Evening Ganga Aarti",
+      "Laxman Jhula Suspension Bridge",
+      "Beatles Ashram Ruins",
+      "White Water River Rafting"
+    ],
+    "cuisines": [
+      "Sattvic Thali",
+      "Ayurvedic Kitchari",
+      "Chai at Organic Cafes",
+      "Fresh Woodfired Pita with Hummus"
+    ]
+  },
+  {
+    "id": "dest_andaman",
+    "name": "Andaman & Havelock Island",
+    "country": "India",
+    "continent": "Asia",
+    "tagline": "Pristine Radhanagar Beach, vibrant coral reefs & secluded coves",
+    "description": "India’s premier island sanctuary with crystal-clear turquoise lagoons, world-class scuba diving, and glowing bioluminescent night waters.",
+    "coverImage": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B3C5D] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "October – May",
+    "averageTemp": "28°C",
+    "idealDays": 6,
+    "vibes": [
+      "Scuba Diving",
+      "Untouched",
+      "Beaches"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Authentic Spicy",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Couple",
+      "Family",
+      "Friends"
+    ],
+    "highlights": [
+      "Radhanagar Beach Sunset",
+      "Elephant Beach Snorkeling",
+      "Cellular Jail Light & Sound Show",
+      "Neil Island Natural Bridge"
+    ],
+    "cuisines": [
+      "Fresh Grilled Lobster & Crab",
+      "Fish Curry with Coconut Milk",
+      "Amritsari Kulcha Breakfast",
+      "Tender Coconut Water"
+    ]
+  },
+  {
+    "id": "dest_manali",
+    "name": "Manali & Solang Valley",
+    "country": "India",
+    "continent": "Asia",
+    "tagline": "Pine-draped cedar forests, roaring Beas river & snow adventures",
+    "description": "Charming mountain town surrounded by towering snowy peaks, apple orchards, cozy wooden cafes, and high-altitude mountain passes.",
+    "coverImage": "https://images.unsplash.com/photo-1598091383021-15ddea10925d?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#0B4F5B] to-[#FFC83D]",
+    "bestSeason": "October – June",
+    "averageTemp": "14°C",
+    "idealDays": 5,
+    "vibes": [
+      "Himalayan",
+      "Snow",
+      "Adventure"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Street Food",
+      "Cafes & Bakeries",
+      "Authentic Spicy"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Friends",
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "Atal Tunnel & Sissu Waterfall",
+      "Solang Valley Paragliding",
+      "Old Manali Bohemian Cafes",
+      "Hadimba Devi Ancient Temple"
+    ],
+    "cuisines": [
+      "Siddu Steamed Wheat Cake",
+      "Himachali Trout Fish",
+      "Hot Maggi on Mountain Cliffs",
+      "Trout in Lemon Butter"
+    ]
+  },
+  {
+    "id": "dest_pokhara",
+    "name": "Pokhara",
+    "country": "Nepal",
+    "continent": "Asia",
+    "tagline": "Phewa lake reflections of Annapurna & world-class paragliding",
+    "description": "A peaceful lakeside town where morning mists lift to reveal the dramatic jagged summit of Mount Machapuchare (Fishtail).",
+    "coverImage": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#C2185B] to-[#FFC83D]",
+    "bestSeason": "October – November & March – April",
+    "averageTemp": "20°C",
+    "idealDays": 4,
+    "vibes": [
+      "Lakeside",
+      "Paragliding",
+      "Himalayan"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Cafes & Bakeries",
+      "Plant-Based",
+      "Street Food"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Solo",
+      "Friends",
+      "Couple"
+    ],
+    "highlights": [
+      "Sarangkot Sunrise Flight",
+      "Phewa Lake Wooden Boat Ride",
+      "World Peace Pagoda Stupa",
+      "Gupteshwor Mahadev Cave"
+    ],
+    "cuisines": [
+      "Fresh Fried Fish from Phewa Lake",
+      "Newari Khaja Set",
+      "Tibetan Momo Dumplings",
+      "Apple Pie in Lakeside Cafes"
+    ]
+  },
+  {
+    "id": "dest_amalfi",
+    "name": "Amalfi Coast & Positano",
+    "country": "Italy",
+    "continent": "Europe",
+    "tagline": "Sun-drenched cliffs, pastel villages & Mediterranean breeze",
+    "description": "Winding coastal roads, lemon groves, and cliffside trattorias overlooking the sparkling Tyrrhenian Sea.",
+    "coverImage": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#C2185B] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "May – September",
+    "averageTemp": "24°C",
+    "idealDays": 6,
+    "vibes": [
+      "Romantic",
+      "Scenic",
+      "Relaxed"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "Positano Beachfront Sunset",
+      "Ravello Villa Cimbrone Gardens",
+      "Path of the Gods Hike",
+      "Capri Private Boat Charter"
+    ],
+    "cuisines": [
+      "Scialatielli ai Frutti di Mare",
+      "Delizia al Limone",
+      "Artisanal Limoncello",
+      "Neapolitan Wood-fired Pizza"
+    ]
+  },
+  {
+    "id": "dest_santorini",
+    "name": "Santorini",
+    "country": "Greece",
+    "continent": "Europe",
+    "tagline": "White-washed caldera facades bathed in sunset glow",
+    "description": "Iconic blue domes, volcanic beaches, and unforgettable sunsets painting the Aegean horizon every evening.",
+    "coverImage": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF4F7A] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "April – October",
+    "averageTemp": "26°C",
+    "idealDays": 4,
+    "vibes": [
+      "Romantic",
+      "Architecture",
+      "Sunset"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Couple",
+      "Friends",
+      "Solo"
+    ],
+    "highlights": [
+      "Oia Sunset Castle View",
+      "Fira to Oia Caldera Hike",
+      "Red Volcanic Beach",
+      "Santo Wines Sunset Tasting"
+    ],
+    "cuisines": [
+      "Grilled Aegean Octopus",
+      "Santorini Fava Puree",
+      "Tomato Gefthedes",
+      "Baklava with Pistachio Gelato"
+    ]
+  },
+  {
+    "id": "dest_rome",
+    "name": "Rome",
+    "country": "Italy",
+    "continent": "Europe",
+    "tagline": "Eternal city of emperors, Renaissance fountains & pasta mastery",
+    "description": "Walk through open-air history surrounded by the Colosseum, Vatican masterpieces, and cobblestone alleys humming with espresso bars.",
+    "coverImage": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "April – June & Sept – Nov",
+    "averageTemp": "21°C",
+    "idealDays": 5,
+    "vibes": [
+      "Historic",
+      "Artistic",
+      "Gastronomy"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Fine Dining",
+      "Street Food",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Couple",
+      "Family",
+      "Solo",
+      "Friends"
+    ],
+    "highlights": [
+      "The Colosseum & Roman Forum",
+      "Trevi Fountain Coin Toss",
+      "Vatican Museums & Sistine Chapel",
+      "Trastevere Night Walk"
+    ],
+    "cuisines": [
+      "Cacio e Pepe Pasta",
+      "Authentic Carbonara",
+      "Artisanal Gelato at Giolitti",
+      "Crispy Roman Pizza al Taglio"
+    ]
+  },
+  {
+    "id": "dest_paris",
+    "name": "Paris",
+    "country": "France",
+    "continent": "Europe",
+    "tagline": "Haussmann avenues, world-class art & candlelit bistro charm",
+    "description": "The City of Light where iconic monuments frame leafy riverbanks, world-renowned museums, and legendary bakeries.",
+    "coverImage": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF4F7A] to-[#FF7A3D]",
+    "bestSeason": "April – October",
+    "averageTemp": "19°C",
+    "idealDays": 5,
+    "vibes": [
+      "Romantic",
+      "Artistic",
+      "Bistros"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Fine Dining",
+      "Cafes & Bakeries",
+      "Wine & Cheese"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Couple",
+      "Solo",
+      "Family"
+    ],
+    "highlights": [
+      "Eiffel Tower Sparkle at Dusk",
+      "Louvre Museum Mona Lisa",
+      "Montmartre & Sacre-Coeur",
+      "Seine River Golden Hour Cruise"
+    ],
+    "cuisines": [
+      "Warm Butter Croissants",
+      "Duck Confit in Saint-Germain",
+      "Ladurée Macarons",
+      "Steak Frites with Béarnaise"
+    ]
+  },
+  {
+    "id": "dest_swiss_alps",
+    "name": "Zermatt & Matterhorn",
+    "country": "Switzerland",
+    "continent": "Europe",
+    "tagline": "Car-free alpine charm under the iconic Matterhorn pyramid",
+    "description": "Scenic cogwheel trains, cozy chalet evenings with bubbling cheese fondue, and legendary panoramic hiking trails.",
+    "coverImage": "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#C2185B] to-[#FFC83D]",
+    "bestSeason": "Year-Round",
+    "averageTemp": "14°C",
+    "idealDays": 5,
+    "vibes": [
+      "Alpine",
+      "Scenic",
+      "Peaceful"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Couple",
+      "Family",
+      "Solo"
+    ],
+    "highlights": [
+      "Gornergrat Scenic Railway",
+      "Matterhorn Glacier Paradise",
+      "Five Lakes Trail Hike",
+      "Car-free Zermatt Village Walk"
+    ],
+    "cuisines": [
+      "Swiss Cheese Raclette",
+      "Crispy Golden Rösti",
+      "Traditional Alpine Fondue",
+      "Swiss Pralines & Chocolates"
+    ]
+  },
+  {
+    "id": "dest_barcelona",
+    "name": "Barcelona",
+    "country": "Spain",
+    "continent": "Europe",
+    "tagline": "Gaudí masterpieces, sunlit Mediterranean tapas & Gothic alleys",
+    "description": "Whimsical modernist architecture by Antoni Gaudí meets sun-soaked Mediterranean urban beaches and buzzing tapas quarters.",
+    "coverImage": "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#C2185B] to-[#FFC83D]",
+    "bestSeason": "May – October",
+    "averageTemp": "23°C",
+    "idealDays": 5,
+    "vibes": [
+      "Architecture",
+      "Beach & City",
+      "Tapas"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Seafood",
+      "Street Food",
+      "Fine Dining"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Friends",
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "Sagrada Familia Basílica",
+      "Park Güell Mosaic Terraces",
+      "Gothic Quarter Tapas Crawl",
+      "Barceloneta Beach Sunset"
+    ],
+    "cuisines": [
+      "Seafood Paella Valenciana",
+      "Patatas Bravas with Aioli",
+      "Jamon Iberico de Bellota",
+      "Churros con Chocolate"
+    ]
+  },
+  {
+    "id": "dest_dubrovnik",
+    "name": "Dubrovnik",
+    "country": "Croatia",
+    "continent": "Europe",
+    "tagline": "Pearl of the Adriatic, terracotta rooftops & ancient sea ramparts",
+    "description": "Walk atop medieval fortress walls surrounding terracotta roofs and jump into crystal-clear sapphire Adriatic waters.",
+    "coverImage": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B3C5D] via-[#FF4F7A] to-[#FF7A3D]",
+    "bestSeason": "May – September",
+    "averageTemp": "25°C",
+    "idealDays": 4,
+    "vibes": [
+      "Coastal",
+      "Medieval",
+      "Scenic"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Couple",
+      "Solo",
+      "Friends"
+    ],
+    "highlights": [
+      "City Walls Medieval Walk",
+      "Stradun Limestone Promenade",
+      "Buza Bar Cliffside Drinks",
+      "Lokrum Island Kayak Trip"
+    ],
+    "cuisines": [
+      "Black Squid Ink Risotto (Crni Rižot)",
+      "Fresh Adriatic Oysters",
+      "Peka Slow-cooked Meat",
+      "Rozata Custard Dessert"
+    ]
+  },
+  {
+    "id": "dest_reykjavik",
+    "name": "Reykjavik & Golden Circle",
+    "country": "Iceland",
+    "continent": "Europe",
+    "tagline": "Dancing Northern Lights, steaming blue lagoons & roaring waterfalls",
+    "description": "The land of fire and ice where geothermal mineral baths, black sand beaches, and cascading glacial waterfalls enchant travelers.",
+    "coverImage": "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B3C5D] via-[#5B0B24] to-[#0B4F5B]",
+    "bestSeason": "Sept – March (Aurora) & June – Aug (Midnight Sun)",
+    "averageTemp": "8°C",
+    "idealDays": 6,
+    "vibes": [
+      "Aurora",
+      "Geothermal",
+      "Untamed"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Seafood",
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Couple",
+      "Friends",
+      "Solo"
+    ],
+    "highlights": [
+      "Blue Lagoon Geothermal Spa",
+      "Gullfoss Waterfall & Geysir",
+      "Reynisfjara Black Sand Beach",
+      "Northern Lights Hunting"
+    ],
+    "cuisines": [
+      "Icelandic Arctic Char",
+      "Slow-cooked Lamb Stew (Kjötsúpa)",
+      "Rúgbrauð Rye Bread with Butter",
+      "Skyr with Wild Berries"
+    ]
+  },
+  {
+    "id": "dest_prague",
+    "name": "Prague",
+    "country": "Czech Republic",
+    "continent": "Europe",
+    "tagline": "City of a Hundred Spires, fairy-tale bridges & bohemian castles",
+    "description": "Wander cobblestone bridges enveloped in morning mist, discover medieval astronomical clocks, and enjoy authentic cellar breweries.",
+    "coverImage": "https://images.unsplash.com/photo-1541849546-216549ae216d?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "April – October & December (Christmas Markets)",
+    "averageTemp": "16°C",
+    "idealDays": 4,
+    "vibes": [
+      "Fairy-tale",
+      "Gothic",
+      "Historic"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Street Food",
+      "Cafes & Bakeries",
+      "Authentic Spicy"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Couple",
+      "Friends",
+      "Solo"
+    ],
+    "highlights": [
+      "Charles Bridge at Dawn",
+      "Prague Castle & St. Vitus Cathedral",
+      "Old Town Square Astronomical Clock",
+      "Vltava River Paddle Boating"
+    ],
+    "cuisines": [
+      "Traditional Czech Goulash",
+      "Svíčková Beef with Bread Dumplings",
+      "Trdelník Chimney Cake",
+      "Pilsner Urquell Draft"
+    ]
+  },
+  {
+    "id": "dest_edinburgh",
+    "name": "Edinburgh",
+    "country": "Scotland",
+    "continent": "Europe",
+    "tagline": "Extinct volcanic peaks, brooding castles & historic Royal Mile",
+    "description": "Dramatic gothic city crowned by a volcanic fortress, filled with hidden cobblestone closes, cozy pubs, and literary heritage.",
+    "coverImage": "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#0B3C5D] to-[#FF7A3D]",
+    "bestSeason": "May – September",
+    "averageTemp": "15°C",
+    "idealDays": 4,
+    "vibes": [
+      "Gothic",
+      "Literary",
+      "Historic"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Fine Dining",
+      "Street Food",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Solo",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "Edinburgh Castle on Castle Rock",
+      "Arthur’s Seat Volcanic Summit Hike",
+      "Royal Mile Hidden Closes",
+      "Victoria Street Shophouses"
+    ],
+    "cuisines": [
+      "Cullen Skink Smoked Haddock Soup",
+      "Traditional Haggis, Neeps & Tatties",
+      "Scottish Shortbread",
+      "Single Malt Scotch Whisky Tasting"
+    ]
+  },
+  {
+    "id": "dest_florence",
+    "name": "Florence",
+    "country": "Italy",
+    "continent": "Europe",
+    "tagline": "Cradle of Renaissance art, terracotta duomos & Tuscan steaks",
+    "description": "Bask in the artistic genius of Michelangelo and Da Vinci, marvel at Brunelleschi’s grand dome, and sip Chianti in sunny piazzas.",
+    "coverImage": "https://images.unsplash.com/photo-1543429776-2782fc8e1acd?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#5B0B24] to-[#FFC83D]",
+    "bestSeason": "April – June & Sept – Oct",
+    "averageTemp": "20°C",
+    "idealDays": 4,
+    "vibes": [
+      "Renaissance",
+      "Artistic",
+      "Tuscan Wine"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Fine Dining",
+      "Street Food",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Couple",
+      "Solo",
+      "Family"
+    ],
+    "highlights": [
+      "Duomo & Brunelleschi Dome Climb",
+      "Uffizi Gallery Masterpieces",
+      "Piazzale Michelangelo Sunset View",
+      "Ponte Vecchio Bridge Walk"
+    ],
+    "cuisines": [
+      "Bistecca alla Fiorentina",
+      "Pappardelle al Cinghiale",
+      "Panino at All’Antico Vinaio",
+      "Chianti Classico Red Wine"
+    ]
+  },
+  {
+    "id": "dest_porto",
+    "name": "Porto",
+    "country": "Portugal",
+    "continent": "Europe",
+    "tagline": "Azulejo-tiled churches, Douro river rabelo boats & port wine cellars",
+    "description": "Clamber up winding colorful hills adorned with hand-painted blue ceramic tiles, cross Eiffel-designed iron bridges, and sip port wine.",
+    "coverImage": "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B3C5D] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "May – October",
+    "averageTemp": "21°C",
+    "idealDays": 4,
+    "vibes": [
+      "Charming",
+      "Wine",
+      "Tiles"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Street Food",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Solo",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "Dom Luís I Bridge Walk",
+      "Ribeira Waterfront Promenade",
+      "Livraria Lello Historic Bookstore",
+      "Douro Valley Day Trip Cruise"
+    ],
+    "cuisines": [
+      "Francesinha Sandwich with Melted Cheese",
+      "Pastel de Nata Tart",
+      "Fresh Grilled Bacalhau Cod",
+      "Vintage Port Wine"
+    ]
+  },
+  {
+    "id": "dest_hallstatt",
+    "name": "Hallstatt",
+    "country": "Austria",
+    "continent": "Europe",
+    "tagline": "Fairy-tale alpine village reflected in mirrored glacial waters",
+    "description": "Postcard-perfect Austrian lake village with pastel 16th-century wooden chalets and the world’s oldest salt mines.",
+    "coverImage": "https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#0B4F5B] to-[#FFC83D]",
+    "bestSeason": "May – October & Winter Snow",
+    "averageTemp": "16°C",
+    "idealDays": 2,
+    "vibes": [
+      "Fairy-tale",
+      "Alpine Lake",
+      "Serenity"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "Classic Postcard Viewpoint Stroll",
+      "Hallstatt Salt Mine Funicular",
+      "Skywalk Lake Panorama Platform",
+      "Electric Boat Ride on Lake Hallstatt"
+    ],
+    "cuisines": [
+      "Reinanke Glacial Lake Whitefish",
+      "Wiener Schnitzel",
+      "Kaiserschmarrn Fluffy Pancake",
+      "Apfelstrudel with Cream"
+    ]
+  },
+  {
+    "id": "dest_lofoten",
+    "name": "Lofoten Islands",
+    "country": "Norway",
+    "continent": "Europe",
+    "tagline": "Crimson rorbuer cabins, dramatic Arctic fjords & Midnight Sun",
+    "description": "Sharp alpine peaks plunging directly into Arctic waters, traditional red fishermen cabins, and incredible hiking trails.",
+    "coverImage": "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B3C5D] via-[#5B0B24] to-[#0B4F5B]",
+    "bestSeason": "June – August (Sun) & Sept – March (Aurora)",
+    "averageTemp": "12°C",
+    "idealDays": 6,
+    "vibes": [
+      "Arctic",
+      "Fjords",
+      "Dramatic"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Seafood",
+      "Fine Dining"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Friends",
+      "Solo",
+      "Couple"
+    ],
+    "highlights": [
+      "Reinebringen Mountain Ridge Hike",
+      "Stay in a Traditional Red Rorbu",
+      "Haukland White Sand Arctic Beach",
+      "Sea Eagle Rib Boat Safari"
+    ],
+    "cuisines": [
+      "Lofoten Dried Stockfish (Skrei)",
+      "Fresh King Crab Legs",
+      "Arctic Cloudberry Dessert",
+      "Smoked Salmon Open Sandwiches"
+    ]
+  },
+  {
+    "id": "dest_budapest",
+    "name": "Budapest",
+    "country": "Hungary",
+    "continent": "Europe",
+    "tagline": "Thermal mineral palaces, grand Danube bridges & ruin pub nightlife",
+    "description": "Soak in grand neo-baroque thermal baths, stroll along the illuminated Danube, and dance in eclectic bohemian ruin bars.",
+    "coverImage": "https://images.unsplash.com/photo-1549877452-9c387954fbc2?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "April – October & Winter Markets",
+    "averageTemp": "18°C",
+    "idealDays": 4,
+    "vibes": [
+      "Thermal Baths",
+      "Danube",
+      "Nightlife"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Street Food",
+      "Authentic Spicy",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Friends",
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "Széchenyi Thermal Bath Soak",
+      "Fisherman’s Bastion Castle Panorama",
+      "Hungarian Parliament Building at Night",
+      "Szimpla Kert Ruin Pub"
+    ],
+    "cuisines": [
+      "Hungarian Gulyás Soup",
+      "Crispy Lángos Fried Flatbread",
+      "Chimney Cake (Kürtőskalács)",
+      "Chicken Paprikash with Nokedli"
+    ]
+  },
+  {
+    "id": "dest_seville",
+    "name": "Seville",
+    "country": "Spain",
+    "continent": "Europe",
+    "tagline": "Orange blossom courtyards, passionate Flamenco & Moorish alcazars",
+    "description": "The passionate heart of Andalusia filled with sun-drenched Moorish palaces, fiery flamenco taverns, and lively tapas bars.",
+    "coverImage": "https://images.unsplash.com/photo-1558642084-fd07fae5282e?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#5B0B24] to-[#FFC83D]",
+    "bestSeason": "March – June & October – November",
+    "averageTemp": "24°C",
+    "idealDays": 4,
+    "vibes": [
+      "Flamenco",
+      "Moorish",
+      "Sunny"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Street Food",
+      "Fine Dining",
+      "Seafood"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Couple",
+      "Solo",
+      "Friends"
+    ],
+    "highlights": [
+      "Real Alcázar Palace & Water Gardens",
+      "Plaza de España Tile Bridges",
+      "Authentic Triana Flamenco Peñas",
+      "Seville Cathedral & Giralda Tower"
+    ],
+    "cuisines": [
+      "Salmorejo Cold Tomato Soup",
+      "Espinacas con Garbanzos (Spinach & Chickpeas)",
+      "Carrillada de Cerdo (Braised Pork Cheek)",
+      "Churros with Thick Dipping Chocolate"
+    ]
+  },
+  {
+    "id": "dest_lisbon",
+    "name": "Lisbon",
+    "country": "Portugal",
+    "continent": "Europe",
+    "tagline": "Yellow vintage trams, pastel rooftops & haunting Fado melodies",
+    "description": "Seven sunlit hills overlooking the Atlantic tagus estuary, where vintage yellow trams rattle through narrow cobblestone alleys.",
+    "coverImage": "https://images.unsplash.com/photo-1509840841025-9088ba78a826?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "April – October",
+    "averageTemp": "22°C",
+    "idealDays": 4,
+    "vibes": [
+      "Sunny",
+      "Vintage",
+      "Coastal Hills"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Street Food",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Solo",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "Tram 28 Scenic Ride",
+      "Miradouro de Santa Luzia Sunset",
+      "Belém Tower & Jerónimos Monastery",
+      "Alfama Fado Dinner Night"
+    ],
+    "cuisines": [
+      "Pastéis de Belém Custard Tarts",
+      "Grilled Sardines with Peppers",
+      "Bifana Pork Sandwiches",
+      "Ginjinha Cherry Liqueur in Chocolate Cups"
+    ]
+  },
+  {
+    "id": "dest_interlaken",
+    "name": "Interlaken & Lauterbrunnen",
+    "country": "Switzerland",
+    "continent": "Europe",
+    "tagline": "72 roaring waterfalls in a glacier valley between two turquoise lakes",
+    "description": "The adventure and nature heartland of the Bernese Oberland where sheer limestone cliffs echo with thunderous waterfalls.",
+    "coverImage": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#5B0B24] to-[#FFC83D]",
+    "bestSeason": "May – October (Hikes) & Dec – April (Ski)",
+    "averageTemp": "17°C",
+    "idealDays": 5,
+    "vibes": [
+      "Adventure",
+      "Waterfalls",
+      "Alpine"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Couple",
+      "Friends",
+      "Family"
+    ],
+    "highlights": [
+      "Lauterbrunnen Valley of 72 Waterfalls",
+      "Jungfraujoch Top of Europe Train",
+      "Lake Brienz Kayaking",
+      "Grindelwald First Cliff Walk"
+    ],
+    "cuisines": [
+      "Swiss Alpine Macaroni (Älplermagronen)",
+      "Cheese Fondue with Crusty Bread",
+      "Rösti with Bacon & Egg",
+      "Swiss Chocolate Truffles"
+    ]
+  },
+  {
+    "id": "dest_bruges",
+    "name": "Bruges",
+    "country": "Belgium",
+    "continent": "Europe",
+    "tagline": "Swan-filled medieval canals, cobblestone bridges & artisan pralines",
+    "description": "Step into a medieval fairy tale where peaceful willow-shaded canals, gothic bell towers, and chocolate boutiques create timeless magic.",
+    "coverImage": "https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "April – October & Christmas Season",
+    "averageTemp": "16°C",
+    "idealDays": 3,
+    "vibes": [
+      "Romantic",
+      "Medieval",
+      "Canals"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Fine Dining",
+      "Street Food",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "Canal Boat Tour of Rozenhoedkaai",
+      "Belfry of Bruges Panoramic Climb",
+      "Lake of Love (Minnewater) Stroll",
+      "Artisan Chocolate Shop Crawl"
+    ],
+    "cuisines": [
+      "Belgian Waffles with Strawberries",
+      "Moules-Frites (Mussels with Fries)",
+      "Flemish Beef Stew (Carbonnade)",
+      "Belgian Trappist Ales"
+    ]
+  },
+  {
+    "id": "dest_nice",
+    "name": "Nice & French Riviera",
+    "country": "France",
+    "continent": "Europe",
+    "tagline": "Azure sea curves, Promenade des Anglais & Belle Époque glamour",
+    "description": "Savor Mediterranean glamour along the curving Baie des Anges, stroll pastel Old Town alleys, and feast on Provencal markets.",
+    "coverImage": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B3C5D] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "May – October",
+    "averageTemp": "24°C",
+    "idealDays": 4,
+    "vibes": [
+      "Riviera",
+      "Coastal",
+      "Glamour"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Couple",
+      "Family",
+      "Solo"
+    ],
+    "highlights": [
+      "Promenade des Anglais Sea Walk",
+      "Castle Hill Panoramic Bay View",
+      "Cours Saleya Flower & Food Market",
+      "Day Trip to Eze Medieval Cliff Village"
+    ],
+    "cuisines": [
+      "Socca Chickpea Flatbread",
+      "Salade Niçoise with Fresh Tuna",
+      "Ratatouille Niçoise",
+      "Chilled Rosé Wine"
+    ]
+  },
+  {
+    "id": "dest_lake_como",
+    "name": "Lake Como & Bellagio",
+    "country": "Italy",
+    "continent": "Europe",
+    "tagline": "Aristocratic lakeside villas, cypress gardens & private wooden boats",
+    "description": "A playground of timeless elegance surrounded by steep alpine foothills, botanical villa gardens, and postcard village harbors.",
+    "coverImage": "https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#C2185B] to-[#FF7A3D]",
+    "bestSeason": "April – October",
+    "averageTemp": "22°C",
+    "idealDays": 4,
+    "vibes": [
+      "Luxury",
+      "Romantic",
+      "Lakeside"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Fine Dining",
+      "Seafood",
+      "Wine & Cheese"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "Villa del Balbianello Terraces",
+      "Bellagio Historic Village Harbor",
+      "Riva Wooden Speedboat Cruise",
+      "Varenna Lovers Walk"
+    ],
+    "cuisines": [
+      "Risotto con Filetti di Pesce Persico",
+      "Bresaola della Valtellina",
+      "Polenta Uncia",
+      "Aperol Spritz on the Water"
+    ]
+  },
+  {
+    "id": "dest_kotor",
+    "name": "Bay of Kotor",
+    "country": "Montenegro",
+    "continent": "Europe",
+    "tagline": "Fjord-like Adriatic bay, Venetian stone palaces & fortress climbs",
+    "description": "Europe’s southernmost fjord-like bay surrounded by towering limestone massifs, Venetian medieval towns, and quiet pebble coves.",
+    "coverImage": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B3C5D] via-[#5B0B24] to-[#FFC83D]",
+    "bestSeason": "May – October",
+    "averageTemp": "24°C",
+    "idealDays": 4,
+    "vibes": [
+      "Fjords",
+      "Medieval",
+      "Scenic"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Street Food",
+      "Fine Dining"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Couple",
+      "Solo",
+      "Friends"
+    ],
+    "highlights": [
+      "St. John Fortress 1,350 Step Climb",
+      "Our Lady of the Rocks Islet Boat",
+      "Kotor Medieval Walled Old Town",
+      "Perast Waterfront Dining"
+    ],
+    "cuisines": [
+      "Buzara Shellfish in White Wine",
+      "Njeguski Prosciutto & Cheese",
+      "Grilled Adriatic Calamari",
+      "Krempita Vanilla Slice"
+    ]
+  },
+  {
+    "id": "dest_vienna",
+    "name": "Vienna",
+    "country": "Austria",
+    "continent": "Europe",
+    "tagline": "Imperial palaces, classical concert halls & velvet coffee houses",
+    "description": "Grand Habsburg dynasty architecture, elegant Sachertorte coffee culture, and world-renowned musical heritage.",
+    "coverImage": "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#C2185B] to-[#FFC83D]",
+    "bestSeason": "April – October & December (Christmas Magic)",
+    "averageTemp": "18°C",
+    "idealDays": 4,
+    "vibes": [
+      "Imperial",
+      "Classical Music",
+      "Coffeehouses"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Couple",
+      "Family",
+      "Solo"
+    ],
+    "highlights": [
+      "Schönbrunn Palace & Imperial Gardens",
+      "St. Stephen’s Gothic Cathedral",
+      "Belvedere Palace Klimt “The Kiss”",
+      "Historic Café Central Velvet Coffee"
+    ],
+    "cuisines": [
+      "Original Wiener Schnitzel",
+      "Sachertorte with Whipped Cream",
+      "Tafelspitz with Horseradish",
+      "Melange Coffee"
+    ]
+  },
+  {
+    "id": "dest_amsterdam",
+    "name": "Amsterdam",
+    "country": "Netherlands",
+    "continent": "Europe",
+    "tagline": "Tree-lined canal rings, world-class art & bicycle-friendly charm",
+    "description": "Picturesque canal houses, blooming tulip markets, world-class Van Gogh masterpieces, and leisurely bicycle rides along waterways.",
+    "coverImage": "https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#C2185B] to-[#0B4F5B]",
+    "bestSeason": "April – October",
+    "averageTemp": "17°C",
+    "idealDays": 4,
+    "vibes": [
+      "Canals",
+      "Art",
+      "Cycling"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Street Food",
+      "Cafes & Bakeries",
+      "Seafood"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Friends",
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "Canal Ring Electric Boat Cruise",
+      "Rijksmuseum & Van Gogh Museum",
+      "Jordaan District Boutique Walk",
+      "Vondelpark Bicycle Ride"
+    ],
+    "cuisines": [
+      "Warm Stroopwafels from Market",
+      "Dutch Bitterballen with Mustard",
+      "Raw Herring with Pickles",
+      "Poffertjes Mini Pancakes"
+    ]
+  },
+  {
+    "id": "dest_crete",
+    "name": "Crete (Chania & Balos)",
+    "country": "Greece",
+    "continent": "Europe",
+    "tagline": "Pink-sand lagoons, Minoan palaces & authentic mountain tavernas",
+    "description": "The largest Greek island combining Venetian port towns, turquoise pink-sand lagoons, and the healthiest Mediterranean cuisine.",
+    "coverImage": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B3C5D] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "May – October",
+    "averageTemp": "26°C",
+    "idealDays": 6,
+    "vibes": [
+      "Beaches",
+      "Gourmet",
+      "Ancient"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Authentic Spicy",
+      "Fine Dining"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Family",
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "Balos Lagoon & Gramvousa Boat Trip",
+      "Elafonisi Pink Sand Beach",
+      "Chania Old Venetian Harbor Walk",
+      "Samaria Gorge Trek"
+    ],
+    "cuisines": [
+      "Cretan Dakos with Myzithra Cheese",
+      "Slow-cooked Lamb Kleftiko",
+      "Fresh Sea Bass Grilled with Oregano",
+      "Raki with Honey (Rakomelo)"
+    ]
+  },
+  {
+    "id": "dest_venice",
+    "name": "Venice",
+    "country": "Italy",
+    "continent": "Europe",
+    "tagline": "Floating marble palaces, gondola serenades & hidden canal bridges",
+    "description": "An architectural miracle built on the water, where marble palazzos rise directly from canals and narrow footpaths lead to quiet piazzas.",
+    "coverImage": "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF4F7A] to-[#FF7A3D]",
+    "bestSeason": "April – June & September – November",
+    "averageTemp": "20°C",
+    "idealDays": 3,
+    "vibes": [
+      "Romantic",
+      "Canals",
+      "Historic"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Seafood",
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "St. Mark’s Square & Basilica",
+      "Gondola Ride through Quiet Back Canals",
+      "Rialto Bridge Grand Canal Panorama",
+      "Burano Lace & Rainbow Houses Island"
+    ],
+    "cuisines": [
+      "Cicchetti & Spritz in Bacaro Bars",
+      "Risotto al Nero di Seppia",
+      "Bigoli in Salsa",
+      "Traditional Venetian Tiramisù"
+    ]
+  },
+  {
+    "id": "dest_dublin",
+    "name": "Dublin",
+    "country": "Ireland",
+    "continent": "Europe",
+    "tagline": "Literary pubs, live fiddle folk sessions & Georgian brick squares",
+    "description": "Warm Irish hospitality, historic libraries preserving ancient manuscripts, and evenings filled with traditional fiddle music.",
+    "coverImage": "https://images.unsplash.com/photo-1549918864-48ac978761a4?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#5B0B24] to-[#FFC83D]",
+    "bestSeason": "May – September",
+    "averageTemp": "16°C",
+    "idealDays": 3,
+    "vibes": [
+      "Friendly",
+      "Pubs & Music",
+      "Literary"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Street Food",
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Friends",
+      "Solo",
+      "Couple"
+    ],
+    "highlights": [
+      "Trinity College Long Room Library",
+      "Guinness Storehouse Gravity Bar",
+      "Temple Bar Folk Music Sessions",
+      "St. Stephen’s Green Walk"
+    ],
+    "cuisines": [
+      "Irish Beef & Guinness Stew",
+      "Soda Bread with Salted Butter",
+      "Fresh Dublin Bay Prawns",
+      "Creamy Pint of Guinness"
+    ]
+  },
+  {
+    "id": "dest_copenhagen",
+    "name": "Copenhagen",
+    "country": "Denmark",
+    "continent": "Europe",
+    "tagline": "Hygge harbor living, Nordic Michelin gastronomy & design icons",
+    "description": "The happiest city in the world where pastel 17th-century townhouses line Nyhavn canal, cargo bikes rule the streets, and bakeries are legendary.",
+    "coverImage": "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#FF4F7A] to-[#0B4F5B]",
+    "bestSeason": "May – September",
+    "averageTemp": "19°C",
+    "idealDays": 4,
+    "vibes": [
+      "Design",
+      "Hygge",
+      "Gastronomy"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Fine Dining",
+      "Cafes & Bakeries",
+      "Seafood"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Couple",
+      "Solo",
+      "Friends"
+    ],
+    "highlights": [
+      "Nyhavn Canal Colorful Shophouse Walk",
+      "Tivoli Gardens Fairy-tale Park",
+      "Rosenborg Castle Crown Jewels",
+      "Torvehallerne Food Market"
+    ],
+    "cuisines": [
+      "Smørrebrød Open-faced Sandwiches",
+      "Cardamom Buns from Juno Bakery",
+      "New Nordic Tasting Menus",
+      "Crispy Danish Flæskesteg"
+    ]
+  },
+  {
+    "id": "dest_split",
+    "name": "Split & Hvar Island",
+    "country": "Croatia",
+    "continent": "Europe",
+    "tagline": "Roman Emperor’s living palace, lavender fields & glamorous yachts",
+    "description": "Lively Dalmatian harbor built inside Roman Emperor Diocletian’s palace, surrounded by island yachts, lavender fields, and turquoise bays.",
+    "coverImage": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B3C5D] via-[#C2185B] to-[#FFC83D]",
+    "bestSeason": "May – October",
+    "averageTemp": "26°C",
+    "idealDays": 5,
+    "vibes": [
+      "Islands",
+      "Roman",
+      "Beach"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Street Food",
+      "Fine Dining"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Friends",
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "Diocletian’s Palace Cellars",
+      "Hvar Island Fortress Sunset",
+      "Marjan Forest Park Hike",
+      "Pakleni Islands Speedboat Tour"
+    ],
+    "cuisines": [
+      "Dalmatian Pasticada with Gnocchi",
+      "Grilled Sea Bream with Chard",
+      "Soparnik Savory Pie",
+      "Croatian Plavac Mali Red Wine"
+    ]
+  },
+  {
+    "id": "dest_madrid",
+    "name": "Madrid",
+    "country": "Spain",
+    "continent": "Europe",
+    "tagline": "Golden Triangle art galleries, tree-lined boulevards & late-night tapas",
+    "description": "Spain’s royal capital bustling with high-energy tapas markets, grand plazas, magnificent Royal Palaces, and manicured Retiro gardens.",
+    "coverImage": "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "April – June & September – October",
+    "averageTemp": "22°C",
+    "idealDays": 4,
+    "vibes": [
+      "Vibrant",
+      "Art",
+      "Tapas"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Street Food",
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Friends",
+      "Solo",
+      "Couple"
+    ],
+    "highlights": [
+      "Prado Museum Masterpieces",
+      "El Retiro Park Glass Palace & Rowing",
+      "Mercado de San Miguel Tapas Feast",
+      "Royal Palace of Madrid"
+    ],
+    "cuisines": [
+      "Bocadillo de Calamares",
+      "Tortilla de Patatas",
+      "Churros con Chocolate at San Ginés",
+      "Huevos Rotos con Jamón"
+    ]
+  },
+  {
+    "id": "dest_berlin",
+    "name": "Berlin",
+    "country": "Germany",
+    "continent": "Europe",
+    "tagline": "Counter-culture art, storied history & world-famous techno clubs",
+    "description": "An open-minded creative capital defined by historic wall memorials, sprawling parks, avant-garde art lofts, and famous street foods.",
+    "coverImage": "https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#0B3C5D] to-[#FF7A3D]",
+    "bestSeason": "May – September",
+    "averageTemp": "20°C",
+    "idealDays": 4,
+    "vibes": [
+      "Creative",
+      "Historic",
+      "Nightlife"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "18-24",
+      "25-34"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Street Food",
+      "Plant-Based",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Neon Metropolis",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Friends",
+      "Solo"
+    ],
+    "highlights": [
+      "Brandenburg Gate & Reichstag Dome",
+      "East Side Gallery Berlin Wall Art",
+      "Museum Island Pergamon Collections",
+      "Mauerpark Flea Market & Karaoke"
+    ],
+    "cuisines": [
+      "Currywurst with Crispy Fries",
+      "Berlin Döner Kebab at Mustafa’s",
+      "Pretzels with Beer Cheese",
+      "Artisan Third-Wave Pour-overs"
+    ]
+  },
+  {
+    "id": "dest_athens",
+    "name": "Athens",
+    "country": "Greece",
+    "continent": "Europe",
+    "tagline": "The Parthenon on high, neoclassical tavernas & buzzing rooftop bars",
+    "description": "The ancient birthplace of Western democracy where thousands of years of antiquity overlook trendy bohemian districts and rooftop cocktail terraces.",
+    "coverImage": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#5B0B24] to-[#FFC83D]",
+    "bestSeason": "April – June & September – November",
+    "averageTemp": "23°C",
+    "idealDays": 3,
+    "vibes": [
+      "Ancient",
+      "Mythology",
+      "Rooftops"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Street Food",
+      "Seafood",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Solo",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "The Acropolis & Parthenon",
+      "Plaka Historic Neighborhood Walk",
+      "Acropolis Museum",
+      "Mount Lycabettus Sunset Viewpoint"
+    ],
+    "cuisines": [
+      "Pork Souvlaki Gyro with Tzatziki",
+      "Traditional Greek Moussaka",
+      "Spanakopita Spinach Pie",
+      "Loukoumades Honey Donuts"
+    ]
+  },
+  {
+    "id": "dest_munich",
+    "name": "Munich & Neuschwanstein Castle",
+    "country": "Germany",
+    "continent": "Europe",
+    "tagline": "Bavarian fairy-tale castles, leafy beer gardens & alpine foothills",
+    "description": "Home of the Disney-inspiring Neuschwanstein castle nestled in alpine pine forests, world-famous beer halls, and elegant baroque architecture.",
+    "coverImage": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#0B4F5B] to-[#FFC83D]",
+    "bestSeason": "May – October & Christmas Market Season",
+    "averageTemp": "18°C",
+    "idealDays": 4,
+    "vibes": [
+      "Bavarian",
+      "Castles",
+      "Beer Gardens"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Street Food",
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Family",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "Neuschwanstein Fairy-tale Castle Tour",
+      "Marienplatz Glockenspiel Show",
+      "English Garden Surfers & Beer Garden",
+      "Nymphenburg Baroque Palace"
+    ],
+    "cuisines": [
+      "Schweinshaxe Roasted Pork Knuckle",
+      "Bavarian Soft Pretzels with Obatzda",
+      "Weisswurst with Sweet Mustard",
+      "Bavarian Helles Lager"
+    ]
+  },
+  {
+    "id": "dest_salzburg",
+    "name": "Salzburg",
+    "country": "Austria",
+    "continent": "Europe",
+    "tagline": "Mozart’s birthplace, clifftop fortresses & baroque gardens",
+    "description": "A magical musical baroque city perched below the Hohensalzburg fortress, framed by the snow-capped Austrian Alps.",
+    "coverImage": "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#C2185B] to-[#FFC83D]",
+    "bestSeason": "May – October & December",
+    "averageTemp": "17°C",
+    "idealDays": 3,
+    "vibes": [
+      "Music",
+      "Baroque",
+      "Alpine"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Couple",
+      "Solo",
+      "Family"
+    ],
+    "highlights": [
+      "Festung Hohensalzburg Fortress",
+      "Mirabell Palace & Baroque Gardens",
+      "Mozart’s Birthplace on Getreidegasse",
+      "Salzach River Bridge Walk"
+    ],
+    "cuisines": [
+      "Salzburger Nockerl Souffle",
+      "Mozartkugeln Pistachio Marzipan Chocolates",
+      "Wiener Schnitzel",
+      "Austrian Roast Coffee with Cream"
+    ]
+  },
+  {
+    "id": "dest_bergen",
+    "name": "Bergen & Western Fjords",
+    "country": "Norway",
+    "continent": "Europe",
+    "tagline": "Colorful Bryggen wooden wharves & gateway to deep fjords",
+    "description": "Charming UNESCO coastal town wrapped by seven mountains, offering direct ferry access to the awe-inspiring Sognefjord and Nærøyfjord.",
+    "coverImage": "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B3C5D] via-[#FF7A3D] to-[#0B4F5B]",
+    "bestSeason": "May – September",
+    "averageTemp": "15°C",
+    "idealDays": 4,
+    "vibes": [
+      "Fjords",
+      "Wooden Wharves",
+      "Scenic"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Seafood",
+      "Fine Dining"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Couple",
+      "Family",
+      "Solo"
+    ],
+    "highlights": [
+      "Bryggen Hanseatic Wooden Wharf",
+      "Fløibanen Funicular Mountain View",
+      "Nærøyfjord Scenic Boat Cruise",
+      "Bergen Fish Market Lunch"
+    ],
+    "cuisines": [
+      "Bergen Creamy Fish Soup (Bergensk Fiskesuppe)",
+      "Fresh Boiled King Crab",
+      "Skillingsbolle Cinnamon Buns",
+      "Smoked Salmon Open Sandwiches"
+    ]
+  },
+  {
+    "id": "dest_banff",
+    "name": "Banff & Lake Louise",
+    "country": "Canada",
+    "continent": "Americas",
+    "tagline": "Glacial turquoise waters framed by majestic Rocky peaks",
+    "description": "Pristine alpine wilderness, pine-scented mountain air, and surreal crystalline lakes in the heart of the Canadian Rockies.",
+    "coverImage": "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF4F7A] to-[#FF7A3D]",
+    "bestSeason": "June – October",
+    "averageTemp": "16°C",
+    "idealDays": 5,
+    "vibes": [
+      "Adventure",
+      "Nature",
+      "Photography"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Fine Dining",
+      "Cafes & Bakeries",
+      "Street Food"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Couple",
+      "Friends",
+      "Family"
+    ],
+    "highlights": [
+      "Moraine Lake Sunrise Canoe",
+      "Lake Louise Shoreline Trail",
+      "Banff Gondola & Sulphur Mountain",
+      "Johnston Canyon Waterfalls"
+    ],
+    "cuisines": [
+      "Alberta Bison Burgers",
+      "Canadian Poutine with Cheese Curds",
+      "Maple Smoked Salmon",
+      "Wild Blackberry Pancakes"
+    ]
+  },
+  {
+    "id": "dest_maui",
+    "name": "Maui",
+    "country": "United States",
+    "continent": "Americas",
+    "tagline": "Haleakala volcanic sunrises, Hana waterfalls & golden beaches",
+    "description": "Tropical paradise offering dramatic dormant volcano summits, the winding Road to Hana rainforest drive, and humpback whale watching.",
+    "coverImage": "https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "Year-Round",
+    "averageTemp": "28°C",
+    "idealDays": 6,
+    "vibes": [
+      "Tropical",
+      "Volcano",
+      "Surf"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Street Food",
+      "Fine Dining"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Couple",
+      "Family"
+    ],
+    "highlights": [
+      "Haleakala National Park Above the Clouds Sunrise",
+      "Road to Hana 620-Curve Rainforest Highway",
+      "Molokini Crater Snorkeling",
+      "Kaanapali Beach Luau"
+    ],
+    "cuisines": [
+      "Fresh Ahi Poke Bowls",
+      "Kalua Pork Tacos",
+      "Shave Ice with Guava & Coconut",
+      "Loco Moco with Gravy"
+    ]
+  },
+  {
+    "id": "dest_nyc",
+    "name": "New York City",
+    "country": "United States",
+    "continent": "Americas",
+    "tagline": "Broadway marquis lights, soaring skyline decks & endless energy",
+    "description": "The epicenter of global art, theater, fashion, and gastronomy spanning iconic Central Park, Brooklyn lofts, and world-class museums.",
+    "coverImage": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#C2185B] to-[#FF7A3D]",
+    "bestSeason": "April – June & Sept – Nov",
+    "averageTemp": "19°C",
+    "idealDays": 5,
+    "vibes": [
+      "Metropolis",
+      "Broadway",
+      "Gastronomy"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Street Food",
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Neon Metropolis",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Solo",
+      "Friends",
+      "Couple"
+    ],
+    "highlights": [
+      "Central Park Lake & Bow Bridge",
+      "Summit One Vanderbilt Deck",
+      "Broadway Evening Musical",
+      "Brooklyn Bridge Sunset Walk"
+    ],
+    "cuisines": [
+      "NY Foldable Pepperoni Pizza Slice",
+      "Warm Pastrami on Rye at Katz’s",
+      "Ess-a-Bagel with Cream Cheese",
+      "Artisanal Banana Pudding at Magnolia"
+    ]
+  },
+  {
+    "id": "dest_oaxaca",
+    "name": "Oaxaca",
+    "country": "Mexico",
+    "continent": "Americas",
+    "tagline": "Artisanal smoky mezcal, complex black moles & colorful crafts",
+    "description": "Mexico’s culinary soul where seven varieties of rich mole simmer, indigenous textile weavers work handlooms, and colonial squares buzz with brass bands.",
+    "coverImage": "https://images.unsplash.com/photo-1512813195386-6cf811ad3542?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#5B0B24] to-[#FFC83D]",
+    "bestSeason": "October – April",
+    "averageTemp": "24°C",
+    "idealDays": 5,
+    "vibes": [
+      "Culinary",
+      "Indigenous Art",
+      "Colonial"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Street Food",
+      "Authentic Spicy",
+      "Fine Dining"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Solo",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "Monte Albán Zapotec Pyramids",
+      "Hierve el Agua Petrified Waterfalls",
+      "Tlacolula Sunday Indigenous Market",
+      "Santo Domingo Baroque Church"
+    ],
+    "cuisines": [
+      "Mole Negro with Handmade Tortillas",
+      "Crispy Tlayudas (Oaxacan Pizza)",
+      "Smoky Artisanal Mezcal Tasting",
+      "Oaxacan Hot Chocolate with Pan de Yema"
+    ]
+  },
+  {
+    "id": "dest_cusco",
+    "name": "Cusco & Machu Picchu",
+    "country": "Peru",
+    "continent": "Americas",
+    "tagline": "Lost Incan citadel in the clouds & Sacred Valley mountains",
+    "description": "The ancient capital of the Inca Empire nestled in the high Andes, leading to the breathtaking cloud-shrouded ruins of Machu Picchu.",
+    "coverImage": "https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "May – October",
+    "averageTemp": "16°C",
+    "idealDays": 6,
+    "vibes": [
+      "Ancient Inca",
+      "Andean",
+      "Wonder"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Authentic Spicy",
+      "Fine Dining",
+      "Street Food"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Solo",
+      "Friends",
+      "Couple"
+    ],
+    "highlights": [
+      "Machu Picchu Sanctuary at Sunrise",
+      "Sacred Valley Ollantaytambo Ruins",
+      "Plaza de Armas Incan Masonry Walk",
+      "Rainbow Mountain Vinicunca Trek"
+    ],
+    "cuisines": [
+      "Fresh Lime Ceviche with Choclo",
+      "Lomo Saltado Stir-fry",
+      "Empanadas de Queso",
+      "Hot Coca Leaf Herbal Tea"
+    ]
+  },
+  {
+    "id": "dest_patagonia",
+    "name": "Patagonia (Torres del Paine)",
+    "country": "Chile",
+    "continent": "Americas",
+    "tagline": "Dramatic granite horns, blue glaciers & guanacos in open pampas",
+    "description": "Wild end-of-the-earth grandeur where sheer granite towers pierce the sky, colossal blue glaciers calf into lakes, and pumas roam.",
+    "coverImage": "https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B3C5D] via-[#5B0B24] to-[#0B4F5B]",
+    "bestSeason": "November – March",
+    "averageTemp": "13°C",
+    "idealDays": 7,
+    "vibes": [
+      "Wilderness",
+      "Trekking",
+      "End of Earth"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Fine Dining",
+      "Street Food"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Solo",
+      "Friends",
+      "Couple"
+    ],
+    "highlights": [
+      "Mirador Base Las Torres Sunrise Hike",
+      "Grey Glacier Boat Navigation",
+      "French Valley Panoramic Lookout",
+      "Guanaco Wildlife Spotting"
+    ],
+    "cuisines": [
+      "Patagonian Lamb Asado",
+      "King Crab Chowder (Chupe de Centolla)",
+      "Calafate Berry Sour Cocktail",
+      "Warm Empanadas"
+    ]
+  },
+  {
+    "id": "dest_costa_rica",
+    "name": "Costa Rica (Arenal & Manuel Antonio)",
+    "country": "Costa Rica",
+    "continent": "Americas",
+    "tagline": "Volcanic hot springs, cloud forest canopy ziplines & sloth encounters",
+    "description": "The epitome of “Pura Vida” with towering active volcanoes, lush rainforest suspension bridges, and pristine Pacific beach national parks.",
+    "coverImage": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "December – April",
+    "averageTemp": "27°C",
+    "idealDays": 6,
+    "vibes": [
+      "Ecotourism",
+      "Rainforest",
+      "Wildlife"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Plant-Based",
+      "Street Food",
+      "Seafood"
+    ],
+    "landscape": "Lush Nature",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Family",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "Arenal Volcano Thermal Springs",
+      "Monteverde Cloud Forest Hanging Bridges",
+      "Manuel Antonio National Park Wildlife Walk",
+      "La Fortuna Waterfall Swim"
+    ],
+    "cuisines": [
+      "Gallo Pinto with Fried Plantains",
+      "Casado Meal Platter",
+      "Fresh Ceviche Tico",
+      "Single-Origin Costa Rican Coffee"
+    ]
+  },
+  {
+    "id": "dest_rio",
+    "name": "Rio de Janeiro",
+    "country": "Brazil",
+    "continent": "Americas",
+    "tagline": "Christ the Redeemer arms open, Copacabana waves & samba rhythms",
+    "description": "Dramatic granite peaks rising from golden beaches, where samba echoes through street corners and sunset caipirinhas are a daily ritual.",
+    "coverImage": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#C2185B] to-[#FFC83D]",
+    "bestSeason": "December – March & May – October",
+    "averageTemp": "28°C",
+    "idealDays": 5,
+    "vibes": [
+      "Beaches",
+      "Samba",
+      "Vibrant"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Seafood",
+      "Street Food",
+      "Fine Dining"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Friends",
+      "Solo",
+      "Couple"
+    ],
+    "highlights": [
+      "Christ the Redeemer at Corcovado",
+      "Sugarloaf Mountain Cable Car Sunset",
+      "Ipanema Beach Posto 9 Lounge",
+      "Santa Teresa Bohemian Steps (Selarón)"
+    ],
+    "cuisines": [
+      "Traditional Feijoada with Farofa",
+      "Picanha Churrasco BBQ",
+      "Acai Bowls with Granola",
+      "Fresh Lime Caipirinhas"
+    ]
+  },
+  {
+    "id": "dest_vancouver",
+    "name": "Vancouver & Whistler",
+    "country": "Canada",
+    "continent": "Americas",
+    "tagline": "Snowy coastal mountains, Stanley Park seawall & fresh salmon bays",
+    "description": "Where cosmopolitan glass skyscrapers sit framed by the Pacific Ocean and towering coastal rainforest mountains.",
+    "coverImage": "https://images.unsplash.com/photo-1559511260-66a65e09b2ee?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#5B0B24] to-[#FF7A3D]",
+    "bestSeason": "June – September & Winter Skiing",
+    "averageTemp": "18°C",
+    "idealDays": 5,
+    "vibes": [
+      "Outdoor",
+      "Coastal City",
+      "Mountains"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Family",
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "Stanley Park Seawall Bicycle Ride",
+      "Capilano Suspension Bridge Park",
+      "Granville Island Public Market",
+      "Whistler Mountain Peak 2 Peak Gondola"
+    ],
+    "cuisines": [
+      "Wild Pacific Sockeye Salmon",
+      "Authentic Richmond Dim Sum",
+      "Spot Prawns in Season",
+      "Nanaimo Bars"
+    ]
+  },
+  {
+    "id": "dest_cartagena",
+    "name": "Cartagena",
+    "country": "Colombia",
+    "continent": "Americas",
+    "tagline": "Bougainvillea colonial balconies, Caribbean salsa & walled ramparts",
+    "description": "A vibrant Caribbean walled fortress town draped in tropical flowers, lively salsa clubs, and nearby coral island paradises.",
+    "coverImage": "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "December – April",
+    "averageTemp": "30°C",
+    "idealDays": 4,
+    "vibes": [
+      "Caribbean",
+      "Colonial",
+      "Salsa"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Seafood",
+      "Street Food",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Friends",
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "Walled City Colonial Balcony Walk",
+      "Getsemaní Street Art & Plaza Salsa",
+      "Rosario Islands Boat Cruise",
+      "Castillo San Felipe de Barajas"
+    ],
+    "cuisines": [
+      "Arepa de Huevo",
+      "Coconut Rice with Fried Red Snapper",
+      "Ceviche Mixto with Plantain Chips",
+      "Fresh Lulo & Maracuyá Juices"
+    ]
+  },
+  {
+    "id": "dest_montreal",
+    "name": "Montreal",
+    "country": "Canada",
+    "continent": "Americas",
+    "tagline": "French-infused cobblestones, wood-fired bagels & festival energy",
+    "description": "North America’s most European metropolis, brimming with creative mural culture, historic basilicas, and irresistible culinary icons.",
+    "coverImage": "https://images.unsplash.com/photo-1519178173458-1f5f3e46c764?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF4F7A] to-[#FF7A3D]",
+    "bestSeason": "May – October & Winter Festivals",
+    "averageTemp": "19°C",
+    "idealDays": 4,
+    "vibes": [
+      "Festivals",
+      "French Flair",
+      "Foodie"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Street Food",
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Friends",
+      "Solo",
+      "Couple"
+    ],
+    "highlights": [
+      "Old Montreal & Notre-Dame Basilica",
+      "Mount Royal Park Lookout",
+      "Plateau Mont-Royal Mural Walk",
+      "Jean-Talon Market Food Tour"
+    ],
+    "cuisines": [
+      "Warm Wood-fired Montreal Bagels",
+      "Schwartz’s Smoked Meat Sandwich",
+      "Classic Poutine with Rich Gravy",
+      "Maple Taffy on Snow"
+    ]
+  },
+  {
+    "id": "dest_san_francisco",
+    "name": "San Francisco & Napa Valley",
+    "country": "United States",
+    "continent": "Americas",
+    "tagline": "Golden Gate Bridge mists, historic cable cars & world-famous wineries",
+    "description": "Rolling coastal hills overlooking the iconic red suspension bridge, vibrant neighborhood cultures, and world-renowned Napa vineyards.",
+    "coverImage": "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#5B0B24] to-[#FF4F7A]",
+    "bestSeason": "September – November (Warmest)",
+    "averageTemp": "18°C",
+    "idealDays": 5,
+    "vibes": [
+      "Iconic",
+      "Wine Country",
+      "Coastal"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Couple",
+      "Solo",
+      "Friends"
+    ],
+    "highlights": [
+      "Golden Gate Bridge Walk & Marin Headlands",
+      "Cable Car Ride over Powell Street Hills",
+      "Napa Valley Vineyard Tasting Train",
+      "Fisherman’s Wharf Sea Lions"
+    ],
+    "cuisines": [
+      "San Francisco Sourdough Clam Chowder",
+      "Mission District Burrito",
+      "Ghirardelli Hot Fudge Sundae",
+      "Napa Cabernet Sauvignon"
+    ]
+  },
+  {
+    "id": "dest_sedona",
+    "name": "Sedona Red Rocks",
+    "country": "United States",
+    "continent": "Americas",
+    "tagline": "Crimson sandstone buttes, spiritual energy vortexes & starry skies",
+    "description": "A mesmerizing high-desert sanctuary framed by dramatic red rock monoliths, pine-shaded creeks, and renowned spiritual wellness vortexes.",
+    "coverImage": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#5B0B24] to-[#FFC83D]",
+    "bestSeason": "March – May & Sept – Nov",
+    "averageTemp": "22°C",
+    "idealDays": 3,
+    "vibes": [
+      "Spiritual",
+      "Red Rocks",
+      "Hiking"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Fine Dining",
+      "Plant-Based"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "Cathedral Rock Vortex Hike",
+      "Devil’s Bridge Natural Arch",
+      "Oak Creek Canyon Scenic Drive",
+      "Tlaquepaque Arts & Shopping Village"
+    ],
+    "cuisines": [
+      "Southwestern Prickly Pear Margarita",
+      "Mesquite Smoked Pulled Pork",
+      "Corn & Green Chile Chowder",
+      "Navajo Fry Bread"
+    ]
+  },
+  {
+    "id": "dest_havana",
+    "name": "Havana",
+    "country": "Cuba",
+    "continent": "Americas",
+    "tagline": "Pastel classic convertibles, colonial plazas & live son cubano",
+    "description": "A living time capsule where 1950s vintage American cars glide along the Malecón seawall and acoustic guitar chords drift from open windows.",
+    "coverImage": "https://images.unsplash.com/photo-1500759285222-a95626b934cb?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#C2185B] to-[#FFC83D]",
+    "bestSeason": "November – April",
+    "averageTemp": "26°C",
+    "idealDays": 4,
+    "vibes": [
+      "Vintage",
+      "Music",
+      "Colonial"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Street Food",
+      "Authentic Spicy"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Friends",
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "Old Havana (Habana Vieja) Four Plazas Walk",
+      "Vintage American Convertible City Tour",
+      "Malecón Seawall Sunset Stroll",
+      "El Floridita Daiquiri Toast"
+    ],
+    "cuisines": [
+      "Ropa Vieja Shredded Beef with Moros y Cristianos",
+      "Cuban Sandwich with Roasted Pork",
+      "Plátanos Maduros (Sweet Plantains)",
+      "Fresh Mint Mojito"
+    ]
+  },
+  {
+    "id": "dest_galapagos",
+    "name": "Galapagos Islands",
+    "country": "Ecuador",
+    "continent": "Americas",
+    "tagline": "Fearless wildlife, giant tortoises & volcanic lava tubes",
+    "description": "Charles Darwin’s living laboratory where blue-footed boobies, marine iguanas, and sea lions swim completely unafraid of humans.",
+    "coverImage": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "Year-Round",
+    "averageTemp": "25°C",
+    "idealDays": 7,
+    "vibes": [
+      "Wildlife",
+      "Evolution",
+      "Volcanic"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Seafood",
+      "Fine Dining"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Family",
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "Snorkel with Sea Lions & Penguins at Kicker Rock",
+      "Giant Tortoises in the Santa Cruz Highlands",
+      "Bartolomé Island Pinnacle Rock Lookout",
+      "Tortuga Bay White Sand Beach Walk"
+    ],
+    "cuisines": [
+      "Ecuadorian Shrimp Ceviche",
+      "Fresh Grilled Corvina Fish",
+      "Fried Green Plantain Patacones",
+      "Canelazo Spiced Cinnamon Drink"
+    ]
+  },
+  {
+    "id": "dest_ushuaia",
+    "name": "Ushuaia",
+    "country": "Argentina",
+    "continent": "Americas",
+    "tagline": "The End of the World, Beagle Channel navigation & penguin colonies",
+    "description": "The southernmost city on Earth where the Martial mountain range meets the icy Beagle Channel and gateway to Antarctic expeditions.",
+    "coverImage": "https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B3C5D] via-[#5B0B24] to-[#0B4F5B]",
+    "bestSeason": "November – March",
+    "averageTemp": "10°C",
+    "idealDays": 3,
+    "vibes": [
+      "End of World",
+      "Penguins",
+      "Antarctic"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Seafood",
+      "Fine Dining"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Solo",
+      "Friends",
+      "Couple"
+    ],
+    "highlights": [
+      "Beagle Channel Penguin Island Navigation",
+      "Tierra del Fuego National Park End-of-the-World Train",
+      "Martial Glacier Hike",
+      "Les Eclaireurs Lighthouse Photo"
+    ],
+    "cuisines": [
+      "Centolla (Fuegian King Crab)",
+      "Patagonian Cordero al Asado",
+      "Black Hake with Lemon",
+      "Alfajores with Dulce de Leche"
+    ]
+  },
+  {
+    "id": "dest_buenos_aires",
+    "name": "Buenos Aires",
+    "country": "Argentina",
+    "continent": "Americas",
+    "tagline": "Passionate street tango, European grand avenues & legendary steakhouses",
+    "description": "The Paris of South America with grand European boulevards, street-corner tango dancers in San Telmo, and world-renowned grass-fed beef.",
+    "coverImage": "https://images.unsplash.com/photo-1589909202802-8f4aadce1849?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF4F7A] to-[#FF7A3D]",
+    "bestSeason": "March – May & Sept – Nov",
+    "averageTemp": "20°C",
+    "idealDays": 5,
+    "vibes": [
+      "Tango",
+      "Steakhouses",
+      "Culture"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Fine Dining",
+      "Street Food",
+      "Wine & Cheese"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Couple",
+      "Solo",
+      "Friends"
+    ],
+    "highlights": [
+      "San Telmo Sunday Antique Market & Tango",
+      "Teatro Colón Opera House Tour",
+      "La Boca Caminito Rainbow Houses",
+      "Recoleta Cemetery Historic Crypts"
+    ],
+    "cuisines": [
+      "Ojo de Bife Ribeye Steak at Don Julio",
+      "Warm Empanadas de Carne",
+      "Medialunas Sweet Croissants",
+      "Malbec Red Wine from Mendoza"
+    ]
+  },
+  {
+    "id": "dest_bariloche",
+    "name": "Bariloche & Lake District",
+    "country": "Argentina",
+    "continent": "Americas",
+    "tagline": "Switzerland of the Andes, artisan chocolate boutiques & glacier lakes",
+    "description": "Alpine wooden architecture nestled on the shores of Lake Nahuel Huapi, famous for world-class artisan chocolates and mountain hikes.",
+    "coverImage": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#5B0B24] to-[#FFC83D]",
+    "bestSeason": "Nov – April (Sun) & July – Sept (Ski)",
+    "averageTemp": "16°C",
+    "idealDays": 4,
+    "vibes": [
+      "Alpine",
+      "Chocolates",
+      "Glacial Lakes"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Couple",
+      "Family",
+      "Solo"
+    ],
+    "highlights": [
+      "Circuito Chico Panoramic Scenic Drive",
+      "Cerro Campanario Viewpoint Chairlift",
+      "Mitre Street Artisan Chocolate Tastings",
+      "Boat Cruise to Victoria Island & Arrayanes Forest"
+    ],
+    "cuisines": [
+      "Handmade Artisan Truffles & Chocolates",
+      "Fondue de Queso",
+      "Smoked Trout in Cream Sauce",
+      "Patagonian Lamb with Chimichurri"
+    ]
+  },
+  {
+    "id": "dest_quebec_city",
+    "name": "Quebec City",
+    "country": "Canada",
+    "continent": "Americas",
+    "tagline": "Walled French ramparts, Château Frontenac & cobblestone bistros",
+    "description": "North America’s only fortified city north of Mexico, dripping in 400-year-old French charm, horse-drawn carriages, and winter carnivals.",
+    "coverImage": "https://images.unsplash.com/photo-1519178173458-1f5f3e46c764?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#0B3C5D] to-[#FF7A3D]",
+    "bestSeason": "June – October & December – February",
+    "averageTemp": "17°C",
+    "idealDays": 3,
+    "vibes": [
+      "Historic Fortress",
+      "French Culture",
+      "Romantic"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Couple",
+      "Family",
+      "Solo"
+    ],
+    "highlights": [
+      "Fairmont Le Château Frontenac Boardwalk",
+      "Quartier Petit Champlain Artisan Boutiques",
+      "Old Quebec Ramparts Walk",
+      "Montmorency Falls Suspension Bridge"
+    ],
+    "cuisines": [
+      "Tourtière Meat Pie",
+      "French Onion Soup with Gruyère",
+      "Sugar Pie (Tarte au Sucre)",
+      "Duck Confit with Maple Glaze"
+    ]
+  },
+  {
+    "id": "dest_mexico_city",
+    "name": "Mexico City (CDMX)",
+    "country": "Mexico",
+    "continent": "Americas",
+    "tagline": "Frida Kahlo blue houses, leafy Roma cafes & street taco heavens",
+    "description": "One of the world’s great cultural megalopolises, bursting with world-class museums, jacaranda-lined avenues, and Michelin street taco counters.",
+    "coverImage": "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "October – May",
+    "averageTemp": "22°C",
+    "idealDays": 5,
+    "vibes": [
+      "Art",
+      "Culinary Capital",
+      "Historic"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Street Food",
+      "Authentic Spicy",
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Neon Metropolis",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Solo",
+      "Friends",
+      "Couple"
+    ],
+    "highlights": [
+      "Frida Kahlo Museum in Coyoacán",
+      "Teotihuacan Pyramids of Sun & Moon",
+      "Chapultepec Castle & Anthropology Museum",
+      "Xochimilco Colorful Trajinera Canal Boats"
+    ],
+    "cuisines": [
+      "Tacos al Pastor with Pineapple",
+      "Churros at El Moro",
+      "Enmoladas with Mole Poblano",
+      "Chiles en Nogada"
+    ]
+  },
+  {
+    "id": "dest_honolulu",
+    "name": "Honolulu & Oahu",
+    "country": "United States",
+    "continent": "Americas",
+    "tagline": "Waikiki golden surf, Diamond Head crater & North Shore big waves",
+    "description": "Where Hawaiian royal heritage blends with iconic Waikiki surf breaks, green volcanic craters, and famous food truck culture.",
+    "coverImage": "https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "Year-Round",
+    "averageTemp": "28°C",
+    "idealDays": 5,
+    "vibes": [
+      "Surfing",
+      "Polynesian",
+      "Beaches"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Street Food",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Family",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "Diamond Head Summit Trail Hike",
+      "Waikiki Sunset Outrigger Canoe",
+      "Hanauma Bay Snorkel Nature Preserve",
+      "North Shore Sunset & Food Trucks"
+    ],
+    "cuisines": [
+      "Shoyu Ahi Poke Bowl",
+      "Giovanni’s Garlic Butter Shrimp",
+      "Malasadas from Leonard’s Bakery",
+      "Loco Moco Breakfast"
+    ]
+  },
+  {
+    "id": "dest_lake_tahoe",
+    "name": "Lake Tahoe",
+    "country": "United States",
+    "continent": "Americas",
+    "tagline": "Cobalt alpine waters, pine-scented beaches & Sierra ski slopes",
+    "description": "A massive cobalt-blue alpine lake surrounded by the snow-capped Sierra Nevada mountains, offering pristine paddleboarding and world-class skiing.",
+    "coverImage": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B3C5D] via-[#0B4F5B] to-[#FFC83D]",
+    "bestSeason": "June – September & Dec – April",
+    "averageTemp": "20°C",
+    "idealDays": 4,
+    "vibes": [
+      "Alpine Lake",
+      "Outdoors",
+      "Ski & Beach"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Fine Dining",
+      "Street Food"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Friends",
+      "Family",
+      "Couple"
+    ],
+    "highlights": [
+      "Emerald Bay & Vikingsholm Castle Lookout",
+      "Sand Harbor Clear Kayaking",
+      "Heavenly Mountain Gondola Ride",
+      "Rubicon Hiking Trail along Cliffs"
+    ],
+    "cuisines": [
+      "Sierra Nevada Craft Beer & Burgers",
+      "Woodfired Salmon Fillet",
+      "Artisan Sourdough Pizza",
+      "Wild Berry Cobbler"
+    ]
+  },
+  {
+    "id": "dest_new_orleans",
+    "name": "New Orleans",
+    "country": "United States",
+    "continent": "Americas",
+    "tagline": "Brass horn jazz in the French Quarter, beignets & Creole magic",
+    "description": "A soulful cultural cauldron where live jazz drifts from French Quarter doorways, historic streetcars rumble under oak trees, and Creole spices tantalize.",
+    "coverImage": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "February – May & October – December",
+    "averageTemp": "23°C",
+    "idealDays": 4,
+    "vibes": [
+      "Jazz",
+      "Creole Food",
+      "Vibrant Culture"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Street Food",
+      "Authentic Spicy",
+      "Seafood",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Friends",
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "Frenchmen Street Live Brass Jazz Clubs",
+      "Café du Monde Powdered Sugar Beignets",
+      "Garden District Stately Mansions Walk",
+      "Bayou Swamp Airboat Alligator Tour"
+    ],
+    "cuisines": [
+      "Crawfish Étouffée & Jambalaya",
+      "Warm Beignets with Café au Lait",
+      "Seafood Gumbo with Andouille Sausage",
+      "Muffuletta Sandwich"
+    ]
+  },
+  {
+    "id": "dest_cape_town",
+    "name": "Cape Town",
+    "country": "South Africa",
+    "continent": "Africa",
+    "tagline": "Flat-topped Table Mountain, penguin beaches & coastal vineyards",
+    "description": "Where dramatic ocean cliffs meet the iconic flat silhouette of Table Mountain, world-class Cape winelands, and colonies of wild African penguins.",
+    "coverImage": "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B3C5D] via-[#C2185B] to-[#FF7A3D]",
+    "bestSeason": "November – April",
+    "averageTemp": "25°C",
+    "idealDays": 6,
+    "vibes": [
+      "Scenic",
+      "Wildlife",
+      "Wine"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Fine Dining",
+      "Street Food"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Couple",
+      "Solo",
+      "Friends"
+    ],
+    "highlights": [
+      "Table Mountain Cableway Sunset",
+      "Boulders Beach Penguin Colony",
+      "Cape Point & Cape of Good Hope",
+      "Stellenbosch Vineyard Wine Tasting"
+    ],
+    "cuisines": [
+      "Cape Malay Bobotie",
+      "Fresh Linefish Grilled on Braai",
+      "Biltong Cured Beef",
+      "Malva Pudding with Warm Custard"
+    ]
+  },
+  {
+    "id": "dest_marrakech",
+    "name": "Marrakech",
+    "country": "Morocco",
+    "continent": "Africa",
+    "tagline": "Ochre medina alleys, spice-scented souks & serene riad courtyards",
+    "description": "A sensory wonderland of labyrinthine medina alleys, snake charmers in Jemaa el-Fnaa square, intricate mosaic riads, and fragrant tagines.",
+    "coverImage": "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "March – May & Sept – Nov",
+    "averageTemp": "24°C",
+    "idealDays": 4,
+    "vibes": [
+      "Exotic",
+      "Historic",
+      "Souks"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Street Food",
+      "Authentic Spicy",
+      "Fine Dining"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Couple",
+      "Solo",
+      "Friends"
+    ],
+    "highlights": [
+      "Jemaa el-Fnaa Night Food Market",
+      "Jardin Majorelle & Yves Saint Laurent Museum",
+      "Bahia Palace Mosaic Courtyards",
+      "Stay in an Authentic Riad with Plunge Pool"
+    ],
+    "cuisines": [
+      "Slow-cooked Lamb Tagine with Prunes",
+      "Fragrant Chicken Pastilla Pie",
+      "Harira Lentil Soup",
+      "Fresh Mint Tea Poured High"
+    ]
+  },
+  {
+    "id": "dest_serengeti",
+    "name": "Serengeti & Ngorongoro",
+    "country": "Tanzania",
+    "continent": "Africa",
+    "tagline": "Endless golden savannah, the Great Migration & Big Five safaris",
+    "description": "Witness the greatest wildlife spectacle on Earth where millions of wildebeest traverse the savannah, lions stalk, and crater floors shelter rhinos.",
+    "coverImage": "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#5B0B24] to-[#FFC83D]",
+    "bestSeason": "June – October & Jan – Feb",
+    "averageTemp": "26°C",
+    "idealDays": 6,
+    "vibes": [
+      "Safari",
+      "Wildlife",
+      "Savannah"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Fine Dining",
+      "Street Food"
+    ],
+    "landscape": "Lush Nature",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Couple",
+      "Family",
+      "Friends"
+    ],
+    "highlights": [
+      "Great Migration Herd Crossing",
+      "Ngorongoro Crater Floor Safari",
+      "Hot Air Balloon Safari over Savannah",
+      "Maasai Village Cultural Visit"
+    ],
+    "cuisines": [
+      "Campfire Braai BBQ",
+      "Nyama Choma Grilled Meat",
+      "Ugali with Rich Stew",
+      "Tropical Passion Fruit Juices"
+    ]
+  },
+  {
+    "id": "dest_zanzibar",
+    "name": "Zanzibar (Stone Town & Nungwi)",
+    "country": "Tanzania",
+    "continent": "Africa",
+    "tagline": "Carved Arab doorways, turquoise Indian Ocean shallows & spice gardens",
+    "description": "The legendary Spice Island featuring UNESCO Stone Town alleys, fragrant clove farms, and powdery white beaches lapped by warm azure waters.",
+    "coverImage": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B3C5D] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "June – October & Dec – March",
+    "averageTemp": "29°C",
+    "idealDays": 5,
+    "vibes": [
+      "Spices",
+      "Beaches",
+      "Arabic Heritage"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Street Food",
+      "Authentic Spicy"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Couple",
+      "Solo",
+      "Friends"
+    ],
+    "highlights": [
+      "Stone Town Carved Doorways Walk",
+      "Forodhani Gardens Night Seafood Market",
+      "Nungwi White Sand Beach & Dhow Cruise",
+      "Organic Spice Farm Tour"
+    ],
+    "cuisines": [
+      "Zanzibar Seafood Pizza",
+      "Coconut Curry with Lobster",
+      "Urojo Soup (Zanzibar Mix)",
+      "Fresh Sugar Cane Juice with Ginger"
+    ]
+  },
+  {
+    "id": "dest_victoria_falls",
+    "name": "Victoria Falls",
+    "country": "Zimbabwe & Zambia",
+    "continent": "Africa",
+    "tagline": "“The Smoke That Thunders”, Devil’s Pool & Zambezi sunsets",
+    "description": "The world’s largest sheet of falling water, where the mighty Zambezi River plunges 100 meters into a misty gorge creating permanent rainbows.",
+    "coverImage": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "February – May (High Water) & Aug – Dec (Devil’s Pool)",
+    "averageTemp": "26°C",
+    "idealDays": 3,
+    "vibes": [
+      "Waterfall Wonder",
+      "Adventure",
+      "Zambezi"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Fine Dining",
+      "Street Food"
+    ],
+    "landscape": "Lush Nature",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Friends",
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "Victoria Falls Rainforest Trail Walk",
+      "Zambezi River Sunset Cruise with Hippos",
+      "Devil’s Pool Swim at the Cataract Edge",
+      "Helicopter Flight of Angels over the Falls"
+    ],
+    "cuisines": [
+      "Boma Barbecue Dinner Feast",
+      "Zambezi Bream Fish",
+      "Sadza Maize Mash with Relish",
+      "Amarula Cream Liqueur Cocktails"
+    ]
+  },
+  {
+    "id": "dest_chefchaouen",
+    "name": "Chefchaouen",
+    "country": "Morocco",
+    "continent": "Africa",
+    "tagline": "The Blue Pearl of the Rif Mountains, leather crafts & mountain air",
+    "description": "A peaceful mountain village where every building, doorway, and cobblestone staircase is painted in luminous shades of cobalt and powder blue.",
+    "coverImage": "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B3C5D] via-[#0B4F5B] to-[#FFC83D]",
+    "bestSeason": "April – June & September – November",
+    "averageTemp": "20°C",
+    "idealDays": 3,
+    "vibes": [
+      "Blue Town",
+      "Photography",
+      "Rif Mountains"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Street Food",
+      "Authentic Spicy",
+      "Plant-Based"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Budget Friendly",
+    "companionFit": [
+      "Solo",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "Blue Medina Alleyway Exploration",
+      "Spanish Mosque Sunset Hike",
+      "Ras El Maa Waterfall Gathering",
+      "Artisan Wool Blanket Weavers"
+    ],
+    "cuisines": [
+      "Goat Cheese with Fig Jam",
+      "Tagine with Kefta & Eggs",
+      "Bissara Fava Bean Soup with Olive Oil",
+      "Freshly Squeezed Orange Juice"
+    ]
+  },
+  {
+    "id": "dest_cairo",
+    "name": "Cairo, Giza & Nile Cruise",
+    "country": "Egypt",
+    "continent": "Africa",
+    "tagline": "Great Pyramids, the mysterious Sphinx & ancient Pharaoh temples",
+    "description": "Stand before the only surviving Ancient Wonder of the World in Giza, explore the Grand Egyptian Museum, and sail the historic Nile to Luxor.",
+    "coverImage": "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "October – April",
+    "averageTemp": "23°C",
+    "idealDays": 6,
+    "vibes": [
+      "Ancient Wonder",
+      "Pyramids",
+      "Nile Cruise"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Street Food",
+      "Authentic Spicy",
+      "Fine Dining"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Couple",
+      "Family",
+      "Solo"
+    ],
+    "highlights": [
+      "Great Pyramids of Giza & Sphinx",
+      "Grand Egyptian Museum Tutankhamun Treasures",
+      "Luxor Valley of the Kings Tombs",
+      "Felucca Sailboat on the Nile at Dusk"
+    ],
+    "cuisines": [
+      "Koshary (Rice, Lentils, Macaroni & Spicy Tomato)",
+      "Warm Egyptian Falafel (Taameya)",
+      "Ful Medames with Fresh Baladi Bread",
+      "Om Ali Sweet Bread Pudding"
+    ]
+  },
+  {
+    "id": "dest_maasai_mara",
+    "name": "Maasai Mara",
+    "country": "Kenya",
+    "continent": "Africa",
+    "tagline": "Big Cat territory, hot air balloon sunrises & red-robed warriors",
+    "description": "Renowned for world-leading cheetah, lion, and leopard densities, breathtaking open plains, and authentic warrior cultural exchanges.",
+    "coverImage": "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "July – October & December – March",
+    "averageTemp": "25°C",
+    "idealDays": 4,
+    "vibes": [
+      "Big Cats",
+      "Safari",
+      "Cultural"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Fine Dining",
+      "Street Food"
+    ],
+    "landscape": "Lush Nature",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Couple",
+      "Family",
+      "Friends"
+    ],
+    "highlights": [
+      "Dawn Game Drive with Lion Prides",
+      "Hot Air Balloon Safari with Champagne Breakfast",
+      "Mara River Crossing Point",
+      "Maasai Cultural Village Visit"
+    ],
+    "cuisines": [
+      "Bush Breakfast under Acacia Trees",
+      "Kenyan Sukuma Wiki with Ugali",
+      "Grilled Beef Ribs",
+      "Kenyan Black Tea with Milk & Ginger"
+    ]
+  },
+  {
+    "id": "dest_mauritius",
+    "name": "Mauritius",
+    "country": "Mauritius",
+    "continent": "Africa",
+    "tagline": "Underwater waterfall illusion, coral lagoons & Chamarel colored earths",
+    "description": "A jewel of the southwest Indian Ocean known for luxury beach resorts, turquoise coral lagoons, volcanic mountain hikes, and Creole rum estates.",
+    "coverImage": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "May – December",
+    "averageTemp": "26°C",
+    "idealDays": 6,
+    "vibes": [
+      "Coral Lagoon",
+      "Luxury Resorters",
+      "Beaches"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Fine Dining",
+      "Authentic Spicy"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Couple",
+      "Family"
+    ],
+    "highlights": [
+      "Le Morne Brabant Mountain Hike",
+      "Chamarel Seven Coloured Earths",
+      "Ile aux Cerfs Catamaran Cruise",
+      "Trou aux Biches Coral Snorkeling"
+    ],
+    "cuisines": [
+      "Mauritian Creole Fish Rougaille",
+      "Dhal Puri Flatbread Wraps",
+      "Fresh Palm Heart Salad (Millionaire’s Salad)",
+      "Artisanal Chamarel Spiced Rum"
+    ]
+  },
+  {
+    "id": "dest_seychelles",
+    "name": "Seychelles (Praslin & La Digue)",
+    "country": "Seychelles",
+    "continent": "Africa",
+    "tagline": "Granite boulders, Anse Source d’Argent & giant Aldabra tortoises",
+    "description": "Unreal island perfection featuring colossal sculpted pink granite boulders on ivory sand, ancient Coco de Mer palm forests, and azure waves.",
+    "coverImage": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B3C5D] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "April – May & October – November",
+    "averageTemp": "28°C",
+    "idealDays": 6,
+    "vibes": [
+      "Pristine",
+      "Granite Boulders",
+      "Paradise"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Fine Dining"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "Anse Source d’Argent Pink Granite Beach",
+      "Vallée de Mai UNESCO Coco de Mer Forest",
+      "Bicycle Ride Across Car-free La Digue",
+      "Curieuse Island Giant Tortoise Sanctuary"
+    ],
+    "cuisines": [
+      "Seychellois Red Snapper with Garlic & Ginger",
+      "Octopus Coconut Curry",
+      "Breadfruit Chips with Chili Salt",
+      "Fresh Passionfruit Tropical Mocktails"
+    ]
+  },
+  {
+    "id": "dest_namibia",
+    "name": "Namibia (Sossusvlei & Skeleton Coast)",
+    "country": "Namibia",
+    "continent": "Africa",
+    "tagline": "Towering rust-orange dunes, ghostly Deadvlei trees & starry skies",
+    "description": "Surreal desert minimalism with 300-meter-tall rust-red sand dunes, 900-year-old dead camelthorn trees preserved in white clay pans, and shipwrecks.",
+    "coverImage": "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#FF7A3D] via-[#5B0B24] to-[#FFC83D]",
+    "bestSeason": "May – October",
+    "averageTemp": "24°C",
+    "idealDays": 6,
+    "vibes": [
+      "Desert",
+      "Surreal",
+      "Untamed"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Fine Dining",
+      "Street Food"
+    ],
+    "landscape": "Lush Nature",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Friends",
+      "Couple",
+      "Solo"
+    ],
+    "highlights": [
+      "Deadvlei Sun-bleached Tree Basin",
+      "Dune 45 Sunrise Climb",
+      "Sesriem Canyon Exploration",
+      "Stargazing in Dark Sky Reserve"
+    ],
+    "cuisines": [
+      "Oryx & Kudu Game Steaks",
+      "Potjiekos Dutch Oven Stew",
+      "Biltong Cured Jerky",
+      "Apple Crumble at Solitaire Outpost"
+    ]
+  },
+  {
+    "id": "dest_kruger",
+    "name": "Kruger National Park",
+    "country": "South Africa",
+    "continent": "Africa",
+    "tagline": "Legendary Big Five game reserve, luxury bush lodges & savannah tracking",
+    "description": "One of Africa’s largest game reserves, home to majestic leopards resting in marula trees, elephant herds drinking at waterholes, and luxury safari tents.",
+    "coverImage": "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "May – September (Dry Wildlife Season)",
+    "averageTemp": "25°C",
+    "idealDays": 5,
+    "vibes": [
+      "Big Five",
+      "Bush Luxury",
+      "Wildlife Tracking"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Fine Dining",
+      "Street Food"
+    ],
+    "landscape": "Lush Nature",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Family",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "Open-top Safari Tracking Leopards & Rhinos",
+      "Bush Walk with Armed Game Rangers",
+      "Sunset Drinks Overlooking a Waterhole",
+      "Stargazing around the Boma Campfire"
+    ],
+    "cuisines": [
+      "Traditional South African Braai BBQ",
+      "Boerewors Spiced Sausage",
+      "Potjie Stew with Fresh Bread",
+      "Pinotage Red Wine Tasting"
+    ]
+  },
+  {
+    "id": "dest_queenstown",
+    "name": "Queenstown & Milford Sound",
+    "country": "New Zealand",
+    "continent": "Oceania",
+    "tagline": "Adventure capital of the world, glacial fjords & Remarkables peaks",
+    "description": "Set on the shores of Lake Wakatipu beneath the Remarkables mountain range, leading to the breathtaking vertical waterfalls of Milford Sound.",
+    "coverImage": "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#5B0B24] to-[#FF7A3D]",
+    "bestSeason": "Dec – Feb (Summer Hikes) & June – Aug (Skiing)",
+    "averageTemp": "18°C",
+    "idealDays": 6,
+    "vibes": [
+      "Adventure",
+      "Fjord",
+      "Alpine"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Fine Dining",
+      "Street Food",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Friends",
+      "Solo",
+      "Couple"
+    ],
+    "highlights": [
+      "Milford Sound Fjord Nature Cruise",
+      "Skyline Gondola & Luge Tracks",
+      "Shotover River Jet Boat Canyon Ride",
+      "Fergburger Gourmet Burger Experience"
+    ],
+    "cuisines": [
+      "Legendary Fergburger Burgers",
+      "Central Otago Pinot Noir",
+      "New Zealand Green Lipped Mussels",
+      "Pavlova with Kiwi Fruit"
+    ]
+  },
+  {
+    "id": "dest_sydney",
+    "name": "Sydney",
+    "country": "Australia",
+    "continent": "Oceania",
+    "tagline": "Harbour Bridge arches, Opera House sails & Bondi beach surf",
+    "description": "A dazzling harbor city where dramatic architectural icons gaze over turquoise waterways, golden surf breaks, and sunny coastal paths.",
+    "coverImage": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B3C5D] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "September – April",
+    "averageTemp": "24°C",
+    "idealDays": 5,
+    "vibes": [
+      "Harbor",
+      "Surf",
+      "Cosmopolitan"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Friends",
+      "Couple",
+      "Solo",
+      "Family"
+    ],
+    "highlights": [
+      "Sydney Opera House & Circular Quay Walk",
+      "Bondi to Coogee Coastal Clifftop Walk",
+      "Sydney Harbour Bridge Climb or Ferry",
+      "Manly Beach Surf & Corso Promenade"
+    ],
+    "cuisines": [
+      "Sydney Rock Oysters",
+      "Barramundi Fillet Pan-seared",
+      "Flat White Coffee in Surry Hills",
+      "Aussie Meat Pie with Mash & Gravy"
+    ]
+  },
+  {
+    "id": "dest_cairns",
+    "name": "Great Barrier Reef (Cairns & Port Douglas)",
+    "country": "Australia",
+    "continent": "Oceania",
+    "tagline": "The world’s largest coral reef, sea turtles & Daintree rainforest",
+    "description": "Snorkel among kaleidoscopic coral gardens, swim alongside gentle sea turtles, and explore the world’s oldest living rainforest in Daintree.",
+    "coverImage": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#0B3C5D] to-[#FFC83D]",
+    "bestSeason": "May – November",
+    "averageTemp": "27°C",
+    "idealDays": 5,
+    "vibes": [
+      "Coral Reef",
+      "Rainforest",
+      "Scuba"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Seafood",
+      "Street Food",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Family",
+      "Friends",
+      "Couple"
+    ],
+    "highlights": [
+      "Outer Great Barrier Reef Snorkel Catamaran",
+      "Daintree Rainforest & Mossman Gorge Walk",
+      "Kuranda Scenic Railway & Skyrail",
+      "Port Douglas Four Mile Beach Sunset"
+    ],
+    "cuisines": [
+      "Tiger Prawns with Lemon Myrtle",
+      "Fresh Coral Trout",
+      "Barramundi Tacos",
+      "Tropical Mango & Macadamia Smoothies"
+    ]
+  },
+  {
+    "id": "dest_bora_bora",
+    "name": "Bora Bora",
+    "country": "French Polynesia",
+    "continent": "Oceania",
+    "tagline": "Overwater bungalows, Mount Otemanu & neon turquoise lagoons",
+    "description": "The world’s most iconic romantic lagoon, where thatched overwater bungalows perch above clear shallow turquoise waters with gentle stingrays.",
+    "coverImage": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B3C5D] via-[#FF4F7A] to-[#FFC83D]",
+    "bestSeason": "May – October",
+    "averageTemp": "28°C",
+    "idealDays": 5,
+    "vibes": [
+      "Overwater Bungalow",
+      "Romance",
+      "Turquoise Lagoon"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Fine Dining"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Luxury Escapes",
+    "companionFit": [
+      "Couple"
+    ],
+    "highlights": [
+      "Private Overwater Bungalow Sun Deck",
+      "Lagoon Snorkel with Manta Rays & Sharks",
+      "Mount Otemanu 4x4 Island Tour",
+      "Polynesian Outrigger Canoe Breakfast"
+    ],
+    "cuisines": [
+      "Poisson Cru (Tuna marinated in Lime & Coconut)",
+      "Grilled Mahi-Mahi with Vanilla Sauce",
+      "Po’e Banana Pudding",
+      "Cocktails in Carved Coconuts"
+    ]
+  },
+  {
+    "id": "dest_fiji",
+    "name": "Fiji (Mamanuca & Yasawa)",
+    "country": "Fiji",
+    "continent": "Oceania",
+    "tagline": "Warm “Bula!” welcomes, soft coral diving & castaway islands",
+    "description": "Warm tropical island hospitality, coral reef atolls with sea turtles, and palm-fringed beaches made famous by classic castaway cinema.",
+    "coverImage": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "May – October",
+    "averageTemp": "27°C",
+    "idealDays": 6,
+    "vibes": [
+      "Castaway",
+      "Friendly",
+      "Coral Reefs"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Chill & Coastal",
+    "foodTypes": [
+      "Seafood",
+      "Authentic Spicy"
+    ],
+    "landscape": "Tropical Beaches",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Couple",
+      "Family",
+      "Solo"
+    ],
+    "highlights": [
+      "Mamanuca Island Catamaran Cruise",
+      "Sawa-i-Lau Limestone Caves Swim",
+      "Traditional Kava Welcome Ceremony",
+      "Snorkeling with Reef Sharks & Rays"
+    ],
+    "cuisines": [
+      "Kokoda (Fijian Raw Fish in Coconut Cream)",
+      "Lovo Earth-oven Roasted Feast",
+      "Rourou (Taro Leaves in Coconut Milk)",
+      "Fresh Papaya & Pineapple"
+    ]
+  },
+  {
+    "id": "dest_melbourne",
+    "name": "Melbourne",
+    "country": "Australia",
+    "continent": "Oceania",
+    "tagline": "Graffiti laneways, world-class espresso & Great Ocean Road cliffs",
+    "description": "Australia’s cultural and coffee capital known for hidden street art arcades, rooftop cocktail lounges, and the iconic Twelve Apostles coastal drive.",
+    "coverImage": "https://images.unsplash.com/photo-1514395462725-fb4566210144?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#5B0B24] via-[#C2185B] to-[#FF7A3D]",
+    "bestSeason": "October – April",
+    "averageTemp": "21°C",
+    "idealDays": 4,
+    "vibes": [
+      "Coffee Capital",
+      "Art Laneways",
+      "Culture"
+    ],
+    "trending": true,
+    "ageGroups": [
+      "18-24",
+      "25-34",
+      "35-49"
+    ],
+    "energyRhythm": "Vibrant & Cultural",
+    "foodTypes": [
+      "Cafes & Bakeries",
+      "Fine Dining",
+      "Street Food"
+    ],
+    "landscape": "Historic Old Towns",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Solo",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "Hosier Lane Graffiti Arcades",
+      "Great Ocean Road & Twelve Apostles Day Trip",
+      "Fitzroy Vintage Shops & Breweries",
+      "Royal Botanic Gardens Walk"
+    ],
+    "cuisines": [
+      "Artisan Flat White Coffee",
+      "Avocado Toast with Dukkah",
+      "Melbourne Greek Souvlaki at Stalactites",
+      "Lune Croissanterie Croissant"
+    ]
+  },
+  {
+    "id": "dest_rotorua",
+    "name": "Rotorua & Hobbiton",
+    "country": "New Zealand",
+    "continent": "Oceania",
+    "tagline": "Geothermal geysers, Māori Hangi feasts & the Shire of Middle-earth",
+    "description": "Bubbling geothermal mud pools, natural hot springs, rich indigenous Māori heritage, and the whimsical green hills of the Hobbiton movie set.",
+    "coverImage": "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#FF7A3D] to-[#FFC83D]",
+    "bestSeason": "October – April",
+    "averageTemp": "19°C",
+    "idealDays": 3,
+    "vibes": [
+      "Geothermal",
+      "Māori Culture",
+      "Middle-earth"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "Peace & Zen",
+    "foodTypes": [
+      "Authentic Spicy",
+      "Fine Dining",
+      "Cafes & Bakeries"
+    ],
+    "landscape": "Lush Nature",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Family",
+      "Couple",
+      "Friends"
+    ],
+    "highlights": [
+      "Hobbiton Movie Set Guided Tour in Matamata",
+      "Te Puia Geyser & Māori Cultural Performance",
+      "Polynesian Spa Natural Mineral Hot Springs",
+      "Redwoods Treewalk High Canopy Bridges"
+    ],
+    "cuisines": [
+      "Māori Hangi Steamed Feast",
+      "Manuka Honey Ice Cream",
+      "Roast Kumara Sweet Potato",
+      "Craft Ciders from the Green Dragon Inn"
+    ]
+  },
+  {
+    "id": "dest_tasmania",
+    "name": "Tasmania (Hobart & Cradle Mountain)",
+    "country": "Australia",
+    "continent": "Oceania",
+    "tagline": "Ancient temperate wilderness, MONA museum & secluded coastal bays",
+    "description": "An untamed island state featuring ancient rainforest trails around alpine peaks, the avant-garde MONA museum, and pure coastal air.",
+    "coverImage": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+    "gradient": "from-[#0B4F5B] via-[#5B0B24] to-[#FFC83D]",
+    "bestSeason": "November – April",
+    "averageTemp": "17°C",
+    "idealDays": 5,
+    "vibes": [
+      "Wilderness",
+      "Art & Wine",
+      "Clean Nature"
+    ],
+    "trending": false,
+    "ageGroups": [
+      "25-34",
+      "35-49",
+      "50+"
+    ],
+    "energyRhythm": "High-Energy Adventure",
+    "foodTypes": [
+      "Seafood",
+      "Fine Dining",
+      "Wine & Cheese"
+    ],
+    "landscape": "Mountains & Alpine",
+    "budgetTier": "Moderate",
+    "companionFit": [
+      "Couple",
+      "Solo",
+      "Friends"
+    ],
+    "highlights": [
+      "Cradle Mountain Dove Lake Circuit Hike",
+      "MONA (Museum of Old and New Art)",
+      "Wineglass Bay Lookout & White Sand Beach",
+      "Salamanca Saturday Market in Hobart"
+    ],
+    "cuisines": [
+      "Fresh Tasmanian Rock Lobster & Scallop Pies",
+      "Huon Smoked Salmon",
+      "Leatherwood Honey Treats",
+      "Cool-climate Tasmanian Pinot Noir"
+    ]
+  }
+]
