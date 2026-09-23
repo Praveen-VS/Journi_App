@@ -102,7 +102,7 @@ export default function LandingPage() {
 
           {/* Subtitle */}
           <p className="text-base sm:text-xl text-[#704250] dark:text-[#FFB3C6] max-w-2xl font-normal leading-relaxed mb-8 sm:mb-10">
-            Tell[Versel Test] Journi how you want to travel. Our AI crafts personalized,
+            Tell Journi how you want to travel. Our AI crafts personalized,
             day-by-day itineraries with smart INR budgets, packing checklists, and local secrets.
           </p>
 
