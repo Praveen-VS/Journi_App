@@ -14,23 +14,34 @@ export default function DestinationsPage() {
   const [selectedContinent, setSelectedContinent] = useState('All');
   const [selectedVibe, setSelectedVibe] = useState('All');
 
-  const continents = ['All', 'Europe', 'Asia', 'Americas'];
-  const vibes = ['All', 'Cultural', 'Romantic', 'Scenic', 'Adventure'];
+  const [visibleCount, setVisibleCount] = useState(32);
+
+  const continents = ['All', 'Asia', 'Europe', 'North America', 'South America', 'Africa', 'Oceania'];
+  const vibes = ['All', 'Cultural', 'Romantic', 'Scenic', 'Adventure', 'Peace & Zen'];
 
   const filteredDestinations = MOCK_DESTINATIONS.filter((dest) => {
+    const q = searchQuery.toLowerCase().trim();
     const matchesSearch =
-      dest.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      dest.country.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      dest.tagline.toLowerCase().includes(searchQuery.toLowerCase());
+      !q ||
+      dest.name.toLowerCase().includes(q) ||
+      dest.country.toLowerCase().includes(q) ||
+      (dest.state && dest.state.toLowerCase().includes(q)) ||
+      dest.tagline.toLowerCase().includes(q);
 
     const matchesContinent =
-      selectedContinent === 'All' || dest.continent === selectedContinent;
+      selectedContinent === 'All' ||
+      dest.continent === selectedContinent ||
+      (selectedContinent === 'Americas' && (dest.continent === 'North America' || dest.continent === 'South America'));
 
     const matchesVibe =
-      selectedVibe === 'All' || dest.vibes.includes(selectedVibe);
+      selectedVibe === 'All' ||
+      dest.vibes.some((v) => v.toLowerCase().includes(selectedVibe.toLowerCase())) ||
+      (dest.energyRhythm && dest.energyRhythm.toLowerCase().includes(selectedVibe.toLowerCase()));
 
     return matchesSearch && matchesContinent && matchesVibe;
   });
+
+  const displayedDestinations = filteredDestinations.slice(0, visibleCount);
 
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-16">
@@ -88,11 +99,25 @@ export default function DestinationsPage() {
 
       {/* Destinations Grid */}
       {filteredDestinations.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {filteredDestinations.map((dest) => (
-            <DestinationCard key={dest.id} destination={dest} />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {displayedDestinations.map((dest) => (
+              <DestinationCard key={dest.id} destination={dest} />
+            ))}
+          </div>
+
+          {visibleCount < filteredDestinations.length && (
+            <div className="flex justify-center mt-10">
+              <button
+                type="button"
+                onClick={() => setVisibleCount((prev) => prev + 32)}
+                className="px-6 py-3 rounded-full bg-[#5B0B24] text-white hover:bg-[#C2185B] dark:bg-[#FF4F7A] dark:text-[#1F060F] dark:hover:bg-[#FF7A3D] font-medium text-xs sm:text-sm shadow-md transition-all duration-200"
+              >
+                Load More Destinations ({filteredDestinations.length - visibleCount} remaining)
+              </button>
+            </div>
+          )}
+        </>
       ) : (
         <EmptyState
           icon={<Compass className="w-8 h-8" />}

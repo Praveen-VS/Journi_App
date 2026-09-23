@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { MOCK_DESTINATIONS, MOCK_SAVED_PLACES } from '@/constants';
+import { searchDestinations } from '@/constants/destinationsData';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -15,13 +16,7 @@ export async function GET(req: NextRequest) {
     });
   }
 
-  const matchingDestinations = MOCK_DESTINATIONS.filter(
-    (d) =>
-      d.name.toLowerCase().includes(q) ||
-      d.country.toLowerCase().includes(q) ||
-      d.tagline.toLowerCase().includes(q) ||
-      d.vibes.some((v) => v.toLowerCase().includes(q))
-  );
+  const matchingDestinations = searchDestinations(q);
 
   const matchingPlaces = MOCK_SAVED_PLACES.filter(
     (p) =>

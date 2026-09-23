@@ -14,6 +14,7 @@
 | [ADR-0004](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0004-surgical-edits-and-change-safety.md) | Surgical Code Modification & Change Acceleration | **Accepted** | 2026-09-23 | Workflow & Productivity |
 | [ADR-0005](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0005-location-scope-and-image-resilience.md) | Location Scope Selector & Direct Image Resilience | **Accepted** | 2026-09-23 | AI Customizer & Image Delivery |
 | [ADR-0006](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0006-release-v1-and-vercel-deployment.md) | Release v1.0.0 & Vercel Free Hosting Configuration | **Accepted** | 2026-09-23 | Release & Deployment |
+| [ADR-0007](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0007-expanded-catalog-and-unified-mock-data.md) | 1,680+ Expanded Catalog & Unified Mock Data | **Accepted** | 2026-09-24 | Catalog & Data Unification |
 
 ---
 
@@ -38,7 +39,7 @@ When asked to make a change, locate the feature below and modify **ONLY** the de
 - **AI Service Client**: [services/ai.service.ts](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/services/ai.service.ts)
 
 ### 3. Destinations Database
-- **Raw 100+ Destinations Data**: [data/destinations.json](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/data/destinations.json)
+- **Raw 1,680+ Destinations Catalog**: [data/destinations.json](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/data/destinations.json)
 - **Lookup Helpers & Re-export**: [constants/destinationsData.ts](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/constants/destinationsData.ts)
 - **Public Destinations Page**: [app/(public)/destinations/page.tsx](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/app/%28public%29/destinations/page.tsx)
 - **Destination Card Component**: [components/cards/DestinationCard.tsx](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/components/cards/DestinationCard.tsx)

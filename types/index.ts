@@ -110,6 +110,7 @@ export interface Destination {
   name: string;
   country: string;
   continent: string;
+  state?: string;
   tagline: string;
   description: string;
   coverImage: string;

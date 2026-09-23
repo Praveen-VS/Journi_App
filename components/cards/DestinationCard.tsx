@@ -95,9 +95,9 @@ export default function DestinationCard({
 
           {/* Vibe Tags */}
           <div className="flex flex-wrap gap-1.5 mt-3">
-            {destination.vibes.map((vibe) => (
+            {Array.from(new Set(destination.vibes)).map((vibe, idx) => (
               <span
-                key={vibe}
+                key={`${destination.id}-${vibe}-${idx}`}
                 className="text-[10px] px-2 py-0.5 rounded-full bg-[#5B0B24]/5 dark:bg-[#FF8BA7]/10 text-[#5B0B24] dark:text-[#FF8BA7] font-medium"
               >
                 {vibe}
