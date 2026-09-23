@@ -102,7 +102,7 @@ export default function LandingPage() {
 
           {/* Subtitle */}
           <p className="text-base sm:text-xl text-[#704250] dark:text-[#FFB3C6] max-w-2xl font-normal leading-relaxed mb-8 sm:mb-10">
-            Tell Journi how you want to travel. Our AI crafts personalized,
+            Tell[Versel Test] Journi how you want to travel. Our AI crafts personalized,
             day-by-day itineraries with smart INR budgets, packing checklists, and local secrets.
           </p>
 
@@ -155,7 +155,7 @@ export default function LandingPage() {
       {/* ===================== SIGNATURE M03 & M04 SHOWCASE ===================== */}
       <section className="py-12 sm:py-20 px-4 sm:px-6 max-w-7xl mx-auto border-t border-[#5B0B24]/8 dark:border-[#FF8BA7]/12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-          
+
           {/* Left: Interactive M03 AI Travel Plan Preview */}
           <div>
             <div className="flex items-center gap-2 mb-3">
