@@ -13,6 +13,7 @@
 | [ADR-0003](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0003-destinations-catalog-and-taste-matcher.md) | 100+ Destinations Catalog & AI Taste Profiler | **Accepted** | 2026-09-23 | AI Planning & Catalog |
 | [ADR-0004](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0004-surgical-edits-and-change-safety.md) | Surgical Code Modification & Change Acceleration | **Accepted** | 2026-09-23 | Workflow & Productivity |
 | [ADR-0005](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0005-location-scope-and-image-resilience.md) | Location Scope Selector & Direct Image Resilience | **Accepted** | 2026-09-23 | AI Customizer & Image Delivery |
+| [ADR-0006](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0006-release-v1-and-vercel-deployment.md) | Release v1.0.0 & Vercel Free Hosting Configuration | **Accepted** | 2026-09-23 | Release & Deployment |
 
 ---
 
