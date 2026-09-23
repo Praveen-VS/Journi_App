@@ -319,6 +319,7 @@ Write personal notes and memories alongside photos.
 * Live Pricing APIs
 * AI Voice Travel Assistant
 * Smart Travel Notifications
+* Smart Features
 
 ---
 
