@@ -1,5 +1,6 @@
 import React from 'react';
 import DesktopNavbar from '@/components/navigation/DesktopNavbar';
+import MobileBottomNav from '@/components/navigation/MobileBottomNav';
 import InspectorToolbar from '@/components/navigation/InspectorToolbar';
 import Link from 'next/link';
 import JourniLogo from '@/components/shared/JourniLogo';
@@ -34,7 +35,10 @@ export default function PublicLayout({
       </header>
 
       {/* Main Public Content */}
-      <div className="flex-1">{children}</div>
+      <div className="flex-1 pb-16 md:pb-0">{children}</div>
+
+      {/* Mobile Bottom Navigation Bar (<md) */}
+      <MobileBottomNav />
 
       {/* Reviewer Inspector Toolbar */}
       <InspectorToolbar />

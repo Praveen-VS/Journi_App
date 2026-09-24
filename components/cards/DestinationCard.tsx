@@ -7,7 +7,8 @@ import Card from '../ui/Card';
 import Badge from '../ui/Badge';
 import Button from '../ui/Button';
 import { Destination } from '@/types';
-import { Sparkles, Calendar, Thermometer } from 'lucide-react';
+import { Sparkles, Calendar, Thermometer, Heart } from 'lucide-react';
+import { useSavedStore } from '@/store';
 
 export interface DestinationCardProps {
   destination: Destination;
@@ -21,6 +22,8 @@ export default function DestinationCard({
   className = '',
 }: DestinationCardProps) {
   const router = useRouter();
+  const { isSaved, toggleFavorite } = useSavedStore();
+  const isFavorite = isSaved(destination.id) || isSaved(destination.name);
 
   const handlePlanClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -29,6 +32,11 @@ export default function DestinationCard({
     } else {
       router.push(`/ai?prompt=${encodeURIComponent(`Plan a ${destination.idealDays}-day trip to ${destination.name}, ${destination.country}`)}`);
     }
+  };
+
+  const handleSaveClick = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    await toggleFavorite(destination);
   };
 
   return (
@@ -51,16 +59,30 @@ export default function DestinationCard({
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
         {/* Top Badges */}
-        <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
+        <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
           <Badge variant="sunset" size="sm">
             {destination.continent}
           </Badge>
-          {destination.trending && (
-            <span className="bg-white/90 backdrop-blur-md text-[#5B0B24] text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
-              <Sparkles className="w-3 h-3 text-[#FF7A3D]" />
-              Trending
-            </span>
-          )}
+          <div className="flex items-center gap-1.5">
+            {destination.trending && (
+              <span className="bg-white/90 backdrop-blur-md text-[#5B0B24] text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
+                <Sparkles className="w-3 h-3 text-[#FF7A3D]" />
+                Trending
+              </span>
+            )}
+            <button
+              type="button"
+              onClick={handleSaveClick}
+              aria-label={isFavorite ? 'Remove from saved' : 'Save to favorites'}
+              className="w-7 h-7 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-md flex items-center justify-center text-white transition-all active:scale-90"
+            >
+              <Heart
+                className={`w-3.5 h-3.5 transition-colors ${
+                  isFavorite ? 'fill-[#FF4F7A] text-[#FF4F7A]' : 'text-white'
+                }`}
+              />
+            </button>
+          </div>
         </div>
 
         {/* Bottom Title on Image */}

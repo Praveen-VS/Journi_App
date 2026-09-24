@@ -11,11 +11,12 @@ import Badge from '@/components/ui/Badge';
 import Button from '@/components/ui/Button';
 import EmptyState from '@/components/ui/EmptyState';
 import { MOCK_SAVED_PLACES } from '@/constants';
+import { useSavedStore } from '@/store';
 import { Bookmark, Sparkles, LayoutGrid, Layers, ArrowRight } from 'lucide-react';
 
 export default function SavedPlacesPage() {
   const router = useRouter();
-  const [places, setPlaces] = useState(MOCK_SAVED_PLACES);
+  const { savedPlaces, removePlace } = useSavedStore();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [viewMode, setViewMode] = useState<'scrapbook' | 'grid'>('scrapbook');
   const [showEmptySim, setShowEmptySim] = useState(false);
@@ -23,10 +24,10 @@ export default function SavedPlacesPage() {
   const categories = ['All', 'Mountains', 'Beaches', 'Cities', 'Nature', 'Culture'];
 
   const handleToggleFavorite = (id: string) => {
-    setPlaces(places.filter((p) => p.id !== id));
+    removePlace(id);
   };
 
-  const filteredPlaces = places.filter((p) => {
+  const filteredPlaces = savedPlaces.filter((p) => {
     if (showEmptySim) return false;
     if (selectedCategory === 'All') return true;
     if (selectedCategory === 'Mountains') return p.category === 'Nature' || p.name.includes('Shrine') || p.name.includes('Sanctuary');

@@ -2,10 +2,20 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const { pathname, searchParams } = request.nextUrl;
+  const userAgent = request.headers.get('user-agent') || '';
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(userAgent);
 
-  // TODO: Implement authentication guard when auth logic is added
-  // For instance: redirect unauthenticated users visiting /(app)/* to /login
+  // If a mobile device visits the root landing page, route directly to the Splash Screen (M01)
+  // (unless ?view=desktop is explicitly requested)
+  if (pathname === '/' && isMobile && searchParams.get('view') !== 'desktop') {
+    return NextResponse.redirect(new URL('/onboarding?splash=1', request.url));
+  }
+
+  // Ensure desktop-only marketing routes redirect to mobile app experience on mobile devices
+  if (pathname === '/how-it-works' && isMobile && searchParams.get('view') !== 'desktop') {
+    return NextResponse.redirect(new URL('/home', request.url));
+  }
 
   return NextResponse.next();
 }
