@@ -11,7 +11,7 @@ export default function PublicLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex flex-col bg-brand-bg text-[#2E0513] dark:text-[#FFF7FA]">
+    <div className="min-h-screen flex flex-col bg-brand-bg text-[#2E0513] dark:text-[#FFF7FA] overflow-x-hidden w-full max-w-full">
       {/* Desktop Navigation */}
       <DesktopNavbar />
 
@@ -26,7 +26,7 @@ export default function PublicLayout({
             Sign In
           </Link>
           <Link
-            href="/ai"
+            href="/#plan"
             className="text-xs font-semibold text-white bg-gradient-to-r from-[#FF4F7A] to-[#FF7A3D] px-3 py-1.5 rounded-full shadow-sunset"
           >
             Plan Trip
@@ -60,8 +60,8 @@ export default function PublicLayout({
             <Link href="/how-it-works" className="hover:text-[#5B0B24] dark:hover:text-white transition-colors">
               How It Works
             </Link>
-            <Link href="/ai" className="hover:text-[#5B0B24] dark:hover:text-white transition-colors">
-              AI Planner
+            <Link href="/trips" className="hover:text-[#5B0B24] dark:hover:text-white transition-colors">
+              My Trips
             </Link>
             <Link href="/login" className="hover:text-[#5B0B24] dark:hover:text-white transition-colors">
               Login

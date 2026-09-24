@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import AIPromptInput from '@/components/forms/AIPromptInput';
+import CompactTasteConsole from '@/components/forms/CompactTasteConsole';
 import DestinationCard from '@/components/cards/DestinationCard';
 import AITravelPlanCard from '@/components/cards/AITravelPlanCard';
 import SavedPolaroidCard from '@/components/cards/SavedPolaroidCard';
@@ -12,10 +12,8 @@ import CategoryGrid from '@/components/shared/CategoryGrid';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
-import PromptSuggestionChip from '@/components/ui/PromptSuggestionChip';
 import {
   MOCK_DESTINATIONS,
-  SAMPLE_AI_PROMPTS,
 } from '@/constants';
 import {
   Sparkles,
@@ -26,7 +24,6 @@ import {
 
 export default function LandingPage() {
   const router = useRouter();
-  const [selectedPrompt, setSelectedPrompt] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   // If a mobile device or mobile viewport reaches the desktop LandingPage, immediately forward to Splash Screen (M01)
@@ -40,19 +37,6 @@ export default function LandingPage() {
       }
     }
   }, [router]);
-
-  const handlePromptSubmit = (promptText: string) => {
-    if (promptText && promptText.trim()) {
-      router.push(`/ai?prompt=${encodeURIComponent(promptText.trim())}`);
-    } else {
-      router.push('/ai');
-    }
-  };
-
-  const handlePromptChipClick = (promptText: string) => {
-    setSelectedPrompt(promptText);
-    router.push(`/ai?prompt=${encodeURIComponent(promptText)}`);
-  };
 
   const handleCategorySelect = (category: string) => {
     setSelectedCategory(category);
@@ -122,28 +106,9 @@ export default function LandingPage() {
             day-by-day itineraries with smart INR budgets, packing checklists, and local secrets.
           </p>
 
-          {/* Central AI Prompt Bar */}
-          <div className="w-full max-w-3xl mb-5">
-            <AIPromptInput
-              initialPrompt={selectedPrompt}
-              onSubmit={handlePromptSubmit}
-            />
-          </div>
-
-          {/* Sample Prompt Pills with single-line truncation and hover popover */}
-          <div className="w-full max-w-3xl flex flex-wrap items-center justify-center gap-2 text-xs">
-            <span className="text-[#704250] dark:text-[#FFB3C6] font-semibold mr-1 shrink-0">
-              Try asking:
-            </span>
-            {SAMPLE_AI_PROMPTS.slice(0, 3).map((prompt, idx) => (
-              <PromptSuggestionChip
-                key={idx}
-                prompt={prompt}
-                onClick={handlePromptChipClick}
-                variant="light"
-                popoverPosition="top"
-              />
-            ))}
+          {/* Central Compact Travel Taste Console with Astra 6 Integration */}
+          <div id="plan" className="w-full max-w-4xl mb-6 scroll-mt-24">
+            <CompactTasteConsole />
           </div>
         </motion.div>
       </section>
@@ -280,8 +245,8 @@ export default function LandingPage() {
                 Journi plans the exact sequence without tedious manual research.
               </p>
             </div>
-            <Link href="/ai" className="mt-6 pt-4 border-t border-[#5B0B24]/8 dark:border-[#FF8BA7]/12 text-xs font-semibold text-[#FF4F7A] flex items-center gap-1">
-              <span>Try the AI Studio</span>
+            <Link href="#plan" className="mt-6 pt-4 border-t border-[#5B0B24]/8 dark:border-[#FF8BA7]/12 text-xs font-semibold text-[#FF4F7A] flex items-center gap-1">
+              <span>Try the AI Console</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </Card>
@@ -383,7 +348,7 @@ export default function LandingPage() {
             </p>
 
             <div className="flex flex-wrap items-center gap-4">
-              <Link href="/ai">
+              <Link href="#plan">
                 <Button variant="journey" size="lg" leftIcon={<Sparkles className="w-4 h-4" />}>
                   Start Planning with AI
                 </Button>

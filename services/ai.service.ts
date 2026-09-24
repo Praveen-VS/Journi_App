@@ -21,7 +21,10 @@ export const aiService = {
     // Check for client stored key in browser if not explicitly passed
     let clientKey = params.userApiKey;
     if (!clientKey && typeof window !== 'undefined') {
-      clientKey = localStorage.getItem('journi_gemini_api_key') || undefined;
+      clientKey =
+        localStorage.getItem('journi_openrouter_api_key') ||
+        localStorage.getItem('journi_gemini_api_key') ||
+        undefined;
     }
 
     const headers: Record<string, string> = {
@@ -29,6 +32,7 @@ export const aiService = {
     };
 
     if (clientKey && clientKey.trim() !== '') {
+      headers['x-openrouter-api-key'] = clientKey.trim();
       headers['x-gemini-api-key'] = clientKey.trim();
     }
 
@@ -55,6 +59,50 @@ export const aiService = {
     }
 
     return result.data;
+  },
+
+  /**
+   * Powerful AI destination & POI search powered by OpenRouter Astra 6
+   */
+  searchDestinationsAI: async (params: {
+    query: string;
+    vibe?: string;
+    continent?: string;
+    limit?: number;
+    userApiKey?: string;
+  }) => {
+    let clientKey = params.userApiKey;
+    if (!clientKey && typeof window !== 'undefined') {
+      clientKey =
+        localStorage.getItem('journi_openrouter_api_key') ||
+        localStorage.getItem('journi_gemini_api_key') ||
+        undefined;
+    }
+
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+    };
+
+    if (clientKey && clientKey.trim() !== '') {
+      headers['x-openrouter-api-key'] = clientKey.trim();
+    }
+
+    const response = await fetch('/api/ai/search', {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        query: params.query,
+        vibe: params.vibe,
+        continent: params.continent,
+        limit: params.limit || 16,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('AI search request failed');
+    }
+
+    return response.json();
   },
 
   /**

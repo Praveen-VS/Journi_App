@@ -3,17 +3,28 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Map, Sparkles, Bookmark, User } from 'lucide-react';
+import { Home, Map, Sparkles, Bookmark, Compass } from 'lucide-react';
 
 export default function MobileBottomNav() {
   const pathname = usePathname();
 
+  // Hide bottom menu on onboarding flow (M01 Splash, M02 Discover, M03 AI Plan, M04 Save) and auth pages
+  if (
+    pathname?.startsWith('/onboarding') ||
+    pathname === '/login' ||
+    pathname === '/register' ||
+    pathname === '/forgot-password' ||
+    pathname?.startsWith('/auth')
+  ) {
+    return null;
+  }
+
   const items = [
-    { label: 'Home', href: '/home', icon: Home },
+    { label: 'Home', href: '/', icon: Home },
+    { label: 'Destinations', href: '/destinations', icon: Compass },
+    { label: 'Plan Trip', href: '/#plan', icon: Sparkles, isCenterCta: true },
     { label: 'Trips', href: '/trips', icon: Map },
-    { label: 'AI Plan', href: '/ai', icon: Sparkles, isCenterCta: true },
     { label: 'Saved', href: '/saved', icon: Bookmark },
-    { label: 'Profile', href: '/profile', icon: User },
   ];
 
   return (
@@ -23,7 +34,7 @@ export default function MobileBottomNav() {
     >
       <div className="flex items-center justify-around max-w-md mx-auto relative h-16">
         {items.map((item) => {
-          const isActive = pathname === item.href;
+          const isActive = item.href === '/' ? (pathname === '/' || pathname === '/home') : item.href === '/#plan' ? false : pathname.startsWith(item.href);
           const Icon = item.icon;
 
           if (item.isCenterCta) {
@@ -32,12 +43,12 @@ export default function MobileBottomNav() {
                 <Link
                   href={item.href}
                   className="w-14 h-14 rounded-full bg-gradient-to-tr from-[#FF4F7A] via-[#FF7A3D] to-[#FFC83D] flex items-center justify-center text-white shadow-sunset hover:scale-105 active:scale-95 transition-transform"
-                  aria-label="Create Trip with AI"
+                  aria-label="Plan Trip with AI"
                 >
                   <Sparkles className="w-6 h-6 stroke-[2.25]" />
                 </Link>
                 <span className="text-[10px] font-bold text-[#FF7A3D] mt-1 tracking-tight">
-                  AI Plan
+                  Plan Trip
                 </span>
               </div>
             );

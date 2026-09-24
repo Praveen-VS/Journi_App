@@ -2,8 +2,9 @@
 
 import React, { useState, Suspense, useEffect, useTransition, useMemo } from 'react';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import MobileHeader from '@/components/navigation/MobileHeader';
+import UnifiedBackButton from '@/components/navigation/UnifiedBackButton';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Chip from '@/components/ui/Chip';
@@ -15,12 +16,17 @@ import AITravelPlanCard from '@/components/cards/AITravelPlanCard';
 import TasteMatchCard from '@/components/cards/TasteMatchCard';
 import PromptSuggestionChip from '@/components/ui/PromptSuggestionChip';
 import TextToSpeechButton from '@/components/shared/TextToSpeechButton';
+import { CuratorInsightCard } from '@/components/cards/CuratorInsightCard';
+import { TripOptionCard } from '@/components/cards/TripOptionCard';
+import { FilterPreferencesStrip } from '@/components/shared/FilterPreferencesStrip';
+import { generateTripOptions } from '@/lib/ai/tripOptionsEngine';
+import { getScenicPhoto } from '@/lib/ai/openrouter';
+import { detectUserLocation } from '@/lib/location';
 import { useTripStore } from '@/store';
 import { aiService } from '@/services/ai.service';
 import type { GeneratedTripPayload } from '@/lib/ai/fallbackEngine';
-import { findTopDestinationMatches } from '@/lib/ai/tasteMatcher';
-import { ALL_DESTINATIONS, TOTAL_DESTINATIONS_COUNT } from '@/constants/destinationsData';
-import type { UserTasteProfile, TasteMatchResult, LocationScope } from '@/types';
+import { TOTAL_DESTINATIONS_COUNT } from '@/constants/destinationsData';
+import type { UserTasteProfile, TasteMatchResult, LocationScope, Destination, TripOptionVariant } from '@/types';
 import {
   MOCK_TRIPS,
   MOCK_ITINERARY_DAYS,
@@ -30,6 +36,7 @@ import {
   Sparkles,
   CheckCircle2,
   ArrowRight,
+  ArrowLeft,
   Bookmark,
   Flame,
   KeyRound,
@@ -43,32 +50,79 @@ import {
   Globe2,
   MapPin,
   Navigation,
+  ChevronDown,
+  Loader2,
 } from 'lucide-react';
 
-type AIPlannerMode = 'taste_matcher' | 'prompt_composer' | 'result';
+type AIPlannerMode = 'taste_matcher' | 'prompt_composer' | 'options_select' | 'result';
 
 function AIPlannerContent() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const initialPrompt = searchParams.get('prompt') || '';
   const initialView = searchParams.get('view') || '';
+  const initialAction = searchParams.get('action') || '';
+  const initialDays = searchParams.get('days') ? parseInt(searchParams.get('days')!, 10) : 5;
+  const initialVibe = searchParams.get('vibe') || 'Cultural';
+  const initialBudget = searchParams.get('budget') || 'Moderate';
+  const initialCompanion = searchParams.get('companion') || 'Couple';
+  const initialAdults = searchParams.get('adults')
+    ? parseInt(searchParams.get('adults')!, 10)
+    : initialCompanion === 'Solo'
+    ? 1
+    : initialCompanion === 'Family'
+    ? 2
+    : initialCompanion === 'Friends'
+    ? 3
+    : 2;
+  const initialChildren = searchParams.get('children')
+    ? parseInt(searchParams.get('children')!, 10)
+    : initialCompanion === 'Family'
+    ? 1
+    : 0;
+  const initialDest = searchParams.get('dest') || '';
+  const initialCountry = searchParams.get('country') || '';
+  const initialReason = searchParams.get('reason') || '';
+  const initialOptionId = searchParams.get('optionId') || '';
+  const fromSource = searchParams.get('from') || '';
 
-  // Determine initial mode
+  // Determine initial mode - route to result if view is result, else options_select if action is generate
   const determineInitialMode = (): AIPlannerMode => {
     if (initialView === 'result') return 'result';
-    if (initialPrompt) return 'prompt_composer';
+    if (initialAction === 'generate') return 'options_select';
+    if (initialPrompt && initialAction !== 'generate') return 'prompt_composer';
     return 'taste_matcher';
   };
 
   const [mode, setMode] = useState<AIPlannerMode>(determineInitialMode());
+  const hasTriggeredInitialGen = React.useRef(false);
+
+  // If visiting /ai directly without specific trip generation intent, redirect to Home AI console
+  useEffect(() => {
+    if (!initialAction && !initialView && !initialDest && !initialPrompt) {
+      router.replace('/#plan');
+    }
+  }, [initialAction, initialView, initialDest, initialPrompt, router]);
+
+  // Selected Destination & 3 Smart Options State
+  const [selectedDestinationName, setSelectedDestinationName] = useState(initialDest);
+  const [selectedCountryName, setSelectedCountryName] = useState(initialCountry);
+  const [curatorIntelligenceText, setCuratorIntelligenceText] = useState(initialReason);
+  const [tripOptions, setTripOptions] = useState<TripOptionVariant[]>([]);
+  const [selectedOption, setSelectedOption] = useState<TripOptionVariant | null>(null);
+  const [selectingOptionId, setSelectingOptionId] = useState<string | null>(null);
+  const [planningCardId, setPlanningCardId] = useState<string | null>(null);
 
   // Prompt Composer State
   const [prompt, setPrompt] = useState(
     initialPrompt || 'Plan a 5-day cultural trip to Kyoto with quiet zen temples, local tea ceremonies, and authentic dining spots.'
   );
-  const [days, setDays] = useState(5);
-  const [selectedVibe, setSelectedVibe] = useState('Cultural');
-  const [budgetTier, setBudgetTier] = useState('Moderate');
-  const [companion, setCompanion] = useState('Couple');
+  const [days, setDays] = useState(initialDays || 5);
+  const [selectedVibe, setSelectedVibe] = useState(initialVibe || 'Cultural');
+  const [budgetTier, setBudgetTier] = useState(initialBudget || 'Moderate');
+  const [companion, setCompanion] = useState(initialCompanion || 'Couple');
+  const [adultsCount, setAdultsCount] = useState<number>(initialAdults);
+  const [childrenCount, setChildrenCount] = useState<number>(initialChildren);
   const [isGenerating, setIsGenerating] = useState(false);
   const [generationStep, setGenerationStep] = useState(0);
   const [isSaved, setIsSaved] = useState(false);
@@ -99,32 +153,59 @@ function AIPlannerContent() {
   const [landscape, setLandscape] = useState<string>('historic');
   const [tasteBudget, setTasteBudget] = useState<string>('Moderate');
   const [tasteCompanion, setTasteCompanion] = useState<string>('Couple');
+  const [tasteDays, setTasteDays] = useState<number>(5);
 
   // Location & Radius Scope State
-  const [userOrigin, setUserOrigin] = useState<string>('San Francisco, CA');
+  const [userOrigin, setUserOrigin] = useState<string>('Kerala, India');
   const [isDetectingLocation, setIsDetectingLocation] = useState<boolean>(false);
-  const [locationScope, setLocationScope] = useState<LocationScope>('international');
+  const [locationScope, setLocationScope] = useState<LocationScope>('in_state');
   const [customLocation, setCustomLocation] = useState<string>('');
 
-  const handleDetectLocation = () => {
-    if (typeof window !== 'undefined' && 'geolocation' in navigator) {
+  // Astra 6 Search on Taste Profiler
+  const [hasAstraSearched, setHasAstraSearched] = useState(false);
+  const [isAstraSearching, setIsAstraSearching] = useState(false);
+  const [showMoreMatches, setShowMoreMatches] = useState<boolean>(false);
+  const [astraTasteResults, setAstraTasteResults] = useState<TasteMatchResult[] | null>(null);
+  const [astraCuratorSummary, setAstraCuratorSummary] = useState<string | null>(null);
+
+  // Automatically analyze current location on mount
+  useEffect(() => {
+    detectUserLocation()
+      .then((loc) => {
+        if (loc?.display) {
+          setUserOrigin(loc.display);
+        }
+      })
+      .catch(() => {
+        setUserOrigin('Kerala, India');
+      });
+  }, []);
+
+  const handleDetectLocation = async () => {
+    setIsDetectingLocation(true);
+    try {
+      const loc = await detectUserLocation();
+      setUserOrigin(loc.display || `${loc.state}, ${loc.country}`);
+    } catch {
+      setUserOrigin('Kerala, India');
+    } finally {
+      setIsDetectingLocation(false);
+    }
+  };
+
+  const handleSelectScope = async (scopeId: LocationScope) => {
+    setLocationScope(scopeId);
+    // When selecting distance & scope (except 'custom' / 'other'), automatically analyze location first
+    if (scopeId !== 'custom') {
       setIsDetectingLocation(true);
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const lat = position.coords.latitude.toFixed(2);
-          const lng = position.coords.longitude.toFixed(2);
-          setUserOrigin(`GPS Verified (${lat}°, ${lng}°)`);
-          setIsDetectingLocation(false);
-        },
-        (error) => {
-          console.warn('Geolocation access issue:', error);
-          setUserOrigin('Current Location (Verified)');
-          setIsDetectingLocation(false);
-        },
-        { timeout: 6000 }
-      );
-    } else {
-      setUserOrigin('Current Location');
+      try {
+        const detected = await detectUserLocation();
+        setUserOrigin(detected.display || `${detected.state}, ${detected.country}`);
+      } catch {
+        setUserOrigin('Kerala, India');
+      } finally {
+        setIsDetectingLocation(false);
+      }
     }
   };
 
@@ -138,7 +219,7 @@ function AIPlannerContent() {
     }
   }, []);
 
-  // Compute Top 4 Destination Matches whenever taste profile changes
+  // Compute User Taste Profile
   const userTasteProfile: UserTasteProfile = useMemo(
     () => ({
       ageGroup,
@@ -147,6 +228,8 @@ function AIPlannerContent() {
       landscape,
       budgetTier: tasteBudget,
       companion: tasteCompanion,
+      adultsCount,
+      childrenCount,
       tripLength: days,
       locationScope,
       userOrigin,
@@ -159,6 +242,8 @@ function AIPlannerContent() {
       landscape,
       tasteBudget,
       tasteCompanion,
+      adultsCount,
+      childrenCount,
       days,
       locationScope,
       userOrigin,
@@ -166,9 +251,180 @@ function AIPlannerContent() {
     ]
   );
 
+  // Restore saved taste session if returning with same content
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = sessionStorage.getItem('journi_ai_taste_search');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed.locationScope) setLocationScope(parsed.locationScope);
+          if (parsed.userOrigin) setUserOrigin(parsed.userOrigin);
+          if (parsed.customLocation) setCustomLocation(parsed.customLocation);
+          if (parsed.energyRhythm) setEnergyRhythm(parsed.energyRhythm);
+          if (parsed.landscape) setLandscape(parsed.landscape);
+          if (parsed.tasteBudget) setTasteBudget(parsed.tasteBudget);
+          if (parsed.tasteCompanion) setTasteCompanion(parsed.tasteCompanion);
+          if (parsed.tasteDays) setTasteDays(parsed.tasteDays);
+          if (parsed.foodPreferences) setFoodPreferences(parsed.foodPreferences);
+          if (parsed.hasAstraSearched) setHasAstraSearched(parsed.hasAstraSearched);
+          if (parsed.showMoreMatches !== undefined) setShowMoreMatches(parsed.showMoreMatches);
+          if (parsed.astraCuratorSummary) setAstraCuratorSummary(parsed.astraCuratorSummary);
+          if (parsed.astraTasteResults && parsed.astraTasteResults.length > 0) {
+            setAstraTasteResults(parsed.astraTasteResults);
+          }
+        }
+      } catch (err) {
+        console.warn('Could not restore AI taste session:', err);
+      }
+    }
+  }, []);
+
+  // Sync showMoreMatches & tasteDays to session storage
+  useEffect(() => {
+    if (typeof window !== 'undefined' && astraTasteResults && astraTasteResults.length > 0) {
+      try {
+        const saved = sessionStorage.getItem('journi_ai_taste_search');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          parsed.showMoreMatches = showMoreMatches;
+          parsed.tasteDays = tasteDays;
+          sessionStorage.setItem('journi_ai_taste_search', JSON.stringify(parsed));
+        }
+      } catch {}
+    }
+  }, [showMoreMatches, tasteDays, astraTasteResults]);
+
+  // Handle browser native back / forward buttons between 3 options and itinerary result
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const handlePopState = () => {
+      const params = new URLSearchParams(window.location.search);
+      const view = params.get('view');
+      const action = params.get('action');
+      if (view === 'result') {
+        setMode('result');
+      } else if (action === 'generate') {
+        setMode('options_select');
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Auto-trigger 3 options synthesis when navigated with action=generate (bypassing prompt studio)
+  useEffect(() => {
+    if (initialAction === 'generate' && !hasTriggeredInitialGen.current) {
+      hasTriggeredInitialGen.current = true;
+      const destName = initialDest || 'Destination';
+      setSelectedDestinationName(destName);
+      setSelectedCountryName(initialCountry);
+
+      const generated = generateTripOptions({
+        destination: destName,
+        country: initialCountry,
+        daysCount: initialDays,
+        companion: initialCompanion,
+        budgetTier: initialBudget,
+        curatorNote: initialReason,
+        adultsCount: initialAdults,
+        childrenCount: initialChildren,
+      });
+
+      setTripOptions(generated.options);
+      setCuratorIntelligenceText(generated.curatorIntelligence);
+
+      if (initialView === 'result') {
+        const targetOption =
+          (initialOptionId ? generated.options.find((o) => o.id === initialOptionId) : null) ||
+          generated.options[0];
+        if (targetOption) {
+          handleSelectOption(targetOption, false);
+        }
+        setMode('result');
+      } else {
+        setMode('options_select');
+      }
+    }
+  }, [initialAction, initialDest, initialCountry, initialDays, initialVibe, initialBudget, initialCompanion, initialReason, initialView, initialOptionId]);
+
+  // Trigger Astra 6 Destination Search for Taste Profiler
+  const handleAstraTasteSearch = async () => {
+    setIsAstraSearching(true);
+    setHasAstraSearched(true);
+    setAstraTasteResults(null);
+    setShowMoreMatches(false);
+
+    try {
+      const res = await fetch('/api/ai/search', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          scope: locationScope,
+          origin: userOrigin,
+          customLocation: locationScope === 'custom' ? customLocation : undefined,
+          rhythm: energyRhythm,
+          landscape,
+          budgetTier: tasteBudget,
+          companion: tasteCompanion,
+          cuisines: foodPreferences,
+          ageGroup,
+          limit: 8,
+        }),
+      });
+
+      if (res.ok) {
+        const json = await res.json();
+        if (json.success && json.data) {
+          setAstraCuratorSummary(json.data.summary || null);
+          if (json.data.destinations && json.data.destinations.length > 0) {
+            const mapped: TasteMatchResult[] = json.data.destinations.map((d: Destination) => ({
+              destination: d,
+              score: d.matchScore || 96,
+              matchReason: d.matchReason || `Matches your ${landscape} & ${energyRhythm} preferences`,
+              matchedTags: d.vibes?.slice(0, 3) || ['Curated Escape'],
+            }));
+            setAstraTasteResults(mapped);
+
+            if (typeof window !== 'undefined') {
+              try {
+                sessionStorage.setItem('journi_ai_taste_search', JSON.stringify({
+                  locationScope,
+                  userOrigin,
+                  customLocation,
+                  energyRhythm,
+                  landscape,
+                  tasteBudget,
+                  tasteCompanion,
+                  foodPreferences,
+                  hasAstraSearched: true,
+                  showMoreMatches: false,
+                  astraCuratorSummary: json.data.summary || null,
+                  astraTasteResults: mapped,
+                }));
+              } catch {}
+            }
+          } else {
+            setAstraTasteResults([]);
+          }
+        } else {
+          setAstraTasteResults([]);
+        }
+      } else {
+        setAstraTasteResults([]);
+      }
+    } catch (err) {
+      console.warn('Astra 6 search error in Plan with AI page:', err);
+      setAstraTasteResults([]);
+    } finally {
+      setIsAstraSearching(false);
+    }
+  };
+
   const top4Matches: TasteMatchResult[] = useMemo(() => {
-    return findTopDestinationMatches(userTasteProfile, ALL_DESTINATIONS);
-  }, [userTasteProfile]);
+    if (!astraTasteResults || astraTasteResults.length === 0) return [];
+    return astraTasteResults.slice(0, showMoreMatches ? 8 : 4);
+  }, [astraTasteResults, showMoreMatches]);
 
   const vibes = ['Cultural', 'Romantic', 'Relaxed', 'Adventure', 'Culinary'];
   const budgetTiers = ['Budget Friendly', 'Moderate', 'Luxury Escapes'];
@@ -246,22 +502,107 @@ function AIPlannerContent() {
 
   // One-click planning from Top 4 Recommendation
   const handlePlanFromMatch = (match: TasteMatchResult) => {
+    setPlanningCardId(match.destination.id);
     const dest = match.destination;
-    const craftedPrompt = `Plan a ${dest.idealDays}-day ${dest.energyRhythm || 'curated'} trip to ${dest.name}, ${dest.country} featuring ${dest.highlights?.slice(0, 2).join(', ') || 'iconic landmarks'} with authentic ${dest.foodTypes?.slice(0, 2).join(' and ') || 'regional dining'}.`;
+    const effectiveDays = tasteDays || dest.idealDays || 5;
+    const craftedPrompt = `Plan a ${effectiveDays}-day ${dest.energyRhythm || energyRhythm || 'curated'} trip to ${dest.name}, ${dest.country} featuring ${(dest.highlights || []).slice(0, 3).join(', ') || 'iconic landmarks'} with authentic ${(dest.foodTypes || []).slice(0, 3).join(' and ') || 'regional dining'}.`;
 
     setPrompt(craftedPrompt);
-    setDays(dest.idealDays);
+    setDays(effectiveDays);
     setSelectedVibe(dest.vibes[0] || 'Cultural');
     setBudgetTier(dest.budgetTier || tasteBudget);
     setCompanion(tasteCompanion);
+    setSelectedDestinationName(dest.name);
+    setSelectedCountryName(dest.country);
 
-    executeGeneration(
-      craftedPrompt,
-      dest.idealDays,
-      dest.vibes[0] || 'Cultural',
-      dest.budgetTier || tasteBudget,
-      tasteCompanion
-    );
+    const generated = generateTripOptions({
+      destination: dest.name,
+      country: dest.country,
+      daysCount: effectiveDays,
+      companion: tasteCompanion,
+      budgetTier: dest.budgetTier || tasteBudget,
+      energyRhythm: dest.energyRhythm || energyRhythm,
+      foodPreferences: dest.foodTypes,
+      highlights: dest.highlights,
+      curatorNote: match.matchReason || dest.tagline || dest.description,
+      adultsCount,
+      childrenCount,
+    });
+
+    setTripOptions(generated.options);
+    setCuratorIntelligenceText(generated.curatorIntelligence);
+    setMode('options_select');
+  };
+
+  const handleSelectOption = (option: TripOptionVariant, shouldPushHistory: boolean = true) => {
+    setSelectedOption(option);
+    setSelectingOptionId(option.id);
+    const cover = getScenicPhoto(undefined, selectedDestinationName || 'Destination');
+    const dynamicTotal = option.estimatedBudget;
+
+    const payload: GeneratedTripPayload = {
+      trip: {
+        id: `trip-${option.id}-${Date.now()}`,
+        title: `${selectedDestinationName}: ${option.title}`,
+        destination: selectedDestinationName || 'Destination',
+        country: selectedCountryName || 'Global',
+        startDate: 'Upcoming',
+        endDate: `${days} Days`,
+        daysCount: days,
+        coverImage: cover,
+        gradient: 'from-[#5B0B24] via-[#C2185B] to-[#FF7A3D]',
+        status: 'upcoming',
+        estimatedBudget: dynamicTotal,
+        spentBudget: 0,
+        currency: 'INR',
+        pace: option.pace,
+        vibe: [selectedVibe, option.badge],
+        description: option.description,
+      },
+      days: option.days,
+      budget: {
+        totalEstimated: dynamicTotal,
+        currency: 'INR',
+        categories: [
+          { category: 'stay', label: 'Accommodations', allocated: Math.round(dynamicTotal * 0.45), spent: 0, iconName: 'Home', color: '#C2185B' },
+          { category: 'food', label: 'Food & Dining', allocated: Math.round(dynamicTotal * 0.25), spent: 0, iconName: 'Utensils', color: '#FF7A3D' },
+          { category: 'activities', label: 'Activities & Sightseeing', allocated: Math.round(dynamicTotal * 0.15), spent: 0, iconName: 'Ticket', color: '#FFC83D' },
+          { category: 'transport', label: 'Transit & Local Travel', allocated: Math.round(dynamicTotal * 0.10), spent: 0, iconName: 'Train', color: '#5B0B24' },
+          { category: 'other', label: 'Incidentals & Buffer', allocated: Math.round(dynamicTotal * 0.05), spent: 0, iconName: 'Tag', color: '#FF4F7A' },
+        ],
+        items: [
+          { id: 'b-1', title: option.stayType, category: 'stay', amount: Math.round(dynamicTotal * 0.45), date: 'Day 1' },
+          { id: 'b-2', title: `Daily Food & Dining (${days} Days)`, category: 'food', amount: Math.round(dynamicTotal * 0.25), date: 'Full Trip' },
+          { id: 'b-3', title: `Activity & Sightseeing Admissions`, category: 'activities', amount: Math.round(dynamicTotal * 0.15), date: 'Full Trip' },
+          { id: 'b-4', title: `Local Transit & Transfers`, category: 'transport', amount: Math.round(dynamicTotal * 0.10), date: 'Full Trip' },
+        ],
+      },
+      packing: [
+        { id: 'p-1', title: 'Passport & Identity Documents', category: 'Essentials', isPacked: true },
+        { id: 'p-2', title: 'Comfortable Walking Shoes', category: 'Clothing', isPacked: false },
+        { id: 'p-3', title: 'Power Bank & Charging Cables', category: 'Tech', isPacked: true },
+        { id: 'p-4', title: 'Lightweight Weatherproof Layer', category: 'Clothing', isPacked: false },
+        { id: 'p-5', title: 'Personal Medication & First Aid Kit', category: 'Essentials', isPacked: false },
+        { id: 'p-6', title: 'Compact Travel Umbrella / Sun Hat', category: 'Essentials', isPacked: false },
+      ],
+      weather: [
+        { date: 'Day 1', dayName: 'Day 1', condition: 'Sunny', icon: 'Sun', highTemp: 26, lowTemp: 17, precipitationPercent: 10, uvIndex: 6, advice: 'Comfortable day wear & sunglasses' },
+      ],
+      source: 'openrouter',
+    };
+
+    setGeneratedPayload(payload);
+    setSelectedDayNumber(1);
+    setMode('result');
+
+    if (shouldPushHistory && typeof window !== 'undefined') {
+      try {
+        const url = new URL(window.location.href);
+        url.searchParams.set('view', 'result');
+        url.searchParams.set('optionId', option.id);
+        window.history.pushState({ view: 'result', optionId: option.id }, '', url.toString());
+      } catch {}
+    }
   };
 
   const handleSaveTrip = () => {
@@ -295,10 +636,51 @@ function AIPlannerContent() {
 
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-8 space-y-6">
-      {/* Mobile Top Header */}
+      {/* Mobile Top Header with Back Navigation */}
       <MobileHeader
-        title={mode === 'result' ? 'AI Planning Result' : 'AI Travel Studio'}
-        showBack={mode === 'result'}
+        title={
+          mode === 'result'
+            ? 'AI Planning Result'
+            : mode === 'options_select'
+            ? 'Select Trip Style'
+            : mode === 'prompt_composer'
+            ? 'Prompt Studio'
+            : 'Taste Profiler'
+        }
+        showBack={mode === 'result' || mode === 'options_select' || mode === 'prompt_composer' || fromSource === 'home'}
+        onBack={() => {
+          if (mode === 'result') {
+            if (tripOptions.length > 0) {
+              if (typeof window !== 'undefined') {
+                const url = new URL(window.location.href);
+                url.searchParams.delete('view');
+                url.searchParams.delete('optionId');
+                window.history.pushState({}, '', url.toString());
+              }
+              setMode('options_select');
+            } else if (fromSource === 'home') {
+              router.push('/');
+            } else {
+              setMode('taste_matcher');
+            }
+          } else if (mode === 'options_select') {
+            if (fromSource === 'home') {
+              router.push('/');
+            } else {
+              setMode('taste_matcher');
+            }
+          } else if (mode === 'prompt_composer') {
+            if (fromSource === 'home') {
+              router.push('/');
+            } else {
+              setMode('taste_matcher');
+            }
+          } else if (fromSource === 'home') {
+            router.push('/');
+          } else {
+            router.back();
+          }
+        }}
       />
 
       {/* Switcher Header Pill & Mode Navigation */}
@@ -414,7 +796,18 @@ function AIPlannerContent() {
       {/* MODE 1: TASTE PROFILER (FIND MY TOP 4 DESTINATIONS) */}
       {/* ========================================================= */}
       {!isGenerating && mode === 'taste_matcher' && (
-        <div className="space-y-10 animate-fade-in">
+        <div className="space-y-8 animate-fade-in">
+          {fromSource === 'home' && (
+            <UnifiedBackButton
+              label="Back to Home Search Results"
+              description="Return to your home search console with all options preserved"
+              mobileLabel="Back to Home Results"
+              badgeText="Home Search Preserved"
+              onBack={() => router.push('/')}
+              fallbackHref="/"
+            />
+          )}
+
           {/* Header Banner */}
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF4F7A]/10 text-[#C2185B] dark:text-[#FF8BA7] text-xs font-bold">
@@ -490,7 +883,7 @@ function AIPlannerContent() {
                   <button
                     key={item.id}
                     type="button"
-                    onClick={() => setLocationScope(item.id as LocationScope)}
+                    onClick={() => handleSelectScope(item.id as LocationScope)}
                     className={`p-2.5 rounded-[16px] text-center border transition-all ${
                       locationScope === item.id
                         ? 'border-[#FF4F7A] bg-white dark:bg-[#38091C] ring-2 ring-[#FF4F7A]/25 shadow-sm'
@@ -712,14 +1105,29 @@ function AIPlannerContent() {
                 </div>
 
                 <label className="text-xs font-bold text-[#5B0B24] dark:text-[#FFF7FA] block pt-2">
-                  6. Traveling Companion
+                  6. Traveling Companion & Party
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {companions.map((c) => (
                     <button
                       key={c}
                       type="button"
-                      onClick={() => setTasteCompanion(c)}
+                      onClick={() => {
+                        setTasteCompanion(c);
+                        if (c === 'Solo') {
+                          setAdultsCount(1);
+                          setChildrenCount(0);
+                        } else if (c === 'Couple') {
+                          setAdultsCount(2);
+                          setChildrenCount(0);
+                        } else if (c === 'Family') {
+                          setAdultsCount(2);
+                          setChildrenCount(1);
+                        } else if (c === 'Friends') {
+                          setAdultsCount(3);
+                          setChildrenCount(0);
+                        }
+                      }}
                       className={`text-xs px-3 py-1.5 rounded-xl font-bold border transition-all ${
                         tasteCompanion === c
                           ? 'bg-[#C2185B] text-white border-[#C2185B]'
@@ -730,6 +1138,110 @@ function AIPlannerContent() {
                     </button>
                   ))}
                 </div>
+
+                {/* Tactile Adults & Kids (<5 yrs) Steppers */}
+                <div className="grid grid-cols-2 gap-2 pt-1">
+                  <div className="flex items-center justify-between bg-white dark:bg-[#280814] rounded-xl px-3 py-1.5 border border-[#5B0B24]/10 dark:border-[#FF8BA7]/15">
+                    <span className="text-[11px] font-semibold text-[#5B0B24] dark:text-[#FFF7FA]">Adults</span>
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setAdultsCount((prev) => Math.max(1, prev - 1))}
+                        disabled={adultsCount <= 1}
+                        className="w-5 h-5 rounded-md flex items-center justify-center bg-[#5B0B24]/5 hover:bg-[#5B0B24]/10 dark:bg-white/10 dark:hover:bg-white/20 text-[#5B0B24] dark:text-white font-bold text-xs disabled:opacity-30 cursor-pointer"
+                      >
+                        -
+                      </button>
+                      <span className="text-xs font-black text-[#5B0B24] dark:text-white w-3 text-center">{adultsCount}</span>
+                      <button
+                        type="button"
+                        onClick={() => setAdultsCount((prev) => Math.min(10, prev + 1))}
+                        disabled={adultsCount >= 10}
+                        className="w-5 h-5 rounded-md flex items-center justify-center bg-[#5B0B24]/5 hover:bg-[#5B0B24]/10 dark:bg-white/10 dark:hover:bg-white/20 text-[#5B0B24] dark:text-white font-bold text-xs disabled:opacity-30 cursor-pointer"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between bg-white dark:bg-[#280814] rounded-xl px-3 py-1.5 border border-[#5B0B24]/10 dark:border-[#FF8BA7]/15">
+                    <div className="flex flex-col">
+                      <span className="text-[11px] font-semibold text-[#5B0B24] dark:text-[#FFF7FA]">Kids &lt;5y</span>
+                      <span className="text-[8px] text-[#5B0B24]/50 dark:text-[#FF8BA7]/50 -mt-0.5">Hotel policy applies</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setChildrenCount((prev) => Math.max(0, prev - 1))}
+                        disabled={childrenCount <= 0}
+                        className="w-5 h-5 rounded-md flex items-center justify-center bg-[#5B0B24]/5 hover:bg-[#5B0B24]/10 dark:bg-white/10 dark:hover:bg-white/20 text-[#5B0B24] dark:text-white font-bold text-xs disabled:opacity-30 cursor-pointer"
+                      >
+                        -
+                      </button>
+                      <span className="text-xs font-black text-[#5B0B24] dark:text-white w-3 text-center">{childrenCount}</span>
+                      <button
+                        type="button"
+                        onClick={() => setChildrenCount((prev) => Math.min(6, prev + 1))}
+                        disabled={childrenCount >= 6}
+                        className="w-5 h-5 rounded-md flex items-center justify-center bg-[#5B0B24]/5 hover:bg-[#5B0B24]/10 dark:bg-white/10 dark:hover:bg-white/20 text-[#5B0B24] dark:text-white font-bold text-xs disabled:opacity-30 cursor-pointer"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <label className="text-xs font-bold text-[#5B0B24] dark:text-[#FFF7FA] block pt-2">
+                  7. Trip Duration (Days)
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {[3, 5, 7, 10, 14].map((d) => (
+                    <button
+                      key={d}
+                      type="button"
+                      onClick={() => setTasteDays(d)}
+                      className={`text-xs px-3 py-1.5 rounded-xl font-bold border transition-all ${
+                        tasteDays === d
+                          ? 'bg-gradient-to-r from-[#FF4F7A] to-[#FF7A3D] text-white border-transparent shadow-xs'
+                          : 'border-[#5B0B24]/10 bg-white dark:bg-[#280814] text-[#5B0B24]/70 dark:text-[#FF8BA7]/70 hover:border-[#FF4F7A]/40'
+                      }`}
+                    >
+                      {d} Days
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Universal Plan with Journi Action Button */}
+            <div className="pt-4 border-t border-[#5B0B24]/10 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-2 text-xs text-[#5B0B24]/70 dark:text-[#FF8BA7]/70">
+                <Sparkles className="w-4 h-4 text-[#FF7A3D]" />
+                <span>Customize all options above, then click to generate unconstrained AI destinations.</span>
+              </div>
+
+              <div className="flex flex-col items-center sm:items-end gap-1 shrink-0 w-full sm:w-auto">
+                <button
+                  type="button"
+                  onClick={handleAstraTasteSearch}
+                  disabled={isAstraSearching}
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-gradient-to-r from-[#FF4F7A] via-[#E91E63] to-[#FF7A3D] hover:from-[#E03A64] hover:to-[#E5662D] text-white text-xs sm:text-sm font-extrabold shadow-md hover:shadow-xl transition-all flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-50"
+                >
+                  {isAstraSearching ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin text-white" />
+                      <span>Curating with Journi...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="w-4 h-4 text-white" />
+                      <span>Plan with Journi</span>
+                    </>
+                  )}
+                </button>
+                <span className="text-[10px] text-[#5B0B24]/50 dark:text-[#FF8BA7]/60 font-medium tracking-wide">
+                  powered by <span className="font-semibold text-[#5B0B24]/70 dark:text-[#FFF7FA]/80">GPT 6 Astra</span>
+                </span>
               </div>
             </div>
           </Card>
@@ -737,39 +1249,92 @@ function AIPlannerContent() {
           {/* ========================================== */}
           {/* Top 4 Recommendations Section */}
           {/* ========================================== */}
-          <section className="space-y-6 pt-4">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <Badge variant="sunset" size="sm">
-                    <Sparkles className="w-3 h-3 mr-1" />
-                    Top 4 Recommendations
-                  </Badge>
-                  <span className="text-xs text-[#5B0B24]/60 dark:text-[#FF8BA7]/60">
-                    Highest compatibility with your taste
-                  </span>
+          {(hasAstraSearched || isAstraSearching) && (
+            <section className="space-y-6 pt-4 animate-in fade-in duration-300">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <Badge variant="sunset" size="sm">
+                      <Sparkles className="w-3 h-3 mr-1" />
+                      {showMoreMatches ? 'Top 8 Recommendations' : 'Top 4 Recommendations'}
+                    </Badge>
+                    <span className="text-xs text-[#5B0B24]/60 dark:text-[#FF8BA7]/60">
+                      Curated by Astra 6 based on your taste profile
+                    </span>
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl font-black text-[#5B0B24] dark:text-[#FFF7FA] tracking-tight">
+                    {showMoreMatches ? 'Your Perfect 8 Getaways' : 'Your Perfect 4 Getaways'}
+                  </h2>
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-black text-[#5B0B24] dark:text-[#FFF7FA] tracking-tight">
-                  Your Perfect 4 Getaways
-                </h2>
-              </div>
-              <p className="text-xs text-[#5B0B24]/70 dark:text-[#FF8BA7]/70 max-w-sm sm:text-right">
-                Tap <strong>&quot;Plan with AI&quot;</strong> on any destination to immediately generate full day-by-day itineraries and budgets.
-              </p>
-            </div>
 
-            {/* Top 4 Responsive Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {top4Matches.map((match, idx) => (
-                <TasteMatchCard
-                  key={match.destination.id}
-                  match={match}
-                  rank={idx + 1}
-                  onPlanTrip={handlePlanFromMatch}
-                />
-              ))}
-            </div>
-          </section>
+                {astraCuratorSummary && (
+                  <p className="text-xs italic text-[#C2185B] dark:text-[#FF8BA7] max-w-md sm:text-right">
+                    &quot;{astraCuratorSummary}&quot;
+                  </p>
+                )}
+              </div>
+
+              {/* Skeleton loading when isAstraSearching */}
+              {isAstraSearching && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div key={i} className="h-80 rounded-[24px] bg-[#FFF5F8]/80 dark:bg-[#280814]/80 border border-[#FF4F7A]/20 p-4 animate-pulse flex flex-col justify-between">
+                      <div className="h-44 rounded-2xl bg-[#5B0B24]/10 dark:bg-white/10" />
+                      <div className="space-y-2 pt-3">
+                        <div className="h-4 bg-[#5B0B24]/10 dark:bg-white/10 rounded-full w-3/4" />
+                        <div className="h-3 bg-[#5B0B24]/10 dark:bg-white/10 rounded-full w-1/2" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Top 4 / 8 Responsive Grid */}
+              {!isAstraSearching && top4Matches.length > 0 && (
+                <>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {top4Matches.map((match, idx) => (
+                      <TasteMatchCard
+                        key={match.destination.id}
+                        match={match}
+                        rank={idx + 1}
+                        isPlanning={planningCardId === match.destination.id}
+                        onPlanTrip={handlePlanFromMatch}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Show More / Show Less Button */}
+                  {astraTasteResults && astraTasteResults.length > 4 && (
+                    <div className="flex justify-center pt-2">
+                      <button
+                        type="button"
+                        onClick={() => setShowMoreMatches((prev) => !prev)}
+                        className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-[#FF4F7A]/30 bg-white dark:bg-[#280814] text-[#C2185B] dark:text-[#FF8BA7] hover:bg-[#FF4F7A]/5 font-bold text-xs sm:text-sm shadow-sm hover:shadow transition-all cursor-pointer"
+                      >
+                        <Sparkles className="w-4 h-4 text-[#FF7A3D]" />
+                        <span>{showMoreMatches ? 'Show Top 4 Only' : 'Show 8 Recommendations'}</span>
+                        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${showMoreMatches ? 'rotate-180' : ''}`} />
+                      </button>
+                    </div>
+                  )}
+                </>
+              )}
+
+              {/* Empty state if search returned 0 results */}
+              {!isAstraSearching && top4Matches.length === 0 && (
+                <div className="text-center py-8 rounded-2xl bg-[#FFF5F8]/50 dark:bg-[#280814]/50 border border-[#FF4F7A]/20 p-6 space-y-2">
+                  <Compass className="w-8 h-8 text-[#FF7A3D] mx-auto opacity-70 animate-bounce" />
+                  <p className="text-sm font-semibold text-[#5B0B24] dark:text-[#FFF7FA]">
+                    No matching destinations found for this search.
+                  </p>
+                  <p className="text-xs text-[#5B0B24]/60 dark:text-[#FF8BA7]/60">
+                    Try adjusting your custom destination or travel preferences and click &quot;Plan with Astra 6&quot;.
+                  </p>
+                </div>
+              )}
+            </section>
+          )}
         </div>
       )}
 
@@ -777,7 +1342,31 @@ function AIPlannerContent() {
       {/* MODE 2: PROMPT STUDIO (MANUAL NATURAL LANGUAGE COMPOSER) */}
       {/* ========================================================= */}
       {!isGenerating && mode === 'prompt_composer' && (
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start animate-fade-in">
+        <div className="space-y-6 animate-fade-in">
+          {(fromSource === 'home' || (astraTasteResults && astraTasteResults.length > 0)) && (
+            <UnifiedBackButton
+              label={fromSource === 'home' ? 'Back to Home Search Results' : 'Back to 4–8 Recommendations'}
+              description={
+                fromSource === 'home'
+                  ? 'Return to your search options with all destination cards preserved'
+                  : 'Return to your curated options with all preferences intact'
+              }
+              mobileLabel={fromSource === 'home' ? 'Back to Search' : 'Back to Matches'}
+              badgeText={fromSource === 'home' ? 'Search Preserved' : `${astraTasteResults?.length || 0} Matches Ready`}
+              onBack={() => {
+                if (fromSource === 'home') {
+                  router.push('/');
+                } else if (astraTasteResults && astraTasteResults.length > 0) {
+                  setMode('taste_matcher');
+                } else {
+                  router.back();
+                }
+              }}
+              fallbackHref={fromSource === 'home' ? '/' : undefined}
+            />
+          )}
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Column: Natural Language Prompt Composer */}
           <div className="lg:col-span-7 space-y-6">
             <div>
@@ -922,11 +1511,11 @@ function AIPlannerContent() {
                 type="submit"
                 variant="sunset"
                 size="lg"
-                className="w-full"
+                className="w-full bg-gradient-to-r from-[#FF4F7A] to-[#FF7A3D] hover:from-[#E03A64] hover:to-[#E5662D] shadow-lg font-bold"
                 isLoading={isGenerating}
-                leftIcon={<Sparkles className="w-5 h-5" />}
+                leftIcon={<Sparkles className="w-5 h-5 text-white" />}
               >
-                {isGenerating ? 'Synthesizing Your Journey...' : 'Generate Story & Plan'}
+                {isGenerating ? 'Synthesizing with Astra 6...' : 'Plan with Astra 6'}
               </Button>
             </form>
           </div>
@@ -990,20 +1579,208 @@ function AIPlannerContent() {
             </Card>
           </div>
         </div>
+        </div>
       )}
 
       {/* ========================================================= */}
-      {/* MODE 3: GENERATED PLAN RESULT */}
+      {/* SUB-PAGE 1: 3 SMART TRIP OPTIONS SELECTOR */}
+      {/* ========================================================= */}
+      {!isGenerating && mode === 'options_select' && (
+        <div className="space-y-6 animate-fade-in">
+          {/* Top Back Navigation Bar (Desktop & Mobile Responsive) */}
+          <UnifiedBackButton
+            label={
+              fromSource === 'home'
+                ? 'Back to Home Search Results'
+                : 'Back to Destination Recommendations'
+            }
+            description={
+              fromSource === 'home'
+                ? 'Return to your search options with all destination cards preserved'
+                : 'Return to your curated matches with all preferences intact'
+            }
+            mobileLabel={fromSource === 'home' ? 'Back to Search' : 'Back to Matches'}
+            badgeText={
+              fromSource === 'home'
+                ? 'Search Preserved'
+                : astraTasteResults && astraTasteResults.length > 0
+                ? `${astraTasteResults.length} Matches Ready`
+                : undefined
+            }
+            onBack={() => {
+              if (fromSource === 'home') {
+                router.push('/');
+              } else {
+                setMode('taste_matcher');
+              }
+            }}
+            fallbackHref={fromSource === 'home' ? '/' : undefined}
+          />
+
+          {/* Selected Filter Preferences Strip (Point 3) */}
+          <FilterPreferencesStrip
+            destination={selectedDestinationName}
+            scope={locationScope}
+            daysCount={days}
+            companion={companion}
+            adultsCount={adultsCount}
+            childrenCount={childrenCount}
+            budgetTier={budgetTier}
+            energyRhythm={energyRhythm}
+            foodPreferences={foodPreferences}
+          />
+
+          {/* Section Header */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-[#5B0B24]/10 dark:border-[#FF8BA7]/15">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <Badge variant="sunset" size="sm">
+                  <Sparkles className="w-3 h-3 mr-1" />
+                  Astra Persona Intelligence
+                </Badge>
+                <span className="text-xs font-bold text-[#FF7A3D]">
+                  {days} Days • {companion} • {budgetTier}
+                </span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black text-[#5B0B24] dark:text-[#FFF7FA] tracking-tight">
+                Select Your {selectedDestinationName} Experience
+              </h2>
+              <p className="text-xs sm:text-sm text-[#704250] dark:text-[#FFB3C6]/80 mt-1">
+                Astra evaluated the complete combination of your traveler type ({companion}), budget ({budgetTier}), and rhythm to formulate 3 distinct, realistic travel experiences.
+              </p>
+            </div>
+          </div>
+
+          {/* Point 4: Standout Curator Travel Intelligence Callout */}
+          <CuratorInsightCard
+            destination={selectedDestinationName}
+            country={selectedCountryName}
+            insight={curatorIntelligenceText}
+            companion={companion}
+            budgetTier={budgetTier}
+          />
+
+          {/* Point 1 & 3: 3 Tailored Trip Options Grid */}
+          {tripOptions.length === 0 ? (
+            <div className="space-y-4 pt-2">
+              <div className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#FFF5F8] dark:bg-[#280814] border border-[#FF4F7A]/20 text-[#C2185B] dark:text-[#FF8BA7] text-xs font-bold animate-pulse">
+                <Loader2 className="w-4 h-4 animate-spin text-[#FF7A3D]" />
+                <span>Astra 6 is personalizing 3 distinct travel styles for your party...</span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {[1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className="rounded-[24px] bg-white/90 dark:bg-[#200612]/90 border-2 border-[#5B0B24]/10 dark:border-[#FF8BA7]/15 p-6 space-y-4 animate-pulse"
+                  >
+                    <div className="flex justify-between items-center">
+                      <div className="h-6 w-24 rounded-full bg-[#FF4F7A]/20" />
+                      <div className="h-5 w-20 rounded-full bg-[#5B0B24]/10 dark:bg-white/10" />
+                    </div>
+                    <div className="space-y-2 pt-2">
+                      <div className="h-6 w-3/4 rounded-lg bg-[#5B0B24]/15 dark:bg-white/15" />
+                      <div className="h-4 w-1/2 rounded-md bg-[#5B0B24]/10 dark:bg-white/10" />
+                    </div>
+                    <div className="h-28 rounded-2xl bg-[#FFF5F8] dark:bg-[#280814] p-3 space-y-2" />
+                    <div className="h-20 rounded-2xl bg-[#FFF9F5] dark:bg-[#250d18] p-3 space-y-2" />
+                    <div className="pt-4 border-t border-[#5B0B24]/10 flex justify-between items-center">
+                      <div className="h-8 w-28 rounded-lg bg-[#5B0B24]/10" />
+                      <div className="h-10 w-full ml-4 rounded-xl bg-gradient-to-r from-[#FF4F7A]/40 to-[#FF7A3D]/40" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+              {tripOptions.map((opt, idx) => (
+                <TripOptionCard
+                  key={opt.id}
+                  option={opt}
+                  index={idx}
+                  daysCount={days}
+                  isSelected={selectedOption?.id === opt.id}
+                  isSelecting={selectingOptionId === opt.id}
+                  onSelect={handleSelectOption}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ========================================================= */}
+      {/* SUB-PAGE 2: FULL TRIP ITINERARY DETAIL PAGE */}
       {/* ========================================================= */}
       {!isGenerating && mode === 'result' && (
-        <div className="space-y-8 animate-fade-in">
+        <div className="space-y-6 animate-fade-in">
+          {/* Top Back Navigation Bar (Desktop & Mobile Responsive) */}
+          <UnifiedBackButton
+            label={
+              tripOptions.length > 0
+                ? 'Back to 3 Trip Options'
+                : fromSource === 'home'
+                ? 'Back to Home Search Results'
+                : 'Back to Recommendations'
+            }
+            description={
+              tripOptions.length > 0
+                ? `Return to the 3 curated travel styles for ${selectedDestinationName}`
+                : fromSource === 'home'
+                ? 'Return to your search options with all destination cards preserved'
+                : 'Return to your curated options with all preferences intact'
+            }
+            mobileLabel={tripOptions.length > 0 ? 'Back to Options' : fromSource === 'home' ? 'Back to Search' : 'Back to Matches'}
+            badgeText={
+              tripOptions.length > 0
+                ? '3 Options Available'
+                : fromSource === 'home'
+                ? 'Search Preserved'
+                : undefined
+            }
+            onBack={() => {
+              if (tripOptions.length > 0) {
+                if (typeof window !== 'undefined') {
+                  const url = new URL(window.location.href);
+                  url.searchParams.delete('view');
+                  url.searchParams.delete('optionId');
+                  window.history.pushState({}, '', url.toString());
+                }
+                setMode('options_select');
+              } else if (fromSource === 'home') {
+                router.push('/');
+              } else {
+                setMode('taste_matcher');
+              }
+            }}
+            fallbackHref={fromSource === 'home' && tripOptions.length === 0 ? '/' : undefined}
+          />
+
+          {/* Selected Filter Preferences Strip (Point 3) */}
+          <FilterPreferencesStrip
+            destination={selectedDestinationName}
+            scope={locationScope}
+            daysCount={days}
+            companion={companion}
+            adultsCount={adultsCount}
+            childrenCount={childrenCount}
+            budgetTier={budgetTier}
+            energyRhythm={energyRhythm}
+            foodPreferences={foodPreferences}
+          />
+
           {/* Trip Hero Banner */}
           <div className="rounded-[28px] bg-gradient-to-tr from-[#5B0B24] via-[#C2185B] to-[#FF7A3D] text-white p-6 sm:p-10 shadow-2xl relative overflow-hidden">
             <div className="relative z-10 max-w-3xl">
               <div className="flex flex-wrap items-center gap-2 mb-3">
                 <Badge variant="golden" size="sm">
-                  {isGeminiSource ? (
-                    <span className="flex items-center gap-1">
+                  {generatedPayload?.source === 'openrouter' ? (
+                    <span className="flex items-center gap-1 font-bold">
+                      <Sparkles className="w-3 h-3 text-[#5B0B24]" />
+                      OpenRouter Astra 6
+                    </span>
+                  ) : isGeminiSource ? (
+                    <span className="flex items-center gap-1 font-bold">
                       <Sparkles className="w-3 h-3 text-[#5B0B24]" />
                       Google Gemini 1.5 Flash
                     </span>
@@ -1190,7 +1967,7 @@ function AIPlannerContent() {
                   </h3>
                 </div>
                 <Link
-                  href="/budget"
+                  href={`/budget?dest=${encodeURIComponent(selectedDestinationName)}&country=${encodeURIComponent(selectedCountryName)}&days=${days}&budget=${encodeURIComponent(budgetTier)}&companion=${encodeURIComponent(companion)}&adults=${adultsCount}&children=${childrenCount}&scope=${encodeURIComponent(locationScope)}&total=${currentTrip.estimatedBudget}&title=${encodeURIComponent(currentTrip.title)}&optionId=${encodeURIComponent(selectedOption?.id || '')}&from=itinerary`}
                   className="text-xs font-bold text-[#FF4F7A] hover:underline flex items-center gap-1"
                 >
                   <span>Open Budget Planner</span>

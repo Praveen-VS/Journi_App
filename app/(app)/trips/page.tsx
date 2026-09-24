@@ -58,7 +58,7 @@ export default function TripsPage() {
             {showEmptySim ? 'Show Loaded Trips' : 'Simulate Empty State'}
           </button>
 
-          <Link href="/ai">
+          <Link href="/#plan">
             <Button
               variant="sunset"
               size="md"

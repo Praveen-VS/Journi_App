@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
-import { Mountain, Palmtree, Building2, Trees } from 'lucide-react';
+import React, { useState } from 'react';
+import { Mountain, Palmtree, Building2, Trees, Loader2 } from 'lucide-react';
 
 export interface CategoryGridProps {
   selectedCategory?: string | null;
@@ -57,19 +57,27 @@ export default function CategoryGrid({
   onSelectCategory,
   className = '',
 }: CategoryGridProps) {
+  const [navigatingCategory, setNavigatingCategory] = useState<string | null>(null);
+
+  const handleClick = (catId: string) => {
+    setNavigatingCategory(catId);
+    onSelectCategory?.(catId);
+  };
+
   return (
     <div className={`grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 ${className}`}>
       {JOURNI_CATEGORIES.map((cat) => {
         const IconComponent = cat.icon;
         const isSelected = selectedCategory === cat.id;
+        const isNavigating = navigatingCategory === cat.id;
 
         return (
           <button
             key={cat.id}
             type="button"
-            onClick={() => onSelectCategory?.(cat.id)}
+            onClick={() => handleClick(cat.id)}
             className={`flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-2xl sm:rounded-3xl transition-all duration-200 cursor-pointer text-center border-2 ${
-              isSelected
+              isSelected || isNavigating
                 ? 'border-[#E61E50] ring-2 ring-[#E61E50]/20 scale-[1.02] shadow-md bg-white dark:bg-[#280814]'
                 : `border-transparent bg-white/80 dark:bg-[#1E0610]/80 shadow-sm hover:shadow-md ${cat.borderHover} hover:scale-[1.02]`
             }`}
@@ -78,7 +86,11 @@ export default function CategoryGrid({
             <div
               className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl sm:rounded-[20px] ${cat.bgColor} flex items-center justify-center mb-2.5 shadow-inner transition-transform group-hover:scale-105`}
             >
-              <IconComponent className={`w-6 h-6 sm:w-7 sm:h-7 ${cat.iconColor}`} />
+              {isNavigating ? (
+                <Loader2 className={`w-6 h-6 sm:w-7 sm:h-7 animate-spin ${cat.iconColor}`} />
+              ) : (
+                <IconComponent className={`w-6 h-6 sm:w-7 sm:h-7 ${cat.iconColor}`} />
+              )}
             </div>
 
             {/* Category Name */}
@@ -88,7 +100,7 @@ export default function CategoryGrid({
 
             {/* Tagline */}
             <span className="text-[10px] sm:text-xs text-[#704250] dark:text-[#FFB3C6] font-medium mt-0.5">
-              {cat.tagline}
+              {isNavigating ? 'Loading...' : cat.tagline}
             </span>
           </button>
         );

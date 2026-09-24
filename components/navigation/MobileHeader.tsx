@@ -9,6 +9,7 @@ import { ChevronLeft, Settings } from 'lucide-react';
 export interface MobileHeaderProps {
   title?: string;
   showBack?: boolean;
+  onBack?: () => void;
   showLogo?: boolean;
   rightAction?: React.ReactNode;
 }
@@ -16,6 +17,7 @@ export interface MobileHeaderProps {
 export default function MobileHeader({
   title,
   showBack = false,
+  onBack,
   showLogo = true,
   rightAction,
 }: MobileHeaderProps) {
@@ -27,7 +29,7 @@ export default function MobileHeader({
         {showBack ? (
           <button
             type="button"
-            onClick={() => router.back()}
+            onClick={() => (onBack ? onBack() : router.back())}
             className="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-[#5B0B24] dark:text-[#FF8BA7] active:bg-[#5B0B24]/5"
             aria-label="Go back"
           >

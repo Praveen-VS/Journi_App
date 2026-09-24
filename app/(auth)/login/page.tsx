@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Mail, Lock, Eye, EyeOff, ArrowRight, Sparkles } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, ArrowRight, Sparkles, Loader2 } from 'lucide-react';
 import JourniLogo from '@/components/shared/JourniLogo';
 
 export default function LoginPage() {
@@ -186,7 +186,10 @@ export default function LoginPage() {
                 className="w-full py-4 px-6 rounded-full bg-gradient-to-r from-[#C2185B] via-[#E91E63] to-[#FF5252] text-white font-bold text-base shadow-[0_8px_20px_rgba(233,30,99,0.35)] hover:shadow-[0_12px_26px_rgba(233,30,99,0.45)] hover:opacity-95 active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
               >
                 {isLoading ? (
-                  <span>Logging in...</span>
+                  <span className="flex items-center gap-2">
+                    <Loader2 className="w-5 h-5 animate-spin text-white" />
+                    <span>Logging in...</span>
+                  </span>
                 ) : (
                   <>
                     <span>Log In</span>

@@ -40,7 +40,7 @@ export default function JourniLogo({
 
   if (href) {
     return (
-      <Link href={href} className="inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-coral rounded-lg">
+      <Link href={href} prefetch={true} className="inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-coral rounded-lg">
         {content}
       </Link>
     );

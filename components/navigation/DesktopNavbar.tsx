@@ -5,16 +5,16 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import JourniLogo from '../shared/JourniLogo';
 import Button from '../ui/Button';
-import { Compass, Sparkles, Map, Bookmark, Settings } from 'lucide-react';
+import { Home, Compass, Sparkles, Map, Bookmark, Settings } from 'lucide-react';
 
 export default function DesktopNavbar() {
   const pathname = usePathname();
 
-  // Exactly 5 primary navigation links (per locked UX requirement)
+  // Primary navigation links in logical user order (Plan with AI removed; accessed via Home AI Console)
   const navLinks = [
+    { label: 'Home', href: '/', icon: <Home className="w-4 h-4" /> },
     { label: 'Destinations', href: '/destinations', icon: <Compass className="w-4 h-4" /> },
     { label: 'How It Works', href: '/how-it-works', icon: <Sparkles className="w-4 h-4" /> },
-    { label: 'Plan with AI', href: '/ai', icon: <Sparkles className="w-4 h-4 text-[#FF7A3D]" /> },
     { label: 'My Trips', href: '/trips', icon: <Map className="w-4 h-4" /> },
     { label: 'Saved Places', href: '/saved', icon: <Bookmark className="w-4 h-4" /> },
   ];
@@ -28,7 +28,7 @@ export default function DesktopNavbar() {
         {/* Primary Navigation Links (Max 5 items) */}
         <nav className="flex items-center gap-1.5" aria-label="Main Navigation">
           {navLinks.map((link) => {
-            const isActive = pathname === link.href;
+            const isActive = link.href === '/' ? (pathname === '/' || pathname === '/home') : pathname.startsWith(link.href);
             return (
               <Link
                 key={link.href}
@@ -64,9 +64,9 @@ export default function DesktopNavbar() {
             ER
           </Link>
 
-          <Link href="/ai">
+          <Link href="/#plan">
             <Button variant="sunset" size="sm" leftIcon={<Sparkles className="w-3.5 h-3.5" />}>
-              Create Trip
+              Plan Trip
             </Button>
           </Link>
         </div>

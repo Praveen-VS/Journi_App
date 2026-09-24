@@ -142,20 +142,26 @@ export function calculateTasteScore(
       destination.country.toLowerCase().includes(customQ) ||
       destination.continent.toLowerCase().includes(customQ)
     ) {
-      score += 35;
+      score += 25;
       matchedTags.unshift(`Target: ${destination.name}`);
       reasons.unshift(`directly matches your custom destination (${destination.name})`);
     }
   } else if (profile.locationScope === 'nearby_200km') {
     matchedTags.push('Within ~200 km');
     reasons.push('ideal for a scenic weekend road trip');
+    score += 15;
   } else if (profile.locationScope === 'in_state') {
     matchedTags.push('Regional State');
     reasons.push('perfect for in-state exploration');
+    score += 15;
   } else if (profile.locationScope === 'interstate') {
-    matchedTags.push('Domestic Flight');
+    matchedTags.push('Domestic Escape');
+    reasons.push('handpicked domestic Indian getaway');
+    score += 15;
   } else if (profile.locationScope === 'international') {
     matchedTags.push('Global Passport');
+    reasons.push('stunning international adventure');
+    score += 15;
   }
 
   // Normalize final percentage score into an intuitive 82% – 99% scale for top results
@@ -178,13 +184,60 @@ export function calculateTasteScore(
 }
 
 /**
- * Filter and rank all 100+ destinations to find the Top 4 best matches
+ * Filter and rank destinations according to taste profile and strict location scope
  */
 export function findTopDestinationMatches(
   profile: UserTasteProfile,
-  catalog: Destination[] = ALL_DESTINATIONS
+  catalog: Destination[] = ALL_DESTINATIONS,
+  limit: number = 8
 ): TasteMatchResult[] {
-  const scored = catalog.map((dest) => {
+  let pool = catalog;
+
+  // Strict geographical partitioning based on locationScope
+  if (profile.locationScope === 'international') {
+    pool = catalog.filter((d) => d.country.toLowerCase() !== 'india');
+  } else if (profile.locationScope === 'interstate') {
+    pool = catalog.filter((d) => d.country.toLowerCase() === 'india');
+  } else if (profile.locationScope === 'in_state') {
+    const originLower = (profile.userOrigin || '').toLowerCase();
+    const targetState = originLower.includes('karnataka')
+      ? 'karnataka'
+      : (originLower.includes('tamil') ? 'tamil nadu' : 'kerala');
+
+    const stateMatched = catalog.filter(
+      (d) => d.country.toLowerCase() === 'india' && d.state && d.state.toLowerCase() === targetState
+    );
+    pool = stateMatched.length > 0 ? stateMatched : catalog.filter((d) => (d.state || '').toLowerCase() === 'kerala');
+  } else if (profile.locationScope === 'nearby_200km') {
+    pool = catalog.filter(
+      (d) =>
+        d.country.toLowerCase() === 'india' &&
+        (d.idealDays <= 3 || d.vibes.includes('Relaxed') || d.vibes.includes('Scenic'))
+    );
+    if (pool.length < 4) {
+      pool = catalog.filter((d) => d.country.toLowerCase() === 'india');
+    }
+  } else if (profile.locationScope === 'custom' && profile.customLocation?.trim()) {
+    const q = profile.customLocation.toLowerCase().trim();
+    const cleanQ = q.replace(/[^a-z0-9]/g, '');
+    const matched = catalog.filter((d) => {
+      const cName = d.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+      const cCountry = d.country.toLowerCase().replace(/[^a-z0-9]/g, '');
+      const cState = (d.state || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+      return (
+        cName.includes(cleanQ) ||
+        cleanQ.includes(cName) ||
+        cCountry.includes(cleanQ) ||
+        cleanQ.includes(cCountry) ||
+        (cState && cState.includes(cleanQ))
+      );
+    });
+    if (matched.length > 0) {
+      pool = matched;
+    }
+  }
+
+  const scored = pool.map((dest) => {
     const { score, matchReason, matchedTags } = calculateTasteScore(profile, dest);
     return {
       destination: {
@@ -201,6 +254,5 @@ export function findTopDestinationMatches(
   // Sort descending by score
   scored.sort((a, b) => b.score - a.score);
 
-  // Return the Top 4 unique matches
-  return scored.slice(0, 4);
+  return scored.slice(0, limit);
 }

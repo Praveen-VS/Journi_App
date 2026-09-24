@@ -11,8 +11,10 @@ import EmptyState from '@/components/ui/EmptyState';
 import Skeleton from '@/components/ui/Skeleton';
 import { useTripStore } from '@/store';
 import { MOCK_ITINERARY_DAYS, MOCK_TRIPS } from '@/constants';
-import { Calendar, Compass, ArrowLeft } from 'lucide-react';
+import { Calendar, Compass, ArrowLeft, Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import UnifiedBackButton from '@/components/navigation/UnifiedBackButton';
+import { FilterPreferencesStrip } from '@/components/shared/FilterPreferencesStrip';
 
 function ItineraryContent() {
   const searchParams = useSearchParams();
@@ -38,6 +40,25 @@ function ItineraryContent() {
     <main className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
       {/* Mobile Top Header */}
       <MobileHeader title="Day-Wise Itinerary" showBack />
+
+      {/* High-Contrast Unified Back Button */}
+      <UnifiedBackButton
+        label="Back to AI Plan Studio"
+        description="Return to your generated trip plan with all options preserved"
+        mobileLabel="Back to Plan"
+        badgeText="Active Plan"
+        fallbackHref="/ai?view=result"
+      />
+
+      {/* Selected Filter Preferences Strip */}
+      <FilterPreferencesStrip
+        scope="in_state"
+        daysCount={itineraryDays.length}
+        companion="Curated"
+        budgetTier="Moderate"
+        energyRhythm="Scenic Explorer"
+        className="mb-6"
+      />
 
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
@@ -139,20 +160,60 @@ function ItineraryContent() {
   );
 }
 
+function ItinerarySkeleton() {
+  return (
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6 animate-pulse">
+      {/* Top bar skeleton */}
+      <div className="flex items-center justify-between pb-3 border-b border-[#5B0B24]/10 dark:border-white/10">
+        <div className="h-9 w-36 rounded-full bg-[#5B0B24]/10 dark:bg-white/10" />
+        <div className="flex items-center gap-2">
+          <Loader2 className="w-4 h-4 animate-spin text-[#FF7A3D]" />
+          <span className="text-xs font-semibold text-[#5B0B24]/70 dark:text-[#FF8BA7]/70">
+            Loading day-by-day story...
+          </span>
+        </div>
+      </div>
+
+      {/* Filter strip skeleton */}
+      <div className="h-14 rounded-2xl bg-[#FFF5F8]/70 dark:bg-[#280814]/70 border border-[#FF4F7A]/15" />
+
+      {/* Title & subtitle skeleton */}
+      <div className="space-y-2">
+        <div className="h-4 w-32 rounded-full bg-[#5B0B24]/10 dark:bg-white/10" />
+        <div className="h-8 w-64 rounded-full bg-[#5B0B24]/15 dark:bg-white/15" />
+      </div>
+
+      {/* Day pill bar skeleton */}
+      <div className="flex gap-2 pb-2 overflow-x-auto">
+        {[1, 2, 3, 4, 5].map((i) => (
+          <div key={i} className="h-10 w-24 rounded-full bg-[#FFF5F8]/80 dark:bg-[#280814]/80 border border-[#FF4F7A]/15 shrink-0" />
+        ))}
+      </div>
+
+      {/* Timeline activity cards skeleton */}
+      <div className="space-y-4 max-w-4xl">
+        {[1, 2, 3].map((i) => (
+          <div
+            key={i}
+            className="rounded-[24px] bg-[#FFF5F8]/60 dark:bg-[#280814]/60 border border-[#FF4F7A]/15 p-5 flex flex-col sm:flex-row gap-4"
+          >
+            <div className="w-full sm:w-44 h-32 rounded-2xl bg-[#5B0B24]/10 dark:bg-white/10 shrink-0" />
+            <div className="flex-1 space-y-3">
+              <div className="h-4 w-28 rounded-full bg-[#5B0B24]/10 dark:bg-white/10" />
+              <div className="h-6 w-3/4 rounded-full bg-[#5B0B24]/15 dark:bg-white/15" />
+              <div className="h-3.5 w-full rounded-full bg-[#5B0B24]/10 dark:bg-white/10" />
+              <div className="h-3.5 w-2/3 rounded-full bg-[#5B0B24]/10 dark:bg-white/10" />
+            </div>
+          </div>
+        ))}
+      </div>
+    </main>
+  );
+}
+
 export default function ItineraryPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="max-w-7xl mx-auto p-8 space-y-6">
-          <Skeleton height={120} className="w-full" />
-          <div className="space-y-4">
-            <Skeleton height={140} />
-            <Skeleton height={140} />
-            <Skeleton height={140} />
-          </div>
-        </div>
-      }
-    >
+    <Suspense fallback={<ItinerarySkeleton />}>
       <ItineraryContent />
     </Suspense>
   );

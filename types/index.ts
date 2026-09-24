@@ -151,6 +151,8 @@ export interface UserTasteProfile {
   locationScope?: LocationScope;
   userOrigin?: string;
   customLocation?: string;
+  adultsCount?: number;
+  childrenCount?: number;
 }
 
 export interface TasteMatchResult {
@@ -173,3 +175,47 @@ export interface SavedPlace {
 }
 
 export type UIStateMode = 'default' | 'empty' | 'loading' | 'error';
+
+export interface HotelChildPolicy {
+  isFree: boolean;
+  ratePerNight: number;
+  description: string;
+}
+
+export interface CuratedRestaurant {
+  name: string;
+  cuisine: string;
+  signatureDish: string;
+  priceForTwo: number;
+  vibe: string;
+}
+
+export interface CuratedStayInfo {
+  name: string;
+  type: string;
+  approxPerNight: number;
+  amenity: string;
+  childPolicy: HotelChildPolicy;
+}
+
+export interface TripOptionVariant {
+  id: string;
+  title: string;
+  tagline: string;
+  badge: string;
+  stayType: string;
+  starRating?: string;
+  description: string;
+  estimatedBudget: number; // Total package cost for all travelers
+  currency: string;
+  dailyRate: number;
+  pace: 'Relaxed' | 'Balanced' | 'Fast-Paced';
+  highlights: string[];
+  inclusions: string[];
+  days: ItineraryDay[];
+  stayInfo?: CuratedStayInfo;
+  curatedRestaurants?: CuratedRestaurant[];
+  adultsCount?: number;
+  childrenCount?: number;
+  perPersonBudget?: number;
+}

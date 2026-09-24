@@ -42,7 +42,7 @@ export default function HomePage() {
     if (prompt && prompt.trim()) {
       router.push(`/ai?prompt=${encodeURIComponent(prompt.trim())}`);
     } else {
-      router.push('/ai');
+      router.push('/#plan');
     }
   };
 
@@ -305,7 +305,7 @@ export default function HomePage() {
               Featured AI Plan
             </h2>
             <Link
-              href="/ai"
+              href="/#plan"
               className="text-xs font-bold text-[#E61E50] hover:underline flex items-center gap-1 shrink-0"
             >
               <span>Generate New</span>

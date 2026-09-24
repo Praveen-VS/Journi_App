@@ -19,7 +19,7 @@ export interface GeneratedTripPayload {
   };
   packing: PackingItem[];
   weather: WeatherDay[];
-  source: 'gemini' | 'internal_engine';
+  source: 'openrouter' | 'gemini' | 'internal_engine';
 }
 
 interface DestinationProfile {
@@ -159,30 +159,62 @@ function extractDestination(prompt: string): DestinationProfile {
     }
   }
 
-  // Regex attempt to find "... to [Destination]" or "... in [Destination]"
-  const match = prompt.match(/\b(?:to|in|visit|explore|trip for|travel to)\s+([A-Z][a-zA-Z\s]{2,20})/i);
-  const detectedName = match ? match[1].trim() : 'Kyoto';
+  // Regex attempt to extract destination, country, highlights, and food from prompt
+  const tripToMatch = prompt.match(/(?:trip to|travel to|explore|visit|in)\s+([^,.]+?)(?:,\s*([^.]+?))?(?:\s+featuring|\s+with|\.|$)/i);
+  let detectedName = tripToMatch ? tripToMatch[1].trim() : '';
+  let detectedCountry = tripToMatch && tripToMatch[2] ? tripToMatch[2].replace(/\b(?:featuring|with|for)\b.*$/i, '').trim() : '';
+
+  if (!detectedName) {
+    const fallbackMatch = prompt.match(/\b(?:to|in|visit|explore)\s+([A-Za-z\s]{2,25})/i);
+    detectedName = fallbackMatch ? fallbackMatch[1].trim() : 'Curated Escape';
+  }
+
+  let realLandmarks: string[] = [];
+  const featMatch = prompt.match(/featuring\s+([^.]+?)(?:\s+with authentic|\s+with|\.|$)/i);
+  if (featMatch && featMatch[1].trim()) {
+    realLandmarks = featMatch[1]
+      .split(/,\s*|\s+and\s+/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+  }
+
+  let realCuisines: string[] = [];
+  const foodMatch = prompt.match(/with authentic\s+([^.]+)/i);
+  if (foodMatch && foodMatch[1].trim()) {
+    realCuisines = foodMatch[1]
+      .split(/,\s*|\s+and\s+/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+  }
+
+  const finalLandmarks = realLandmarks.length > 0
+    ? realLandmarks
+    : [
+        `${detectedName} Historic Old Quarter`,
+        `${detectedName} Panorama Viewpoint`,
+        `${detectedName} Scenic Promenade & Gardens`,
+        `${detectedName} Heritage Sanctuary`,
+        `${detectedName} Sunset Waterfront`,
+      ];
+
+  const finalCuisines = realCuisines.length > 0
+    ? realCuisines
+    : [
+        'Artisan local breakfast specialties & regional coffee',
+        'Traditional chef tasting feast featuring local spices',
+        'Signature street food bites & sweet delicacies',
+        'Sunset rooftop dining with regional mocktails',
+      ];
 
   return {
     name: detectedName,
-    country: 'Travel Destination',
+    country: detectedCountry || 'Scenic Destination',
     gradient: 'from-[#5B0B24] via-[#C2185B] to-[#FF7A3D]',
     coverImage: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=1200&auto=format&fit=crop',
     currency: 'INR',
-    landmarks: [
-      `${detectedName} Old Quarter & Scenic Plaza`,
-      `${detectedName} Grand Panorama Viewpoint`,
-      `${detectedName} Botanical Gardens & Promenade`,
-      `${detectedName} Historic Heritage Sanctuary`,
-      `${detectedName} Golden Hour Waterfront`,
-    ],
-    cuisines: [
-      'Locally sourced morning pastries & roast coffee',
-      'Traditional chef table tasting menu',
-      'Artisan street food market specialties',
-      'Sunset rooftop tapas and handcrafted mocktails',
-    ],
-    neighborhoods: ['Historic Center', 'Artisan Quarter', 'Riverside Promenade', 'Cultural District'],
+    landmarks: finalLandmarks,
+    cuisines: finalCuisines,
+    neighborhoods: ['Historic Center', 'Artisan Quarter', 'Scenic Waterfront', 'Cultural District'],
     vibes: ['Exploration', 'Scenic', 'Cultural'],
   };
 }

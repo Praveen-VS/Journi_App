@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { callOpenRouterTravelPlanner, getOpenRouterApiKey, getOpenRouterModel } from '@/lib/ai/openrouter';
 import { callGeminiTravelPlanner } from '@/lib/ai/gemini';
 import { generateFallbackTripPlan, type GeneratedTripPayload } from '@/lib/ai/fallbackEngine';
 
@@ -14,14 +15,46 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Check for API key in header or environment variables
-    const headerKey = req.headers.get('x-gemini-api-key');
-    const envKey = process.env.GEMINI_API_KEY;
-    const activeKey = headerKey || envKey;
+    // Check for API keys: OpenRouter / Astra 6 takes priority, then Gemini
+    const openRouterHeaderKey = req.headers.get('x-openrouter-api-key') || req.headers.get('x-ai-api-key');
+    const openRouterKey = getOpenRouterApiKey(openRouterHeaderKey || undefined);
+
+    const geminiHeaderKey = req.headers.get('x-gemini-api-key');
+    const geminiEnvKey = process.env.GEMINI_API_KEY;
+    const geminiKey = geminiHeaderKey || geminiEnvKey;
 
     let payload: GeneratedTripPayload;
 
-    if (activeKey && activeKey.trim() !== '') {
+    if (openRouterKey) {
+      try {
+        payload = await callOpenRouterTravelPlanner({
+          prompt,
+          days,
+          vibe,
+          budgetTier,
+          companion,
+          apiKey: openRouterKey,
+        });
+      } catch (openRouterErr) {
+        console.warn('OpenRouter / Astra 6 request failed. Trying fallback:', openRouterErr);
+        if (geminiKey && geminiKey.trim() !== '') {
+          try {
+            payload = await callGeminiTravelPlanner({
+              prompt,
+              days,
+              vibe,
+              budgetTier,
+              companion,
+              apiKey: geminiKey.trim(),
+            });
+          } catch {
+            payload = generateFallbackTripPlan({ prompt, days, vibe, budgetTier, companion });
+          }
+        } else {
+          payload = generateFallbackTripPlan({ prompt, days, vibe, budgetTier, companion });
+        }
+      }
+    } else if (geminiKey && geminiKey.trim() !== '') {
       try {
         payload = await callGeminiTravelPlanner({
           prompt,
@@ -29,36 +62,27 @@ export async function POST(req: NextRequest) {
           vibe,
           budgetTier,
           companion,
-          apiKey: activeKey.trim(),
+          apiKey: geminiKey.trim(),
         });
       } catch (geminiError) {
-        console.warn('Google Gemini API request failed or rate-limited. Falling back to internal engine:', geminiError);
-        // Seamless fallback to heuristic engine
-        payload = generateFallbackTripPlan({
-          prompt,
-          days,
-          vibe,
-          budgetTier,
-          companion,
-        });
+        console.warn('Google Gemini API request failed. Falling back to internal engine:', geminiError);
+        payload = generateFallbackTripPlan({ prompt, days, vibe, budgetTier, companion });
       }
     } else {
-      // Use internal heuristic travel intelligence
-      payload = generateFallbackTripPlan({
-        prompt,
-        days,
-        vibe,
-        budgetTier,
-        companion,
-      });
+      payload = generateFallbackTripPlan({ prompt, days, vibe, budgetTier, companion });
     }
+
+    const message =
+      payload.source === 'openrouter'
+        ? `Trip synthesized by OpenRouter (${getOpenRouterModel()})`
+        : payload.source === 'gemini'
+        ? 'Trip synthesized by Google Gemini 1.5 Flash'
+        : 'Trip synthesized by Journi Intelligent Travel Engine';
 
     return NextResponse.json({
       success: true,
       data: payload,
-      message: payload.source === 'gemini'
-        ? 'Trip synthesized by Google Gemini 1.5 Flash'
-        : 'Trip synthesized by Journi Intelligent Travel Engine',
+      message,
     });
   } catch (err: unknown) {
     console.error('API AI Generation Error:', err);
@@ -70,11 +94,21 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET() {
-  const hasEnvKey = Boolean(process.env.GEMINI_API_KEY);
+  const openRouterKey = getOpenRouterApiKey();
+  const hasGeminiKey = Boolean(process.env.GEMINI_API_KEY);
+
+  let engine = 'Journi Smart Travel Engine (Ready)';
+  if (openRouterKey) {
+    engine = `OpenRouter Astra 6 (${getOpenRouterModel()}) (Active)`;
+  } else if (hasGeminiKey) {
+    engine = 'Google Gemini 1.5 Flash (Active)';
+  }
+
   return NextResponse.json({
     success: true,
-    engine: hasEnvKey ? 'Google Gemini 1.5 Flash (Active)' : 'Journi Smart Travel Engine (Ready)',
-    freeTierAvailable: true,
+    engine,
+    openRouterConfigured: Boolean(openRouterKey),
+    model: getOpenRouterModel(),
     status: 'operational',
   });
 }

@@ -11,7 +11,7 @@ export default function AppLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex flex-col bg-brand-bg text-[#2E0513] dark:text-[#FFF7FA]">
+    <div className="min-h-screen flex flex-col bg-brand-bg text-[#2E0513] dark:text-[#FFF7FA] overflow-x-hidden w-full max-w-full">
       {/* Top Desktop Navigation Header (md+) */}
       <DesktopNavbar />
 
