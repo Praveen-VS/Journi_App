@@ -26,11 +26,6 @@ export default function InspectorToolbar({
   const router = useRouter();
   const pathname = usePathname();
 
-  // Hide inspector toolbar on onboarding to keep full screen interactive and clean
-  if (pathname.startsWith('/onboarding')) {
-    return null;
-  }
-
   const mobileScreens = [
     { code: 'M01', label: 'Splash', href: '/onboarding?splash=1' },
     { code: 'M02', label: 'Discover Places', href: '/destinations' },
@@ -187,16 +182,26 @@ export default function InspectorToolbar({
         </div>
       )}
 
-      {/* Floating Trigger Pill */}
+      {/* Floating Trigger Button: small compact circular icon under 780px, pill above 780px */}
       <button
         type="button"
         onClick={() => setIsExpanded(!isExpanded)}
-        className="h-11 px-4 rounded-full bg-[#5B0B24] text-white shadow-hover flex items-center gap-2 text-xs font-semibold hover:bg-[#4a081d] active:scale-95 transition-all select-none border border-white/20"
+        className="w-10 h-10 min-[780px]:w-auto min-[780px]:h-11 min-[780px]:px-4 rounded-full bg-[#5B0B24] text-white shadow-hover flex items-center justify-center min-[780px]:justify-start min-[780px]:gap-2 text-xs font-semibold hover:bg-[#4a081d] active:scale-95 transition-all select-none border border-white/20 relative"
         aria-label="Toggle Journi Screen Inspector"
+        title="V1 Screens & States"
       >
-        <div className="w-2 h-2 rounded-full bg-[#FF4F7A] animate-pulse" />
-        <span>V1 Screens & States</span>
-        {isExpanded ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronUp className="w-3.5 h-3.5" />}
+        {/* Under 780px: Small icon with pulsing dot */}
+        <div className="relative flex items-center justify-center min-[780px]:hidden">
+          <Layers className="w-4 h-4 text-white" />
+          <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#FF4F7A] ring-1 ring-[#5B0B24] animate-pulse" />
+        </div>
+
+        {/* 780px and wider: Full pill label */}
+        <div className="hidden min-[780px]:flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-[#FF4F7A] animate-pulse" />
+          <span>V1 Screens & States</span>
+          {isExpanded ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronUp className="w-3.5 h-3.5" />}
+        </div>
       </button>
     </aside>
   );
