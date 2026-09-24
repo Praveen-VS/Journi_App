@@ -133,3 +133,25 @@ export async function toggleSaveDestination(
 
   return { isSaved, updatedPlaces };
 }
+
+export async function deleteSavedPlace(placeId: string): Promise<SavedPlace[]> {
+  const currentPlaces = getLocalSavedPlaces();
+  const updatedPlaces = currentPlaces.filter((p) => p.id !== placeId);
+  setLocalSavedPlaces(updatedPlaces);
+
+  const supabase = getSupabaseBrowserClient();
+  if (supabase) {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user) {
+        await (supabase.from('saved_places') as any)
+          .delete()
+          .match({ user_id: session.user.id, destination_id: placeId });
+      }
+    } catch (err) {
+      console.warn('Supabase delete skipped/failed:', err);
+    }
+  }
+
+  return updatedPlaces;
+}

@@ -40,7 +40,7 @@ export default function AIPromptInput({
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
           placeholder={placeholder}
-          className="flex-1 bg-transparent border-none text-sm sm:text-base text-[#2E0513] dark:text-[#FFF7FA] placeholder:text-[#5B0B24]/40 dark:placeholder:text-[#FF8BA7]/40 focus:outline-none focus:ring-0 px-2 py-2"
+          className="flex-1 min-w-0 bg-transparent border-none text-sm sm:text-base text-[#2E0513] dark:text-[#FFF7FA] placeholder:text-[#5B0B24]/40 dark:placeholder:text-[#FF8BA7]/40 focus:outline-none focus:ring-0 px-2 py-2"
         />
 
         <Button

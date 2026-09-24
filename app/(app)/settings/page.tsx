@@ -106,16 +106,23 @@ export default function SettingsPage() {
       <div className="space-y-6">
         {/* AI Travel Intelligence & Free API Key */}
         <Card variant="elevated" className="p-5 sm:p-6 border-l-4 border-l-[#FF4F7A]">
-          <div className="flex items-center justify-between gap-2 mb-2">
-            <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-[#FF7A3D]" />
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-3">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-[#FFE5EC] dark:bg-[#3E0717] flex items-center justify-center shrink-0">
+                <Sparkles className="w-4 h-4 text-[#FF4F7A]" />
+              </div>
               <h2 className="text-base font-bold text-[#5B0B24] dark:text-[#FF8BA7] tracking-tight">
                 AI Travel Intelligence Engine
               </h2>
             </div>
-            <Badge variant={hasSavedGeminiKey ? 'golden' : 'sunset'} size="sm">
-              {hasSavedGeminiKey ? 'Google Gemini 1.5 Flash (Active)' : 'Journi Smart Engine (Ready)'}
-            </Badge>
+            <div className="flex items-center self-start sm:self-auto pl-10 sm:pl-0">
+              <Badge variant={hasSavedGeminiKey ? 'golden' : 'sunset'} size="sm">
+                <span className="flex items-center gap-1.5 font-semibold text-[11px]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>{hasSavedGeminiKey ? 'Gemini 1.5 Flash Active' : 'Journi Smart Engine Ready'}</span>
+                </span>
+              </Badge>
+            </div>
           </div>
           <p className="text-xs text-[#5B0B24]/70 dark:text-[#FF8BA7]/70 mb-4">
             Journi works out-of-the-box with our internal smart travel engine. You can also connect your own free Google Gemini API key (1,500 free queries/day from Google AI Studio with zero credit card required) for real-time worldwide itinerary synthesis.

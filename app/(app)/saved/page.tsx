@@ -12,7 +12,8 @@ import Button from '@/components/ui/Button';
 import EmptyState from '@/components/ui/EmptyState';
 import { MOCK_SAVED_PLACES } from '@/constants';
 import { useSavedStore } from '@/store';
-import { Bookmark, Sparkles, LayoutGrid, Layers, ArrowRight } from 'lucide-react';
+import { Bookmark, Sparkles, LayoutGrid, Layers, ArrowRight, Trash2 } from 'lucide-react';
+import type { SavedPlace } from '@/types';
 
 export default function SavedPlacesPage() {
   const router = useRouter();
@@ -20,6 +21,7 @@ export default function SavedPlacesPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [viewMode, setViewMode] = useState<'scrapbook' | 'grid'>('scrapbook');
   const [showEmptySim, setShowEmptySim] = useState(false);
+  const [placeToDelete, setPlaceToDelete] = useState<SavedPlace | null>(null);
 
   const categories = ['All', 'Mountains', 'Beaches', 'Cities', 'Nature', 'Culture'];
 
@@ -66,8 +68,8 @@ export default function SavedPlacesPage() {
         </div>
 
         {/* View Switcher & Action */}
-        <div className="flex items-center gap-2">
-          <div className="bg-[#FAF0F4] dark:bg-[#280814] p-1 rounded-2xl border border-[#FF4F7A]/20 flex items-center">
+        <div className="flex items-center justify-between w-full sm:w-auto gap-3">
+          <div className="bg-[#FAF0F4] dark:bg-[#280814] p-1 rounded-2xl border border-[#FF4F7A]/20 flex items-center shrink-0">
             <button
               type="button"
               onClick={() => setViewMode('scrapbook')}
@@ -94,23 +96,25 @@ export default function SavedPlacesPage() {
             </button>
           </div>
 
-          <button
-            type="button"
-            onClick={() => setShowEmptySim(!showEmptySim)}
-            className="text-[11px] px-2.5 py-1 rounded-full border border-[#FF4F7A]/20 text-[#704250] dark:text-[#FFB3C6] hover:bg-[#FFF0F4] dark:hover:bg-[#280814] transition-colors"
-          >
-            {showEmptySim ? 'Show Places' : 'Test Empty'}
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setShowEmptySim(!showEmptySim)}
+              className="hidden lg:inline-flex text-[11px] px-2.5 py-1 rounded-full border border-[#FF4F7A]/20 text-[#704250] dark:text-[#FFB3C6] hover:bg-[#FFF0F4] dark:hover:bg-[#280814] transition-colors"
+            >
+              {showEmptySim ? 'Show Places' : 'Test Empty'}
+            </button>
 
-          <Button
-            variant="sunset"
-            size="sm"
-            onClick={() => router.push('/ai?prompt=Plan+a+custom+trip+visiting+my+saved+places')}
-            leftIcon={<Sparkles className="w-3.5 h-3.5" />}
-            className="font-bold text-xs"
-          >
-            Plan from Saved
-          </Button>
+            <Button
+              variant="sunset"
+              size="sm"
+              onClick={() => router.push('/ai?prompt=Plan+a+custom+trip+visiting+my+saved+places')}
+              leftIcon={<Sparkles className="w-3.5 h-3.5" />}
+              className="font-bold text-xs shrink-0 whitespace-nowrap shadow-sm"
+            >
+              Plan with AI
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -165,6 +169,7 @@ export default function SavedPlacesPage() {
                     rotation={rotation}
                     isFavorite={true}
                     onToggleFavorite={() => handleToggleFavorite(place.id)}
+                    onDelete={() => setPlaceToDelete(place)}
                     onClick={() => router.push(`/ai?prompt=${encodeURIComponent(`Plan a day itinerary visiting ${place.name} in ${place.destination}, ${place.country}`)}`)}
                   />
                 </div>
@@ -197,6 +202,20 @@ export default function SavedPlacesPage() {
                     {place.category}
                   </Badge>
                 </div>
+                <div className="absolute top-3 right-3 z-10">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setPlaceToDelete(place);
+                    }}
+                    className="w-7 h-7 rounded-full bg-black/40 hover:bg-black/70 backdrop-blur-md text-white flex items-center justify-center transition-all hover:scale-110 active:scale-95 shadow-sm"
+                    title="Remove from saved"
+                    aria-label="Remove from saved"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
               </div>
 
               <div className="p-4 flex-1 flex flex-col justify-between">
@@ -216,6 +235,61 @@ export default function SavedPlacesPage() {
               </div>
             </Card>
           ))}
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal Dialog */}
+      {placeToDelete && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="delete-modal-title"
+        >
+          <div className="w-full max-w-sm rounded-[28px] bg-white dark:bg-[#200612] p-6 shadow-2xl border border-[#FF4F7A]/25 space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-2xl bg-[#FFE5EC] dark:bg-[#3E0717] text-[#E61E50] flex items-center justify-center shrink-0">
+                <Trash2 className="w-5 h-5 stroke-[2.2]" />
+              </div>
+              <div>
+                <h3 id="delete-modal-title" className="text-base font-bold text-[#3E0717] dark:text-[#FFF7FA]">
+                  Remove Saved Place?
+                </h3>
+                <p className="text-xs text-[#704250] dark:text-[#FFB3C6]">
+                  Are you sure you want to remove this destination?
+                </p>
+              </div>
+            </div>
+
+            <div className="p-3 rounded-2xl bg-[#FAF0F4] dark:bg-[#18030C] border border-[#FF4F7A]/15 text-xs text-[#5B0B24] dark:text-[#FFB3C6]">
+              <span className="font-bold text-[#3E0717] dark:text-white block truncate">
+                {placeToDelete.name}
+              </span>
+              <span className="text-[11px] text-[#704250] dark:text-[#FF8BA7]/70">
+                {placeToDelete.destination}, {placeToDelete.country}
+              </span>
+            </div>
+
+            <div className="flex items-center justify-end gap-2 pt-2">
+              <button
+                type="button"
+                onClick={() => setPlaceToDelete(null)}
+                className="px-4 py-2 rounded-xl text-xs font-semibold text-[#5B0B24] dark:text-[#FFB3C6] hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={async () => {
+                  await removePlace(placeToDelete.id);
+                  setPlaceToDelete(null);
+                }}
+                className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#E61E50] to-[#C2185B] shadow-md shadow-[#E61E50]/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+              >
+                Delete Destination
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </main>

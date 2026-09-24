@@ -28,9 +28,11 @@ import {
   MapPin,
 } from 'lucide-react';
 import { UIStateMode } from '@/types';
+import { useSavedStore } from '@/store';
 
 export default function HomePage() {
   const router = useRouter();
+  const { isSaved, toggleFavorite } = useSavedStore();
   const [uiState, setUiState] = useState<UIStateMode>('default');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
@@ -116,7 +118,7 @@ export default function HomePage() {
 
   // Default Loaded State (M07 Mobile Home & D03 Desktop Dashboard)
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-8 space-y-8">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-8 space-y-8 overflow-x-hidden">
       {/* Mobile Top Header with official logo & cursive tagline */}
       <div className="sm:hidden flex items-center justify-between pb-2">
         <MobileHeader title="" showLogo />
@@ -166,8 +168,8 @@ export default function HomePage() {
           </div>
 
           {/* Suggestion Chips with single-line truncation and hover popover */}
-          <div className="flex flex-wrap items-center gap-2 pt-1">
-            <span className="text-xs font-semibold text-white/80 mr-1 shrink-0">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-2 pt-1 w-full max-w-full">
+            <span className="text-xs font-semibold text-white/80 mr-1 shrink-0 mb-0.5 sm:mb-0">
               Try asking:
             </span>
             {SAMPLE_AI_PROMPTS.slice(0, 3).map((prompt, idx) => (
@@ -304,9 +306,10 @@ export default function HomePage() {
             </h2>
             <Link
               href="/ai"
-              className="text-xs font-bold text-[#E61E50] hover:underline"
+              className="text-xs font-bold text-[#E61E50] hover:underline flex items-center gap-1 shrink-0"
             >
-              Generate New
+              <span>Generate New</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
@@ -321,6 +324,26 @@ export default function HomePage() {
             estimatedBudget={240000}
             topExperiences="Snorkeling, Island Hopping, Sunset Cruise"
             foodRecommendations="Local Seafood, Coconut Curries, Cafés"
+            isSaved={isSaved('Maldives Getaway')}
+            onSave={() =>
+              toggleFavorite({
+                id: 'dest-maldives-featured',
+                name: 'Maldives Getaway',
+                destination: 'Maldives',
+                country: 'Maldives',
+                coverImage:
+                  'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&auto=format&fit=crop&q=80',
+                tagline: 'Tropical paradise of overwater bungalows and coral reefs',
+                idealDays: 5,
+                estimatedBudget: 240000,
+                continent: 'Asia',
+                bestTimeToVisit: 'Nov - Apr',
+                vibes: ['Beaches', 'Adventure', 'Relaxation'],
+                popularSpots: ['Male', 'Maafushi', 'Ari Atoll'],
+                rating: 4.9,
+                reviewCount: 340,
+              } as any)
+            }
             onExplore={() => router.push('/ai?prompt=Plan+a+5-day+Maldives+Getaway+for+2+people')}
           />
         </div>

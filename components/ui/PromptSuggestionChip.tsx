@@ -34,7 +34,7 @@ export default function PromptSuggestionChip({
 
   return (
     <div
-      className="relative group inline-block max-w-[calc(100vw-3rem)] xs:max-w-[280px] sm:max-w-[340px] md:max-w-[420px]"
+      className="relative group block w-full max-w-full sm:inline-block sm:w-auto sm:max-w-[340px] md:max-w-[420px]"
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >

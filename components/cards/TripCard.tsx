@@ -6,7 +6,8 @@ import Link from 'next/link';
 import Card from '../ui/Card';
 import Badge from '../ui/Badge';
 import { TripSummary } from '@/types';
-import { Calendar, MapPin, ArrowRight } from 'lucide-react';
+import { Calendar, MapPin, ArrowRight, Heart } from 'lucide-react';
+import { useSavedStore } from '@/store';
 
 export interface TripCardProps {
   trip: TripSummary;
@@ -14,6 +15,30 @@ export interface TripCardProps {
 }
 
 export default function TripCard({ trip, className = '' }: TripCardProps) {
+  const { isSaved, toggleFavorite } = useSavedStore();
+  const isTripSaved = isSaved(trip.id) || isSaved(trip.title) || isSaved(trip.destination);
+
+  const handleSaveClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    await toggleFavorite({
+      id: trip.id,
+      name: trip.title,
+      destination: trip.destination,
+      country: trip.country,
+      coverImage: trip.coverImage,
+      tagline: trip.description,
+      idealDays: trip.daysCount,
+      estimatedBudget: trip.estimatedBudget,
+      continent: 'Global',
+      bestTimeToVisit: trip.startDate,
+      vibes: ['Adventure', 'Trip'],
+      popularSpots: [trip.destination],
+      rating: 4.9,
+      reviewCount: 120,
+    } as any);
+  };
+
   const statusBadges = {
     upcoming: <Badge variant="sunset" size="sm">Upcoming</Badge>,
     ongoing: <Badge variant="golden" size="sm">Active Now</Badge>,
@@ -40,12 +65,26 @@ export default function TripCard({ trip, className = '' }: TripCardProps) {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
-          {/* Top Status Badge */}
-          <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
+          {/* Top Status Badge & Actions */}
+          <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
             {statusBadges[trip.status]}
-            <span className="bg-black/50 backdrop-blur-md text-white text-[11px] font-semibold px-2.5 py-0.5 rounded-full">
-              {trip.daysCount} Days
-            </span>
+            <div className="flex items-center gap-1.5">
+              <span className="bg-black/50 backdrop-blur-md text-white text-[11px] font-semibold px-2.5 py-0.5 rounded-full">
+                {trip.daysCount} Days
+              </span>
+              <button
+                type="button"
+                onClick={handleSaveClick}
+                aria-label={isTripSaved ? 'Remove from saved' : 'Save to favorites'}
+                className="w-7 h-7 rounded-full bg-black/40 hover:bg-black/70 backdrop-blur-md flex items-center justify-center text-white transition-all active:scale-90"
+              >
+                <Heart
+                  className={`w-3.5 h-3.5 transition-colors ${
+                    isTripSaved ? 'fill-[#FF4F7A] text-[#FF4F7A]' : 'text-white'
+                  }`}
+                />
+              </button>
+            </div>
           </div>
 
           {/* Destination Header Text on Image */}

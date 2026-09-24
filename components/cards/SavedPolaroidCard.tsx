@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Heart, MapPin, Calendar } from 'lucide-react';
+import { Heart, MapPin, Calendar, Trash2 } from 'lucide-react';
 
 export interface SavedPolaroidCardProps {
   title: string;
@@ -14,6 +14,7 @@ export interface SavedPolaroidCardProps {
   rotation?: number;
   isFavorite?: boolean;
   onToggleFavorite?: () => void;
+  onDelete?: () => void;
   onClick?: () => void;
   className?: string;
 }
@@ -28,6 +29,7 @@ export default function SavedPolaroidCard({
   rotation = 0,
   isFavorite = true,
   onToggleFavorite,
+  onDelete,
   onClick,
   className = '',
 }: SavedPolaroidCardProps) {
@@ -53,18 +55,35 @@ export default function SavedPolaroidCard({
         </div>
       )}
 
-      {/* Floating Pink Heart Badge */}
-      <button
-        type="button"
-        onClick={(e) => {
-          e.stopPropagation();
-          onToggleFavorite?.();
-        }}
-        className="absolute top-5 right-5 z-10 w-7 h-7 rounded-full bg-[#E61E50] text-white flex items-center justify-center shadow-md hover:scale-110 active:scale-95 transition-transform"
-        title="Saved place"
-      >
-        <Heart className={`w-3.5 h-3.5 ${isFavorite ? 'fill-current' : ''}`} />
-      </button>
+      {/* Floating Action Buttons */}
+      <div className="absolute top-5 right-5 z-10 flex items-center gap-1.5">
+        {onDelete && (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete();
+            }}
+            className="w-7 h-7 rounded-full bg-white/95 hover:bg-white text-[#E61E50] dark:bg-[#280814]/90 dark:hover:bg-[#280814] flex items-center justify-center shadow-md hover:scale-110 active:scale-95 transition-all border border-[#FF4F7A]/20"
+            title="Remove from saved"
+            aria-label="Remove from saved"
+          >
+            <Trash2 className="w-3.5 h-3.5" />
+          </button>
+        )}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            onToggleFavorite?.();
+          }}
+          className="w-7 h-7 rounded-full bg-[#E61E50] text-white flex items-center justify-center shadow-md hover:scale-110 active:scale-95 transition-transform"
+          title="Saved place"
+          aria-label="Saved place"
+        >
+          <Heart className={`w-3.5 h-3.5 ${isFavorite ? 'fill-current' : ''}`} />
+        </button>
+      </div>
 
       {/* Photo Frame */}
       <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden mb-3 bg-neutral-100">

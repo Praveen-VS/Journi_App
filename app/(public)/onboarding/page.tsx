@@ -116,7 +116,7 @@ function OnboardingContent() {
 
   // M02, M03, M04: Interactive Onboarding Flow
   return (
-    <main className="fixed inset-0 z-40 w-full h-full flex flex-col justify-between overflow-x-hidden overflow-y-auto select-none bg-[#FFF7FA]">
+    <main className="relative min-h-[100dvh] w-full flex flex-col justify-between overflow-x-hidden overflow-y-auto select-none bg-[#FFF7FA]">
       {/* Background Hero Stage */}
       <div className="absolute top-0 inset-x-0 h-[62%] sm:h-[65%] z-0 overflow-hidden">
         <AnimatePresence mode="wait">
@@ -210,10 +210,10 @@ function OnboardingContent() {
       </div>
 
       {/* Spacer to push Bottom Sheet */}
-      <div className="h-[52vh] sm:h-[55vh]" />
+      <div className="h-[38vh] sm:h-[48vh] shrink-0" />
 
       {/* Bottom Sheet Container (M02 / M03 / M04) */}
-      <div className="relative z-30 w-full max-w-md mx-auto sm:max-w-2xl bg-white dark:bg-[#280814] rounded-t-[36px] shadow-2xl p-6 sm:p-8 flex flex-col justify-between border-t border-[#5B0B24]/8">
+      <div className="relative z-30 w-full max-w-md mx-auto sm:max-w-2xl bg-white dark:bg-[#280814] rounded-t-[36px] shadow-2xl p-6 sm:p-8 pb-10 sm:pb-8 flex flex-col justify-between border-t border-[#5B0B24]/8 mt-auto shrink-0">
         {/* Content specific to current step */}
         <div className="mb-6">
           {/* M02: 4 Category Boxes */}

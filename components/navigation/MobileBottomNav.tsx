@@ -8,6 +8,11 @@ import { Home, Map, Sparkles, Bookmark, User } from 'lucide-react';
 export default function MobileBottomNav() {
   const pathname = usePathname();
 
+  // Do not show bottom nav on onboarding/splash flow
+  if (pathname.startsWith('/onboarding')) {
+    return null;
+  }
+
   const items = [
     { label: 'Home', href: '/home', icon: Home },
     { label: 'Trips', href: '/trips', icon: Map },

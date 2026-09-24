@@ -26,6 +26,11 @@ export default function InspectorToolbar({
   const router = useRouter();
   const pathname = usePathname();
 
+  // Hide inspector toolbar on onboarding to keep full screen interactive and clean
+  if (pathname.startsWith('/onboarding')) {
+    return null;
+  }
+
   const mobileScreens = [
     { code: 'M01', label: 'Splash', href: '/onboarding?splash=1' },
     { code: 'M02', label: 'Discover Places', href: '/destinations' },

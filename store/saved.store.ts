@@ -5,6 +5,7 @@ import { MOCK_SAVED_PLACES } from '@/constants';
 import {
   fetchSavedPlaces,
   toggleSaveDestination,
+  deleteSavedPlace,
 } from '@/services/saved.service';
 
 interface SavedState {
@@ -12,7 +13,7 @@ interface SavedState {
   isLoading: boolean;
   loadSavedPlaces: () => Promise<void>;
   toggleFavorite: (destination: Destination) => Promise<boolean>;
-  removePlace: (id: string) => void;
+  removePlace: (id: string) => Promise<void>;
   isSaved: (idOrName: string) => boolean;
 }
 
@@ -39,8 +40,8 @@ export const useSavedStore = create<SavedState>()(
           return isSaved;
         },
 
-        removePlace: (id: string) => {
-          const updated = get().savedPlaces.filter((p) => p.id !== id);
+        removePlace: async (id: string) => {
+          const updated = await deleteSavedPlace(id);
           set({ savedPlaces: updated });
         },
 
