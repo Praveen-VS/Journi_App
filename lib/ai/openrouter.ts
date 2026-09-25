@@ -70,6 +70,7 @@ function cleanJsonString(raw: string): string {
 /**
  * Safely parse JSON with bracket-balancing repair for truncated responses
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function parseItinerarySafely(raw: string): any {
   const cleaned = cleanJsonString(raw);
   try {
@@ -314,12 +315,14 @@ Output strictly valid JSON with no extraneous text.`;
     ? rawTrip.days
     : [];
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const days: ItineraryDay[] = rawDays.map((d: any, idx: number) => ({
     dayNumber: d.dayNumber || idx + 1,
     date: d.date || `Day ${d.dayNumber || idx + 1}`,
     title: d.title || `${trip.destination} Day ${idx + 1}`,
     theme: d.theme || 'Exploration & Culture',
     activities: Array.isArray(d.activities)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ? d.activities.map((a: any, actIdx: number) => ({
           id: a.id || `act-${idx + 1}-${actIdx + 1}`,
           time: a.time || (actIdx === 0 ? '09:00 AM' : actIdx === 1 ? '01:00 PM' : '06:00 PM'),
@@ -510,6 +513,7 @@ function formatScopeDescription(scope?: string, origin?: string): string {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function parseRecommendationsSafely(raw: string): any {
   const cleaned = cleanJsonString(raw);
   try {
@@ -640,7 +644,7 @@ Rules:
           { role: 'user', content: userContent },
         ],
         response_format: { type: 'json_object' },
-        max_tokens: 3500,
+        max_tokens: 2200,
         temperature: 0.6,
       }),
     });
@@ -663,7 +667,7 @@ Rules:
             { role: 'user', content: userContent },
           ],
           response_format: { type: 'json_object' },
-          max_tokens: 3500,
+          max_tokens: 2200,
           temperature: 0.5,
         }),
       });
@@ -761,6 +765,224 @@ Rules:
     console.warn('OpenRouter destination search error, using intelligent generator:', err);
     return performHeuristicDestinationSearch(params);
   }
+}
+
+/**
+ * Intelligently scores and ranks a pool of candidate destinations
+ * against the traveler's landscape, query, rhythm, vibes, and cuisines.
+ */
+function filterAndRankCuratedDestinations(
+  pool: Destination[],
+  params: AIDestinationSearchParams
+): Destination[] {
+  const {
+    query = '',
+    landscape = '',
+    rhythm = '',
+    vibe = '',
+    cuisines = [],
+    customLocation = '',
+  } = params;
+
+  const qClean = query.toLowerCase().trim();
+  const landClean = landscape.toLowerCase().trim();
+  const rhythmClean = rhythm.toLowerCase().trim();
+  const vibeClean = vibe.toLowerCase().trim();
+  const locClean = customLocation.toLowerCase().trim();
+
+  const isBeachIntent =
+    /\b(beach|beaches|coast|coastal|sea|ocean|sands?|surf|island|islands|cove|lagoon|cliff|marine|shacks?)\b/i.test(landClean) ||
+    /\b(beach|beaches|coast|coastal|sea|ocean|sands?|surf|island|islands|cove|lagoon|cliff|marine|shacks?)\b/i.test(qClean) ||
+    /\b(coastal|beach)\b/i.test(vibeClean);
+
+  const isMountainIntent =
+    /\b(mountain|mountains|alpine|peaks?|hills?|slopes?|tea|coffee|altitude|valleys?|trek|treks|trekking|summits?|himalayas|ghats|mist|snow)\b/i.test(landClean) ||
+    /\b(mountain|mountains|alpine|peaks?|hills?|slopes?|tea|coffee|altitude|valleys?|trek|treks|trekking|summits?|himalayas|ghats|mist|snow)\b/i.test(qClean) ||
+    /\b(alpine|mountain)\b/i.test(vibeClean);
+
+  const isHistoricIntent =
+    /\b(historic|history|heritage|palaces?|forts?|ramparts?|monuments?|architecture|unesco|ruins|temples?|old\s*towns?|ancient|colonial|cities|city)\b/i.test(landClean) ||
+    /\b(historic|history|heritage|palaces?|forts?|ramparts?|monuments?|architecture|unesco|ruins|temples?|old\s*towns?|ancient|colonial|cities|city)\b/i.test(qClean) ||
+    /\b(historic|cultural|culture)\b/i.test(vibeClean);
+
+  const isNatureIntent =
+    /\b(nature|wildlife|safari|forest|rainforest|sanctuary|jungle|waterfalls?|falls|canopy|biodiversity|tigers?|elephants?|rivers?|lakes?|backwaters?)\b/i.test(landClean) ||
+    /\b(nature|wildlife|safari|forest|rainforest|sanctuary|jungle|waterfalls?|falls|canopy|biodiversity|tigers?|elephants?|rivers?|lakes?|backwaters?)\b/i.test(qClean) ||
+    /\b(nature|adventure)\b/i.test(vibeClean);
+
+  const scored = pool.map((dest) => {
+    let score = 50;
+
+    const vibesStr = (dest.vibes || []).join(' ').toLowerCase();
+    const nameAndTagline = (dest.name + ' ' + dest.tagline).toLowerCase();
+    const haystack = [
+      dest.name,
+      dest.tagline,
+      dest.description,
+      ...(dest.vibes || []),
+      ...(dest.highlights || []),
+      ...(dest.foodTypes || []),
+      dest.state || '',
+      dest.country || '',
+    ]
+      .join(' ')
+      .toLowerCase();
+
+    // 1. Geography / Custom Location Match
+    if (locClean) {
+      if (
+        dest.country.toLowerCase().includes(locClean) ||
+        (dest.state && dest.state.toLowerCase().includes(locClean)) ||
+        dest.name.toLowerCase().includes(locClean)
+      ) {
+        score += 80;
+      }
+    }
+
+    // 2. Landscape matching
+    if (isBeachIntent) {
+      if (vibesStr.includes('coastal') || vibesStr.includes('beach')) score += 70;
+      if (/\b(beach|beaches|coast|coastal|sea|ocean|sands?|surf|island|lagoon|cliff)\b/i.test(nameAndTagline)) score += 40;
+      if (vibesStr.includes('mountains') || vibesStr.includes('alpine')) score -= 60;
+      if (vibesStr.includes('historic')) score -= 30;
+    } else if (isMountainIntent) {
+      if (vibesStr.includes('mountains') || vibesStr.includes('alpine')) score += 70;
+      if (/\b(mountain|mountains|alpine|peaks?|hills?|tea|coffee|altitude|valleys?|trek|summits?|himalayan|ghats)\b/i.test(nameAndTagline)) score += 40;
+      if (vibesStr.includes('coastal') || vibesStr.includes('beach')) score -= 60;
+      if (vibesStr.includes('historic')) score -= 30;
+    } else if (isHistoricIntent) {
+      if (vibesStr.includes('historic') || vibesStr.includes('cultural')) score += 70;
+      if (/\b(historic|history|heritage|palaces?|forts?|unesco|ruins|temples?|monuments?)\b/i.test(nameAndTagline)) score += 40;
+      if (vibesStr.includes('mountains') || vibesStr.includes('alpine')) score -= 30;
+    } else if (isNatureIntent) {
+      if (vibesStr.includes('nature') || vibesStr.includes('wildlife') || vibesStr.includes('adventure')) score += 70;
+      if (/\b(nature|wildlife|safari|forest|sanctuary|jungle|waterfalls?|river|lake|backwaters)\b/i.test(nameAndTagline)) score += 40;
+    }
+
+    // 3. User Query Term Matching
+    if (qClean) {
+      const terms = qClean
+        .split(/\s+/)
+        .map((t) => t.trim())
+        .filter((t) => t.length > 2 && !['plan', 'scenic', 'trip', 'with', 'focused', 'and', 'the', 'for', 'stays', 'authentic'].includes(t));
+
+      for (const term of terms) {
+        if (dest.name.toLowerCase().includes(term)) score += 40;
+        else if (dest.country.toLowerCase().includes(term)) score += 25;
+        else if (dest.state && dest.state.toLowerCase().includes(term)) score += 25;
+        else if (dest.vibes?.some((v) => v.toLowerCase().includes(term))) score += 20;
+        else if (dest.highlights?.some((h) => h.toLowerCase().includes(term))) score += 15;
+        else if (haystack.includes(term)) score += 8;
+      }
+    }
+
+    // 4. Rhythm matching
+    if (rhythmClean) {
+      if (rhythmClean.includes('chill') || rhythmClean.includes('peace')) {
+        if (/\b(chill|peace|zen|quiet|relax|serene|tranquil|slow|secluded)\b/i.test(haystack)) score += 15;
+      } else if (rhythmClean.includes('adventure')) {
+        if (/\b(adventure|trek|rafting|safari|rapids|climb|outdoor|active)\b/i.test(haystack)) score += 15;
+      } else if (rhythmClean.includes('culture')) {
+        if (/\b(culture|cultural|heritage|art|historic|temple|palace)\b/i.test(haystack)) score += 15;
+      }
+    }
+
+    // 5. Cuisines matching
+    if (cuisines && cuisines.length > 0) {
+      for (const c of cuisines) {
+        const cClean = c.toLowerCase().replace(/_/g, ' ');
+        if (haystack.includes(cClean)) score += 8;
+      }
+    }
+
+    return { dest, score };
+  });
+
+  scored.sort((a, b) => b.score - a.score);
+
+  return scored.map((item, idx) => {
+    const d = item.dest;
+    const dynamicScore = Math.max(88, Math.min(99, 98 - idx));
+    let dynamicReason = d.matchReason;
+
+    if (isBeachIntent && /\b(beach|coast|sea|surf|lagoon|shacks)\b/i.test(d.tagline + ' ' + d.description + ' ' + (d.vibes || []).join(' '))) {
+      dynamicReason = `${d.name} delivers pristine coastal beauty, relaxing seaside rhythms, and quintessential beach vibes.`;
+    } else if (isMountainIntent && /\b(mountain|alpine|hill|tea|coffee|peak|snow|valleys?)\b/i.test(d.tagline + ' ' + d.description + ' ' + (d.vibes || []).join(' '))) {
+      dynamicReason = `${d.name} features cool mountain air, panoramic high-altitude viewpoints, and serene highland retreats.`;
+    } else if (isHistoricIntent && /\b(historic|palace|fort|heritage|unesco|ruins)\b/i.test(d.tagline + ' ' + d.description + ' ' + (d.vibes || []).join(' '))) {
+      dynamicReason = `${d.name} delivers rich historic architecture, centuries-old royal landmarks, and vibrant cultural immersion.`;
+    } else if (isNatureIntent && /\b(nature|wildlife|forest|river|sanctuary|backwaters)\b/i.test(d.tagline + ' ' + d.description + ' ' + (d.vibes || []).join(' '))) {
+      dynamicReason = `${d.name} connects you with untouched wilderness, lush natural reserves, and serene outdoor sanctuaries.`;
+    }
+
+    return {
+      ...d,
+      matchScore: dynamicScore,
+      matchReason: dynamicReason || d.matchReason || `Matches your travel style and preferences.`,
+    };
+  });
+}
+
+function generateSearchSummary(
+  destinations: Destination[],
+  params: AIDestinationSearchParams,
+  scopeLabel: string
+): string {
+  const { landscape = '', rhythm = '', query = '' } = params;
+  const count = destinations.length;
+  const landClean = landscape.toLowerCase().trim();
+  const qClean = query.toLowerCase().trim();
+
+  let categoryDesc = 'curated';
+  if (/\b(beach|beaches|coast|coastal)\b/i.test(landClean + ' ' + qClean)) {
+    categoryDesc = 'coastal & beach';
+  } else if (/\b(mountain|mountains|alpine|hills?)\b/i.test(landClean + ' ' + qClean)) {
+    categoryDesc = 'mountain & highland';
+  } else if (/\b(historic|history|heritage|palace|old\s*town)\b/i.test(landClean + ' ' + qClean)) {
+    categoryDesc = 'historic & heritage';
+  } else if (/\b(nature|wildlife|forest|safari)\b/i.test(landClean + ' ' + qClean)) {
+    categoryDesc = 'lush nature & wildlife';
+  }
+
+  const rhythmDesc = rhythm ? `${rhythm} pace` : 'relaxed rhythm';
+  return `Astra 6 analyzed your preferences and curated ${count} premier ${categoryDesc} destinations across ${scopeLabel} tailored to your ${rhythmDesc}.`;
+}
+
+function generateFollowUps(
+  destinations: Destination[],
+  params: AIDestinationSearchParams
+): string[] {
+  const { landscape = '', query = '' } = params;
+  const top = destinations[0];
+  const topName = top?.name || 'your top match';
+  const landClean = (landscape + ' ' + query).toLowerCase();
+
+  if (/\b(beach|beaches|coast|coastal)\b/i.test(landClean)) {
+    return [
+      `Best secluded sunset spots in ${topName}`,
+      `Fresh seafood & coastal shack recommendations for ${topName}`,
+      `Water sports and island boat excursions in ${topName}`,
+    ];
+  }
+  if (/\b(mountain|mountains|alpine|hills?)\b/i.test(landClean)) {
+    return [
+      `Scenic viewpoints and hiking trails in ${topName}`,
+      `Best boutique estate homestays in ${topName}`,
+      `Crisp mountain weather & packing tips for ${topName}`,
+    ];
+  }
+  if (/\b(historic|history|heritage|old\s*town)\b/i.test(landClean)) {
+    return [
+      `Heritage walking tour itineraries for ${topName}`,
+      `Best local bazaars & artisan crafts in ${topName}`,
+      `Architectural marvels and guided monument tours in ${topName}`,
+    ];
+  }
+  return [
+    `Hidden gems and secret viewpoints in ${topName}`,
+    `Best travel season and weather for ${topName}`,
+    `Authentic culinary specialties to try in ${topName}`,
+  ];
 }
 
 /**
@@ -932,15 +1154,13 @@ function performHeuristicDestinationSearch(
         },
       ];
 
+      const rankedSriLanka = filterAndRankCuratedDestinations(sriLankaCurated, params);
+
       return {
-        query: customLocation,
-        summary: `Astra 6 curated 8 authentic destinations across Sri Lanka tailored to your ${landscape} & ${rhythm} rhythm.`,
-        destinations: sriLankaCurated.slice(0, limit),
-        suggestedFollowUps: [
-          'Best scenic train route between Kandy and Ella',
-          'Whale watching season in Mirissa',
-          'Surf camps in southern Sri Lanka',
-        ],
+        query: query || customLocation || 'Sri Lanka Escapes',
+        summary: generateSearchSummary(rankedSriLanka, params, 'Sri Lanka'),
+        destinations: rankedSriLanka.slice(0, limit),
+        suggestedFollowUps: generateFollowUps(rankedSriLanka, params),
         source: 'smart_taste_fallback',
       };
     }
@@ -1093,17 +1313,51 @@ function performHeuristicDestinationSearch(
         matchScore: 91,
         matchReason: 'Pristine wilderness landscapes with thrilling mountain panoramas.',
       },
+      {
+        id: 'astra-bali-tropical',
+        name: 'Bali (Uluwatu & Canggu)',
+        country: 'Indonesia',
+        continent: 'Asia',
+        tagline: 'World-class surf breaks, cliff temples & tropical beaches',
+        description: 'An idyllic Indonesian island paradise famed for dramatic sea temples, golden sunset beaches, and vibrant beach club culture.',
+        coverImage: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=1000&auto=format&fit=crop',
+        gradient: 'from-[#5B0B24] via-[#C2185B] to-[#FF7A3D]',
+        bestSeason: 'April to October',
+        averageTemp: '28°C',
+        idealDays: 6,
+        vibes: ['Chill & Coastal', 'Beaches', 'Water Sports'],
+        highlights: ['Uluwatu Cliff Temple', 'Padang Padang Beach', 'Echo Beach Sunset'],
+        foodTypes: ['Nasi Goreng', 'Fresh Grilled Snapper', 'Açaí Bowls'],
+        matchScore: 94,
+        matchReason: 'Tropical ocean sunsets, azure surf beaches, and relaxed island rhythms.',
+      },
+      {
+        id: 'astra-rome-eternal',
+        name: 'Rome',
+        country: 'Italy',
+        continent: 'Europe',
+        tagline: 'Ancient imperial ruins, Baroque piazzas & open-air history',
+        description: 'The Eternal City where classical antiquity meets vibrant street life, historic cobblestones, and world-class trattorias.',
+        coverImage: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?q=80&w=1000&auto=format&fit=crop',
+        gradient: 'from-[#5B0B24] via-[#C2185B] to-[#FF7A3D]',
+        bestSeason: 'April to June & Sept to Oct',
+        averageTemp: '22°C',
+        idealDays: 4,
+        vibes: ['Historic Old Towns', 'Vibrant & Cultural', 'Architecture'],
+        highlights: ['The Colosseum', 'Pantheon & Trevi Fountain', 'Vatican Museums'],
+        foodTypes: ['Cacio e Pepe', 'Roman Pizza al Taglio', 'Artisan Tiramisù'],
+        matchScore: 95,
+        matchReason: 'Millennia of world-heritage architecture, iconic monuments, and culinary masters.',
+      },
     ];
+
+    const rankedInternational = filterAndRankCuratedDestinations(internationalCurated, params);
 
     return {
       query: query || 'International Escapes',
-      summary: `Astra 6 curated 8 premier global destinations matching your ${landscape} & ${rhythm} desires.`,
-      destinations: internationalCurated.slice(0, limit),
-      suggestedFollowUps: [
-        'Best season to visit Kyoto for foliage',
-        'Budget travel tips for Amalfi Coast',
-        'Top hiking trails in Banff',
-      ],
+      summary: generateSearchSummary(rankedInternational, params, 'global destinations'),
+      destinations: rankedInternational.slice(0, limit),
+      suggestedFollowUps: generateFollowUps(rankedInternational, params),
       source: 'smart_taste_fallback',
     };
   }
@@ -1268,15 +1522,13 @@ function performHeuristicDestinationSearch(
         },
       ];
 
+      const rankedNearbyKerala = filterAndRankCuratedDestinations(keralaNearby, params);
+
       return {
         query: query || 'Weekend Trips Near You in Kerala',
-        summary: `Astra 6 curated 8 top destinations within ~200 km road trip distance across Kerala matching your ${landscape} & ${rhythm} rhythm.`,
-        destinations: keralaNearby.slice(0, limit),
-        suggestedFollowUps: [
-          'Best scenic route to Munnar',
-          'Houseboat day rates in Alleppey',
-          'Monsoon viewpoint at Athirappilly',
-        ],
+        summary: generateSearchSummary(rankedNearbyKerala, params, 'Kerala road trip distance'),
+        destinations: rankedNearbyKerala.slice(0, limit),
+        suggestedFollowUps: generateFollowUps(rankedNearbyKerala, params),
         source: 'smart_taste_fallback',
       };
     }
@@ -1428,15 +1680,13 @@ function performHeuristicDestinationSearch(
       },
     ];
 
+    const rankedNearby = filterAndRankCuratedDestinations(nearbyCurated, params);
+
     return {
-      query: query || 'Weekend Trips Near Bengaluru',
-      summary: `Astra 6 curated 8 top destinations within ~200 km road trip distance of Bengaluru matching your ${landscape} & ${rhythm} rhythm.`,
-      destinations: nearbyCurated.slice(0, limit),
-      suggestedFollowUps: [
-        'Best sunrise timing for Nandi Hills',
-        'Boating rules in Bheemeshwari Cauvery camp',
-        'Top heritage stops between Bengaluru and Mysore',
-      ],
+      query: query || `Weekend Trips Near ${loc.state || 'Bengaluru'}`,
+      summary: generateSearchSummary(rankedNearby, params, `${loc.state || 'Bengaluru'} road trip distance`),
+      destinations: rankedNearby.slice(0, limit),
+      suggestedFollowUps: generateFollowUps(rankedNearby, params),
       source: 'smart_taste_fallback',
     };
   }
@@ -1599,15 +1849,13 @@ function performHeuristicDestinationSearch(
         },
       ];
 
+      const rankedInStateKerala = filterAndRankCuratedDestinations(keralaInState, params);
+
       return {
         query: query || 'In-State Kerala Escapes',
-        summary: `Astra 6 curated 8 authentic Kerala in-state destinations matching your ${landscape} & ${rhythm} rhythm.`,
-        destinations: keralaInState.slice(0, limit),
-        suggestedFollowUps: [
-          'Best tea estate homestays in Munnar',
-          'Luxury houseboat booking in Alleppey',
-          'Top sunset spots along Varkala Cliff',
-        ],
+        summary: generateSearchSummary(rankedInStateKerala, params, 'Kerala in-state destinations'),
+        destinations: rankedInStateKerala.slice(0, limit),
+        suggestedFollowUps: generateFollowUps(rankedInStateKerala, params),
         source: 'smart_taste_fallback',
       };
     }
@@ -1759,15 +2007,13 @@ function performHeuristicDestinationSearch(
       },
     ];
 
+    const rankedInState = filterAndRankCuratedDestinations(inStateCurated, params);
+
     return {
-      query: query || 'In-State Karnataka Escapes',
-      summary: `Astra 6 curated 8 top Karnataka destinations matching your ${landscape} & ${rhythm} rhythm.`,
-      destinations: inStateCurated.slice(0, limit),
-      suggestedFollowUps: [
-        'Best beach shacks in Gokarna',
-        'Top heritage homestays in Coorg',
-        'Bouldering guides for Hampi',
-      ],
+      query: query || `In-State ${loc.state || 'Karnataka'} Escapes`,
+      summary: generateSearchSummary(rankedInState, params, `${loc.state || 'Karnataka'} in-state destinations`),
+      destinations: rankedInState.slice(0, limit),
+      suggestedFollowUps: generateFollowUps(rankedInState, params),
       source: 'smart_taste_fallback',
     };
   }
@@ -1918,17 +2164,186 @@ function performHeuristicDestinationSearch(
       matchScore: 91,
       matchReason: 'An exotic tropical island dreamscape within domestic borders.',
     },
+    {
+      id: 'astra-gokarna-karnataka',
+      name: 'Gokarna',
+      country: 'India',
+      continent: 'Asia',
+      state: 'Karnataka',
+      tagline: 'Soulful cliffside beaches & sacred Shiva temples',
+      description: 'Karnataka’s legendary coastal haven where rustic beach shacks meet secluded crescent coves.',
+      coverImage: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=1000&auto=format&fit=crop',
+      gradient: 'from-[#5B0B24] via-[#C2185B] to-[#FF7A3D]',
+      bestSeason: 'October to March',
+      averageTemp: '28°C',
+      idealDays: 4,
+      vibes: ['Chill & Coastal', 'Peace & Zen', 'Beaches'],
+      highlights: ['Om Beach', 'Kudle Beach Sunset', 'Half Moon Beach Hike'],
+      foodTypes: ['Coastal Fish Curry', 'Nutella Crepes', 'Prawn Ghee Roast'],
+      matchScore: 95,
+      matchReason: 'The ultimate coastal retreat for relaxed, uncrowded beach days.',
+    },
+    {
+      id: 'dest_kerala_kovalam',
+      name: 'Kovalam Beach',
+      country: 'India',
+      continent: 'Asia',
+      state: 'Kerala',
+      tagline: 'Crescent golden beaches & iconic striped cliff lighthouse',
+      description: 'Kerala’s original world-renowned beach destination, featuring three adjacent crescent beaches separated by rocky headlands.',
+      coverImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1000&auto=format&fit=crop',
+      gradient: 'from-[#5B0B24] via-[#C2185B] to-[#FF7A3D]',
+      bestSeason: 'November to February',
+      averageTemp: '29°C',
+      idealDays: 3,
+      vibes: ['Chill & Coastal', 'Beaches', 'Relaxed'],
+      highlights: ['Lighthouse Beach Sunset', 'Hawa Beach Catamaran Ride', 'Samudra Beach Calm Shacks'],
+      foodTypes: ['Grilled Jumbo Prawns', 'Kerala Crab Curry', 'Fresh King Coconut'],
+      matchScore: 94,
+      matchReason: 'Classic golden crescent beaches and warm Arabian Sea waters.',
+    },
+    {
+      id: 'astra-udupi-malpe',
+      name: 'Udupi & Malpe Beach',
+      country: 'India',
+      continent: 'Asia',
+      state: 'Karnataka',
+      tagline: 'Basalt volcanic islands & legendary temple cuisine',
+      description: 'Karnataka’s culinary capital with golden Malpe sands and boat excursions to unique basalt rock islands.',
+      coverImage: 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=1000&auto=format&fit=crop',
+      gradient: 'from-[#5B0B24] via-[#C2185B] to-[#FF7A3D]',
+      bestSeason: 'October to March',
+      averageTemp: '28°C',
+      idealDays: 3,
+      vibes: ['Chill & Coastal', 'Beaches', 'Culinary'],
+      highlights: ['St. Mary’s Basalt Island', 'Malpe Sea Walk', 'Krishna Temple'],
+      foodTypes: ['Neer Dosa & Ghee Roast', 'Udupi Sambar', 'Mangalore Buns'],
+      matchScore: 92,
+      matchReason: 'Sensational coastal culinary delights with unique geological islands.',
+    },
+    {
+      id: 'astra-coorg-madikeri',
+      name: 'Coorg (Kodagu)',
+      country: 'India',
+      continent: 'Asia',
+      state: 'Karnataka',
+      tagline: 'Misty coffee plantations & aromatic spice estates',
+      description: 'Known as the Scotland of India, blanketed in rolling emerald coffee estates and fragrant spice orchards.',
+      coverImage: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?q=80&w=1000&auto=format&fit=crop',
+      gradient: 'from-[#5B0B24] via-[#C2185B] to-[#FF7A3D]',
+      bestSeason: 'October to April',
+      averageTemp: '20°C',
+      idealDays: 3,
+      vibes: ['Mountains & Alpine', 'Lush Nature', 'Peace & Zen'],
+      highlights: ['Abbey Falls', 'Raja’s Seat Sunset', 'Dubare Elephant Camp'],
+      foodTypes: ['Pandi Curry (or Mushroom Curry)', 'Akki Roti', 'Estate Filter Coffee'],
+      matchScore: 96,
+      matchReason: 'Cool mountain air, lush plantations, and cozy boutique estate stays.',
+    },
+    {
+      id: 'astra-chikmagalur-peaks',
+      name: 'Chikmagalur & Mullayanagiri',
+      country: 'India',
+      continent: 'Asia',
+      state: 'Karnataka',
+      tagline: 'Highest peak summits & origin of Indian coffee',
+      description: 'Spectacular Western Ghats trekking trails, cascading waterfalls, and historic hillside shrines.',
+      coverImage: 'https://images.unsplash.com/photo-1546708973-b339540b5162?q=80&w=1000&auto=format&fit=crop',
+      gradient: 'from-[#5B0B24] via-[#C2185B] to-[#FF7A3D]',
+      bestSeason: 'September to March',
+      averageTemp: '21°C',
+      idealDays: 3,
+      vibes: ['Mountains & Alpine', 'High Adventure', 'Scenic'],
+      highlights: ['Mullayanagiri Peak Trek', 'Baba Budangiri', 'Hebbe Waterfalls'],
+      foodTypes: ['Malanadu Akki Roti', 'Kaai Holige', 'Fresh Coffee Brew'],
+      matchScore: 95,
+      matchReason: 'High-mountain hiking with uninterrupted valley vistas.',
+    },
+    {
+      id: 'dest_kerala_wayanad',
+      name: 'Wayanad & Ghat Peaks',
+      country: 'India',
+      continent: 'Asia',
+      state: 'Kerala',
+      tagline: 'Misty cloud forests, spice mountains & prehistoric edakkal caves',
+      description: 'High-altitude Western Ghats plateau filled with mist-covered mountain peaks and sprawling tea estates.',
+      coverImage: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80',
+      gradient: 'from-[#5B0B24] via-[#C2185B] to-[#FF7A3D]',
+      bestSeason: 'October to May',
+      averageTemp: '22°C',
+      idealDays: 3,
+      vibes: ['Mountains & Alpine', 'Lush Nature', 'Scenic'],
+      highlights: ['Chembra Peak Heart Lake Trek', 'Edakkal Caves Prehistoric Petroglyphs', 'Banasura Sagar Dam'],
+      foodTypes: ['Malabar Bamboo Biryani', 'Puttu with Kadala Curry', 'Herbal Wayanad Coffee'],
+      matchScore: 94,
+      matchReason: 'High-altitude cloud forests and heart-lake mountain hikes.',
+    },
+    {
+      id: 'astra-hampi-unesco',
+      name: 'Hampi',
+      country: 'India',
+      continent: 'Asia',
+      state: 'Karnataka',
+      tagline: 'Surreal boulder landscapes & ancient imperial ruins',
+      description: 'A UNESCO World Heritage marvel with colossal 14th-century stone palaces and Tungabhadra riverbanks.',
+      coverImage: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?q=80&w=1000&auto=format&fit=crop',
+      gradient: 'from-[#5B0B24] via-[#C2185B] to-[#FF7A3D]',
+      bestSeason: 'November to February',
+      averageTemp: '26°C',
+      idealDays: 4,
+      vibes: ['Historic Old Towns', 'Vibrant & Cultural', 'Architecture'],
+      highlights: ['Virupaksha Temple', 'Stone Chariot at Vijaya Vittala', 'Matanga Hill Sunrise'],
+      foodTypes: ['Mango Tree Special Thali', 'Banana Flower Curry', 'Falafel Platter'],
+      matchScore: 96,
+      matchReason: 'Breathtaking open-air museum of ancient Vijayanagara grandeur.',
+    },
+    {
+      id: 'dest_kerala_alleppey',
+      name: 'Alleppey (Alappuzha)',
+      country: 'India',
+      continent: 'Asia',
+      state: 'Kerala',
+      tagline: 'Iconic palm-fringed backwaters & tranquil houseboat cruises',
+      description: 'Known as the Venice of the East, famed for serene canals, coconut palm shores, and overnight luxury kettuvalam stays.',
+      coverImage: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80',
+      gradient: 'from-[#5B0B24] via-[#C2185B] to-[#FF7A3D]',
+      bestSeason: 'October to March',
+      averageTemp: '28°C',
+      idealDays: 2,
+      vibes: ['Lush Nature', 'Chill & Coastal', 'Peace & Zen'],
+      highlights: ['Overnight Kettuvalam Cruise', 'Vembanad Lake Sunset', 'Kuttanad Below-Sea-Level Paddy Walk'],
+      foodTypes: ['Karimeen Pollichathu', 'Kerala Red Rice with Fish Curry', 'Banana Fritters'],
+      matchScore: 95,
+      matchReason: 'Iconic serene backwater canals and coconut lagoon houseboats.',
+    },
+    {
+      id: 'astra-bandipur-wildlife',
+      name: 'Bandipur National Park',
+      country: 'India',
+      continent: 'Asia',
+      state: 'Karnataka',
+      tagline: 'Nilgiri biosphere tiger reserve & elephant trails',
+      description: 'A protected forest sanctuary at the foothills of the Nilgiris, celebrated for tiger safaris and wild elephant herds.',
+      coverImage: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=1000&auto=format&fit=crop',
+      gradient: 'from-[#5B0B24] via-[#C2185B] to-[#FF7A3D]',
+      bestSeason: 'October to May',
+      averageTemp: '24°C',
+      idealDays: 2,
+      vibes: ['Lush Nature', 'Wildlife Safari', 'Peace & Zen'],
+      highlights: ['Open-top Jeep Jungle Safari', 'Himavad Gopalaswamy Betta', 'Elephant Spotting'],
+      foodTypes: ['Karnataka Jungle Camp Meals', 'Ragi Roti', 'Local Honey'],
+      matchScore: 93,
+      matchReason: 'Prime tiger and elephant habitat within lush forest canopies.',
+    },
   ];
+
+  const rankedDomestic = filterAndRankCuratedDestinations(domesticCurated, params);
 
   return {
     query: query || 'Handpicked Interstate Getaways',
-    summary: `Astra 6 curated 8 destinations across diverse Indian states matching your ${landscape} & ${rhythm} vibe.`,
-    destinations: domesticCurated.slice(0, limit),
-    suggestedFollowUps: [
-      `Hidden gems for ${landscape}`,
-      `Best season for your getaway`,
-      `Budget stays in top destinations`,
-    ],
+    summary: generateSearchSummary(rankedDomestic, params, 'diverse Indian states'),
+    destinations: rankedDomestic.slice(0, limit),
+    suggestedFollowUps: generateFollowUps(rankedDomestic, params),
     source: 'smart_taste_fallback',
   };
 }

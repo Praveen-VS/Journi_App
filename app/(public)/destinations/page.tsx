@@ -1,26 +1,54 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchInput from '@/components/forms/SearchInput';
 import DestinationCard from '@/components/cards/DestinationCard';
 import Chip from '@/components/ui/Chip';
 import Badge from '@/components/ui/Badge';
 import EmptyState from '@/components/ui/EmptyState';
 import { ALL_DESTINATIONS } from '@/constants/destinationsData';
-import { Compass, Sparkles, Loader2 } from 'lucide-react';
+import { Compass, Sparkles, Loader2, Shuffle, Zap } from 'lucide-react';
 import type { Destination } from '@/types';
+
+// Multi-layer client cache: 0 duplicate tokens for repeated queries
+interface CachedSearchResult {
+  destinations: Destination[];
+  summary: string | null;
+  suggestedFollowUps: string[];
+}
+
+const MEMORY_CACHE = new Map<string, CachedSearchResult>();
+
+function getSearchCacheKey(query: string, vibe: string, continent: string): string {
+  return `journi_dest_cache_${query.toLowerCase().trim()}_v_${vibe.toLowerCase()}_c_${continent.toLowerCase()}`;
+}
 
 export default function DestinationsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedContinent, setSelectedContinent] = useState('All');
   const [selectedVibe, setSelectedVibe] = useState('All');
-  const [visibleCount, setVisibleCount] = useState(32);
+  const [visibleCount, setVisibleCount] = useState(20);
 
-  // AI Search states
+  // 20 Seed World Destinations: randomized on client mount
+  const [shuffledSeed, setShuffledSeed] = useState<Destination[]>(ALL_DESTINATIONS);
+
+  // AI Search states & caching
   const [isAISearching, setIsAISearching] = useState(false);
+  const [isFromCache, setIsFromCache] = useState(false);
   const [aiSummary, setAiSummary] = useState<string | null>(null);
   const [aiSuggestedQueries, setAiSuggestedQueries] = useState<string[]>([]);
   const [aiResults, setAiResults] = useState<Destination[] | null>(null);
+
+  // Randomly shuffle the 20 iconic world destinations on mount
+  useEffect(() => {
+    const randomized = [...ALL_DESTINATIONS].sort(() => Math.random() - 0.5);
+    setShuffledSeed(randomized);
+  }, []);
+
+  const handleShuffle = () => {
+    const randomized = [...ALL_DESTINATIONS].sort(() => Math.random() - 0.5);
+    setShuffledSeed(randomized);
+  };
 
   const continents = ['All', 'Asia', 'Europe', 'North America', 'South America', 'Africa', 'Oceania'];
   const vibes = ['All', 'Cultural', 'Romantic', 'Scenic', 'Adventure', 'Peace & Zen'];
@@ -33,29 +61,77 @@ export default function DestinationsPage() {
   ];
 
   const executeAISearch = async (queryText: string) => {
-    if (!queryText.trim()) return;
+    const cleanQ = queryText.trim();
+    if (!cleanQ) return;
+    setSearchQuery(cleanQ);
+
+    const cacheKey = getSearchCacheKey(cleanQ, selectedVibe, selectedContinent);
+
+    // 1. Check in-memory cache (0ms, 0 tokens)
+    if (MEMORY_CACHE.has(cacheKey)) {
+      const cached = MEMORY_CACHE.get(cacheKey)!;
+      setAiResults(cached.destinations);
+      setAiSummary(cached.summary);
+      setAiSuggestedQueries(cached.suggestedFollowUps);
+      setIsFromCache(true);
+      setIsAISearching(false);
+      return;
+    }
+
+    // 2. Check sessionStorage cache (survives page reloads without tokens)
+    if (typeof window !== 'undefined') {
+      try {
+        const item = sessionStorage.getItem(cacheKey);
+        if (item) {
+          const parsed: CachedSearchResult = JSON.parse(item);
+          MEMORY_CACHE.set(cacheKey, parsed);
+          setAiResults(parsed.destinations);
+          setAiSummary(parsed.summary);
+          setAiSuggestedQueries(parsed.suggestedFollowUps);
+          setIsFromCache(true);
+          setIsAISearching(false);
+          return;
+        }
+      } catch {
+        // Continue to network call on session read fail
+      }
+    }
+
     setIsAISearching(true);
-    setSearchQuery(queryText);
+    setIsFromCache(false);
 
     try {
       const res = await fetch('/api/ai/search', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          query: queryText,
+          query: cleanQ,
           vibe: selectedVibe !== 'All' ? selectedVibe : undefined,
           continent: selectedContinent !== 'All' ? selectedContinent : undefined,
-          limit: 32,
+          limit: 20,
         }),
       });
 
       if (res.ok) {
         const json = await res.json();
         if (json.success && json.data) {
-          setAiResults(json.data.destinations || []);
-          setAiSummary(json.data.summary || null);
-          setAiSuggestedQueries(json.data.suggestedFollowUps || []);
-          setVisibleCount(32);
+          const destinations = json.data.destinations || [];
+          const summary = json.data.summary || null;
+          const suggestedFollowUps = json.data.suggestedFollowUps || [];
+
+          setAiResults(destinations);
+          setAiSummary(summary);
+          setAiSuggestedQueries(suggestedFollowUps);
+          setVisibleCount(20);
+
+          // Store in both cache tiers
+          const payload: CachedSearchResult = { destinations, summary, suggestedFollowUps };
+          MEMORY_CACHE.set(cacheKey, payload);
+          try {
+            sessionStorage.setItem(cacheKey, JSON.stringify(payload));
+          } catch {
+            // Ignore storage quota
+          }
         }
       }
     } catch (err) {
@@ -70,12 +146,12 @@ export default function DestinationsPage() {
     setAiResults(null);
     setAiSummary(null);
     setAiSuggestedQueries([]);
+    setIsFromCache(false);
   };
 
-  const activePool = aiResults !== null ? aiResults : ALL_DESTINATIONS;
+  const activePool = aiResults !== null ? aiResults : shuffledSeed;
 
   const filteredDestinations = activePool.filter((dest) => {
-    // If AI results are active, they are already scored and relevant
     if (aiResults === null) {
       const q = searchQuery.toLowerCase().trim();
       const matchesSearch =
@@ -107,14 +183,27 @@ export default function DestinationsPage() {
     <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-16">
       {/* Header Banner */}
       <div className="text-center max-w-3xl mx-auto mb-10">
-        <Badge variant="sunset" size="sm" className="mb-3">
-          Discover Places ({ALL_DESTINATIONS.length}+ Global Catalog)
-        </Badge>
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-3">
+          <Badge variant="sunset" size="sm">
+            20 Iconic World Wonders • Live AI Explorer
+          </Badge>
+          {aiResults === null && (
+            <button
+              type="button"
+              onClick={handleShuffle}
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#5B0B24]/10 dark:bg-[#FF8BA7]/15 hover:bg-[#FF4F7A]/25 text-[#5B0B24] dark:text-[#FFF7FA] text-[11px] font-bold transition-all cursor-pointer border border-[#FF4F7A]/20 shadow-xs"
+              title="Randomly shuffle the 20 world destinations"
+            >
+              <Shuffle className="w-3 h-3 text-[#FF7A3D]" />
+              <span>Shuffle 20 Best</span>
+            </button>
+          )}
+        </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#5B0B24] dark:text-[#FFF7FA] mb-3">
           Explore Inspiring Destinations
         </h1>
         <p className="text-xs sm:text-sm text-[#5B0B24]/75 dark:text-[#FF8BA7]/75 leading-relaxed">
-          Powered by Astra 6 AI. Type any vibe, natural landscape, or travel fantasy to discover your dream getaway.
+          Discover 20 legendary world icons, or use Astra 6 AI to search authentic travel gems across any country, village, or vibe in real time.
         </p>
       </div>
 
@@ -175,10 +264,18 @@ export default function DestinationsPage() {
         {aiSummary && (
           <div className="max-w-2xl mx-auto w-full p-4 rounded-2xl bg-gradient-to-r from-[#5B0B24]/5 via-[#FF4F7A]/10 to-[#FF7A3D]/10 border border-[#FF4F7A]/25 backdrop-blur-sm animate-in fade-in slide-in-from-top-2 duration-300">
             <div className="flex items-center justify-between mb-1.5">
-              <span className="text-xs font-bold text-[#C2185B] dark:text-[#FF8BA7] flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-[#FF7A3D]" />
-                Astra 6 AI Curator Recommendations
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-bold text-[#C2185B] dark:text-[#FF8BA7] flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#FF7A3D]" />
+                  Astra 6 AI Curator Recommendations
+                </span>
+                {isFromCache && (
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold border border-emerald-500/25">
+                    <Zap className="w-3 h-3 text-emerald-500" />
+                    Cached (0 Tokens)
+                  </span>
+                )}
+              </div>
               <button
                 type="button"
                 onClick={handleClearSearch}
@@ -244,7 +341,7 @@ export default function DestinationsPage() {
           <div className="flex items-center justify-center gap-3 py-4 px-6 rounded-2xl bg-gradient-to-r from-[#FFF5F8] to-[#FFF0F5] dark:from-[#280814] dark:to-[#380b1d] border border-[#FF4F7A]/25 shadow-sm text-center">
             <Loader2 className="w-5 h-5 animate-spin text-[#FF7A3D]" />
             <span className="text-xs sm:text-sm font-bold text-[#5B0B24] dark:text-[#FFF7FA]">
-              Astra 6 is analyzing vibes, climate & curated spots across 1,680+ destinations...
+              Astra 6 AI is exploring the globe in real time for authentic spots...
             </span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

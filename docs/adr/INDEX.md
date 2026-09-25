@@ -17,6 +17,7 @@
 | [ADR-0007](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0007-expanded-catalog-and-unified-mock-data.md) | 1,680+ Expanded Catalog & Unified Mock Data | **Accepted** | 2026-09-24 | Catalog & Data Unification |
 | [ADR-0008](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0008-supabase-database-integration.md) | Supabase Database Integration & Mobile-First Routing | **Accepted** | 2026-09-24 | Database & Mobile Routing |
 | [ADR-0009](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0009-budget-math-child-policies-loaders-menu.md) | Dynamic Budget Math, Hotel Child Policies, Loaders & Menu | **Accepted** | 2026-09-25 | UI/UX & AI Options Flow |
+| [ADR-0010](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0010-ai-instinct-discovery-seed-catalog-and-token-caching.md) | Dynamic AI Instinct Discovery, 20-Destination Seed Catalog & Client-Side Token Caching | **Accepted** | 2026-09-25 | Catalog, AI Search & Token Caching |
 
 ---
 

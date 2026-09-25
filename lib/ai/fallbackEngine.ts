@@ -123,6 +123,28 @@ const DESTINATION_CATALOG: Record<string, DestinationProfile> = {
     neighborhoods: ['Zermatt Village', 'Lauterbrunnen', 'Grindelwald', 'Wengen'],
     vibes: ['Alpine', 'Adventure', 'Scenic Train', 'Luxury Nature'],
   },
+  goa: {
+    name: 'South Goa',
+    country: 'India',
+    gradient: 'from-[#5B0B24] via-[#C2185B] to-[#FF7A3D]',
+    coverImage: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=1200&auto=format&fit=crop',
+    currency: 'INR',
+    landmarks: ['Palolem Beach sunset', 'Cabo de Rama Fort ramparts', 'Cola Beach freshwater lagoon', 'Agonda quiet sands', 'Fontainhas Latin Quarter'],
+    cuisines: ['Goan fish curry thali', 'Prawn balchão', 'Bebinca dessert', 'Fresh kingfish rava fry', 'Feni & kokum coolers'],
+    neighborhoods: ['Palolem', 'Agonda', 'Cavelossim', 'Benaulim'],
+    vibes: ['Chill & Coastal', 'Relaxed', 'Seafood', 'Sunset'],
+  },
+  munnar: {
+    name: 'Munnar & Tea Hills',
+    country: 'India',
+    gradient: 'from-[#5B0B24] via-[#C2185B] to-[#FF7A3D]',
+    coverImage: 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=80',
+    currency: 'INR',
+    landmarks: ['Eravikulam National Park (Nilgiri Tahr)', 'Top Station valley panorama', 'Mattupetty Dam & lake', 'Kolukkumalai world highest tea estate', 'Attukad Waterfalls'],
+    cuisines: ['Kerala appam with vegetable stew', 'Cardamom & spiced mountain tea', 'Kerala parotta with roast', 'Steamed banana snacks', 'Fresh tribal honey'],
+    neighborhoods: ['Old Munnar', 'Chithirapuram', 'Devikulam', 'Marayoor'],
+    vibes: ['Mountains & Alpine', 'Lush Nature', 'Peace & Zen'],
+  },
 };
 
 /**
@@ -162,11 +184,27 @@ function extractDestination(prompt: string): DestinationProfile {
   // Regex attempt to extract destination, country, highlights, and food from prompt
   const tripToMatch = prompt.match(/(?:trip to|travel to|explore|visit|in)\s+([^,.]+?)(?:,\s*([^.]+?))?(?:\s+featuring|\s+with|\.|$)/i);
   let detectedName = tripToMatch ? tripToMatch[1].trim() : '';
-  let detectedCountry = tripToMatch && tripToMatch[2] ? tripToMatch[2].replace(/\b(?:featuring|with|for)\b.*$/i, '').trim() : '';
+  const detectedCountry = tripToMatch && tripToMatch[2] ? tripToMatch[2].replace(/\b(?:featuring|with|for)\b.*$/i, '').trim() : '';
 
   if (!detectedName) {
     const fallbackMatch = prompt.match(/\b(?:to|in|visit|explore)\s+([A-Za-z\s]{2,25})/i);
     detectedName = fallbackMatch ? fallbackMatch[1].trim() : 'Curated Escape';
+  }
+
+  // If destination is generic or unstated, inspect prompt for thematic travel style
+  if (!detectedName || detectedName.toLowerCase() === 'curated escape' || detectedName.toLowerCase() === 'curated') {
+    if (/\b(beach|beaches|coast|coastal|surf|ocean|sea|islands?|sand)\b/i.test(lower)) {
+      return DESTINATION_CATALOG.amalfi;
+    }
+    if (/\b(mountain|mountains|alpine|peaks?|hills?|tea\s*hills?|himalayan)\b/i.test(lower)) {
+      return DESTINATION_CATALOG['swiss alps'];
+    }
+    if (/\b(city|cities|historic|heritage|old\s*town|culture|cultural|palaces?)\b/i.test(lower)) {
+      return DESTINATION_CATALOG.kyoto;
+    }
+    if (/\b(nature|wildlife|forest|safari|jungle|waterfalls?)\b/i.test(lower)) {
+      return DESTINATION_CATALOG.banff;
+    }
   }
 
   let realLandmarks: string[] = [];

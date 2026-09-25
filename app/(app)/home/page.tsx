@@ -27,7 +27,7 @@ import {
   ArrowRight,
   MapPin,
 } from 'lucide-react';
-import { UIStateMode } from '@/types';
+import { UIStateMode, Destination } from '@/types';
 import { useSavedStore } from '@/store';
 
 export default function HomePage() {
@@ -342,7 +342,7 @@ export default function HomePage() {
                 popularSpots: ['Male', 'Maafushi', 'Ari Atoll'],
                 rating: 4.9,
                 reviewCount: 340,
-              } as any)
+              } as unknown as Destination)
             }
             onExplore={() => router.push('/ai?prompt=Plan+a+5-day+Maldives+Getaway+for+2+people')}
           />

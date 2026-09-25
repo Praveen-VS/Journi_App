@@ -237,6 +237,11 @@ export function findTopDestinationMatches(
     }
   }
 
+  // Graceful fallback if pool is empty under specific scope
+  if (pool.length === 0) {
+    pool = catalog;
+  }
+
   const scored = pool.map((dest) => {
     const { score, matchReason, matchedTags } = calculateTasteScore(profile, dest);
     return {

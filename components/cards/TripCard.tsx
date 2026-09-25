@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Card from '../ui/Card';
 import Badge from '../ui/Badge';
-import { TripSummary } from '@/types';
+import { TripSummary, Destination } from '@/types';
 import { Calendar, MapPin, ArrowRight, Heart } from 'lucide-react';
 import { useSavedStore } from '@/store';
 
@@ -36,7 +36,7 @@ export default function TripCard({ trip, className = '' }: TripCardProps) {
       popularSpots: [trip.destination],
       rating: 4.9,
       reviewCount: 120,
-    } as any);
+    } as unknown as Destination);
   };
 
   const statusBadges = {
