@@ -36,7 +36,6 @@ import {
   Sparkles,
   CheckCircle2,
   ArrowRight,
-  ArrowLeft,
   Bookmark,
   Flame,
   KeyRound,

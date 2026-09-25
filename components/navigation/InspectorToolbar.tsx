@@ -26,8 +26,8 @@ export default function InspectorToolbar({
   if (true as boolean) return null;
   const isExpanded = false;
   const pathname = '';
-  const router = { push: (_: string) => {} };
-  const setIsExpanded = (_: any) => {};
+  const router = { push: (_path: string) => { void _path; } };
+  const setIsExpanded = (_val: unknown) => { void _val; };
 
   const mobileScreens = [
     { code: 'M01', label: 'Splash', href: '/onboarding?splash=1' },

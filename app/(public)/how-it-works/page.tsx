@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
 import {
@@ -11,23 +10,12 @@ import {
   Layers,
   Compass,
   ArrowRight,
-  SlidersHorizontal,
   ChevronDown,
-  Hotel,
   Volume2,
   Wallet,
-  CheckSquare,
   ShieldCheck,
   CheckCircle2,
-  Utensils,
-  Sun,
   Bookmark,
-  Users,
-  Clock,
-  Car,
-  Plane,
-  Heart,
-  Luggage,
   Sparkle,
 } from 'lucide-react';
 

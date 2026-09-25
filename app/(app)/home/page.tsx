@@ -64,39 +64,6 @@ function HomeContent() {
 
   const upcomingTrip = MOCK_TRIPS[0];
 
-  const handlePromptSubmit = (prompt: string) => {
-    if (prompt && prompt.trim()) {
-      const q = prompt.trim();
-      setConsoleQuery(q);
-      const lower = q.toLowerCase();
-      if (lower.includes('beach') || lower.includes('coast')) {
-        setSelectedLandscape('beaches');
-        setSelectedCategory('Beaches');
-      } else if (lower.includes('mountain') || lower.includes('alpine') || lower.includes('hike')) {
-        setSelectedLandscape('mountains');
-        setSelectedCategory('Mountains');
-      } else if (lower.includes('city') || lower.includes('urban')) {
-        setSelectedLandscape('metropolis');
-        setSelectedCategory('Cities');
-      } else if (lower.includes('nature') || lower.includes('forest') || lower.includes('wild')) {
-        setSelectedLandscape('nature');
-        setSelectedCategory('Nature');
-      }
-      setConsoleTrigger((prev) => prev + 1);
-      const el = document.getElementById('plan');
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    } else {
-      const el = document.getElementById('plan');
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else {
-        router.push('/home#plan');
-      }
-    }
-  };
-
   const handleCategorySelect = (category: string) => {
     const isTogglingOff = selectedCategory === category;
     const newCat = isTogglingOff ? null : category;

@@ -15,7 +15,7 @@ export interface FilterPreferencesStripProps {
 }
 
 export function FilterPreferencesStrip({
-  destination,
+  destination: _destination,
   scope,
   daysCount = 5,
   companion = 'Couple',
