@@ -52,6 +52,9 @@ import {
   Navigation,
   ChevronDown,
   Loader2,
+  Clock,
+  Users,
+  Wallet,
 } from 'lucide-react';
 
 type AIPlannerMode = 'taste_matcher' | 'prompt_composer' | 'options_select' | 'result';
@@ -87,6 +90,7 @@ function AIPlannerContent() {
   const initialReason = searchParams.get('reason') || '';
   const initialOptionId = searchParams.get('optionId') || '';
   const fromSource = searchParams.get('from') || '';
+  const initialRhythm = searchParams.get('rhythm') || 'peace';
 
   // Determine initial mode - route to result if view is result, else options_select if action is generate
   const determineInitialMode = (): AIPlannerMode => {
@@ -147,7 +151,7 @@ function AIPlannerContent() {
   // Taste Profiler Questionnaire State
   // ==========================================
   const [ageGroup, setAgeGroup] = useState<string>('25-34');
-  const [energyRhythm, setEnergyRhythm] = useState<string>('peace');
+  const [energyRhythm, setEnergyRhythm] = useState<string>(initialRhythm || 'peace');
   const [foodPreferences, setFoodPreferences] = useState<string[]>([
     'street_food',
     'authentic_spicy',
@@ -661,7 +665,7 @@ function AIPlannerContent() {
             ? 'Prompt Studio'
             : 'Taste Profiler'
         }
-        showBack={mode === 'result' || mode === 'options_select' || mode === 'prompt_composer' || fromSource === 'home'}
+        showBack={mode === 'result' || mode === 'options_select' || mode === 'prompt_composer' || fromSource === 'home' || fromSource === 'saved'}
         onBack={() => {
           if (mode === 'result') {
             if (tripOptions.length > 0) {
@@ -672,23 +676,31 @@ function AIPlannerContent() {
                 window.history.pushState({}, '', url.toString());
               }
               setMode('options_select');
+            } else if (fromSource === 'saved') {
+              router.push('/saved');
             } else if (fromSource === 'home') {
               router.push('/');
             } else {
               setMode('taste_matcher');
             }
           } else if (mode === 'options_select') {
-            if (fromSource === 'home') {
+            if (fromSource === 'saved') {
+              router.push('/saved');
+            } else if (fromSource === 'home') {
               router.push('/');
             } else {
               setMode('taste_matcher');
             }
           } else if (mode === 'prompt_composer') {
-            if (fromSource === 'home') {
+            if (fromSource === 'saved') {
+              router.push('/saved');
+            } else if (fromSource === 'home') {
               router.push('/');
             } else {
               setMode('taste_matcher');
             }
+          } else if (fromSource === 'saved') {
+            router.push('/saved');
           } else if (fromSource === 'home') {
             router.push('/');
           } else {
@@ -1600,35 +1612,49 @@ function AIPlannerContent() {
       {/* SUB-PAGE 1: 3 SMART TRIP OPTIONS SELECTOR */}
       {/* ========================================================= */}
       {!isGenerating && mode === 'options_select' && (
-        <div className="space-y-6 animate-fade-in">
+        <div className="space-y-8 animate-fade-in">
           {/* Top Back Navigation Bar (Desktop & Mobile Responsive) */}
           <UnifiedBackButton
             label={
-              fromSource === 'home'
+              fromSource === 'saved'
+                ? 'Back to Saved Destinations'
+                : fromSource === 'home'
                 ? 'Back to Home Search Results'
                 : 'Back to Destination Recommendations'
             }
             description={
-              fromSource === 'home'
+              fromSource === 'saved'
+                ? 'Return to your saved places and memories'
+                : fromSource === 'home'
                 ? 'Return to your search options with all destination cards preserved'
                 : 'Return to your curated matches with all preferences intact'
             }
-            mobileLabel={fromSource === 'home' ? 'Back to Search' : 'Back to Matches'}
+            mobileLabel={
+              fromSource === 'saved'
+                ? 'Back to Saved'
+                : fromSource === 'home'
+                ? 'Back to Search'
+                : 'Back to Matches'
+            }
             badgeText={
-              fromSource === 'home'
+              fromSource === 'saved'
+                ? 'Saved Places'
+                : fromSource === 'home'
                 ? 'Search Preserved'
                 : astraTasteResults && astraTasteResults.length > 0
                 ? `${astraTasteResults.length} Matches Ready`
                 : undefined
             }
             onBack={() => {
-              if (fromSource === 'home') {
+              if (fromSource === 'saved') {
+                router.push('/saved');
+              } else if (fromSource === 'home') {
                 router.push('/');
               } else {
                 setMode('taste_matcher');
               }
             }}
-            fallbackHref={fromSource === 'home' ? '/' : undefined}
+            fallbackHref={fromSource === 'saved' ? '/saved' : fromSource === 'home' ? '/' : undefined}
           />
 
           {/* Selected Filter Preferences Strip (Point 3) */}
@@ -1644,22 +1670,42 @@ function AIPlannerContent() {
             foodPreferences={foodPreferences}
           />
 
-          {/* Section Header */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-[#5B0B24]/10 dark:border-[#FF8BA7]/15">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <Badge variant="sunset" size="sm">
-                  <Sparkles className="w-3 h-3 mr-1" />
+          {/* Grand & Lively Section Header Showcase */}
+          <div className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-white via-[#FFF8FB] to-[#FFF1F5] dark:from-[#1F0613] dark:via-[#280818] dark:to-[#220715] border-2 border-[#FF4F7A]/25 dark:border-[#FF8BA7]/35 p-5 sm:p-6 shadow-[0_6px_24px_rgba(255,79,122,0.06)]">
+            {/* Ambient Radial Lights */}
+            <div className="absolute top-0 right-0 w-72 h-72 bg-radial from-[#FF7A3D]/15 via-transparent to-transparent rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-radial from-[#FF4F7A]/15 via-transparent to-transparent rounded-full blur-3xl pointer-events-none" />
+
+            <div className="relative z-10 space-y-2.5 max-w-4xl">
+              {/* Badge & Traveler Meta Ribbon */}
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black uppercase text-white bg-gradient-to-r from-[#FF4F7A] via-[#E61E50] to-[#FF7A3D] shadow-xs tracking-wider">
+                  <Sparkles className="w-3 h-3 text-white animate-pulse" />
                   Astra Persona Intelligence
-                </Badge>
-                <span className="text-xs font-bold text-[#FF7A3D]">
-                  {days} Days • {companion} • {budgetTier}
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#5B0B24]/5 dark:bg-white/10 text-[#5B0B24] dark:text-[#FFB3C6] border border-[#5B0B24]/10 dark:border-white/15 backdrop-blur-xs">
+                  <Clock className="w-3 h-3 text-[#FF7A3D]" />
+                  {days} Days
+                  <span className="text-[#FF7A3D]">•</span>
+                  <Users className="w-3 h-3 text-[#FF4F7A]" />
+                  {companion}
+                  <span className="text-[#FF7A3D]">•</span>
+                  <Wallet className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
+                  {budgetTier}
                 </span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-[#5B0B24] dark:text-[#FFF7FA] tracking-tight">
-                Select Your {selectedDestinationName} Experience
+
+              {/* Gradient Destination Title (Realistic & Balanced Size) */}
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#2E0513] dark:text-[#FFF7FA] tracking-tight leading-snug">
+                Select Your{' '}
+                <span className="bg-gradient-to-r from-[#FF4F7A] via-[#E61E50] to-[#FF7A3D] bg-clip-text text-transparent">
+                  {selectedDestinationName}
+                </span>{' '}
+                Experience
               </h2>
-              <p className="text-xs sm:text-sm text-[#704250] dark:text-[#FFB3C6]/80 mt-1">
+
+              {/* Realistic & Readable Narrative Subtitle */}
+              <p className="text-xs sm:text-sm text-[#704250] dark:text-[#FFB3C6]/85 leading-relaxed font-normal">
                 Astra evaluated the complete combination of your traveler type ({companion}), budget ({budgetTier}), and rhythm to formulate 3 distinct, realistic travel experiences.
               </p>
             </div>
@@ -1674,39 +1720,37 @@ function AIPlannerContent() {
             budgetTier={budgetTier}
           />
 
-          {/* Point 1 & 3: 3 Tailored Trip Options Grid */}
+          {/* Point 1 & 3: 3 Tailored Trip Options Grid (Spacious & Lively) */}
           {tripOptions.length === 0 ? (
-            <div className="space-y-4 pt-2">
-              <div className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#FFF5F8] dark:bg-[#280814] border border-[#FF4F7A]/20 text-[#C2185B] dark:text-[#FF8BA7] text-xs font-bold animate-pulse">
+            <div className="space-y-5 pt-3">
+              <div className="flex items-center justify-center gap-2.5 p-4 rounded-2xl bg-[#FFF5F8] dark:bg-[#280814] border border-[#FF4F7A]/20 text-[#C2185B] dark:text-[#FF8BA7] text-sm font-bold animate-pulse">
                 <Loader2 className="w-4 h-4 animate-spin text-[#FF7A3D]" />
                 <span>Astra 6 is personalizing 3 distinct travel styles for your party...</span>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {[1, 2, 3].map((i) => (
                   <div
                     key={i}
-                    className="rounded-[24px] bg-white/90 dark:bg-[#200612]/90 border-2 border-[#5B0B24]/10 dark:border-[#FF8BA7]/15 p-6 space-y-4 animate-pulse"
+                    className="rounded-[28px] overflow-hidden bg-white/90 dark:bg-[#200612]/90 border-2 border-[#5B0B24]/10 dark:border-[#FF8BA7]/15 animate-pulse flex flex-col justify-between"
                   >
-                    <div className="flex justify-between items-center">
-                      <div className="h-6 w-24 rounded-full bg-[#FF4F7A]/20" />
-                      <div className="h-5 w-20 rounded-full bg-[#5B0B24]/10 dark:bg-white/10" />
-                    </div>
-                    <div className="space-y-2 pt-2">
-                      <div className="h-6 w-3/4 rounded-lg bg-[#5B0B24]/15 dark:bg-white/15" />
-                      <div className="h-4 w-1/2 rounded-md bg-[#5B0B24]/10 dark:bg-white/10" />
-                    </div>
-                    <div className="h-28 rounded-2xl bg-[#FFF5F8] dark:bg-[#280814] p-3 space-y-2" />
-                    <div className="h-20 rounded-2xl bg-[#FFF9F5] dark:bg-[#250d18] p-3 space-y-2" />
-                    <div className="pt-4 border-t border-[#5B0B24]/10 flex justify-between items-center">
-                      <div className="h-8 w-28 rounded-lg bg-[#5B0B24]/10" />
-                      <div className="h-10 w-full ml-4 rounded-xl bg-gradient-to-r from-[#FF4F7A]/40 to-[#FF7A3D]/40" />
+                    <div className="h-48 sm:h-52 w-full bg-[#5B0B24]/10 dark:bg-white/10" />
+                    <div className="p-6 space-y-4">
+                      <div className="space-y-2">
+                        <div className="h-6 w-3/4 rounded-lg bg-[#5B0B24]/15 dark:bg-white/15" />
+                        <div className="h-4 w-1/2 rounded-md bg-[#5B0B24]/10 dark:bg-white/10" />
+                      </div>
+                      <div className="h-20 rounded-2xl bg-[#FFF5F8] dark:bg-[#280814] p-3 space-y-2" />
+                      <div className="pt-4 border-t border-[#5B0B24]/10 flex justify-between items-center">
+                        <div className="h-8 w-28 rounded-lg bg-[#5B0B24]/10" />
+                        <div className="h-10 w-36 rounded-xl bg-gradient-to-r from-[#FF4F7A]/40 to-[#FF7A3D]/40" />
+                      </div>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-3">
               {tripOptions.map((opt, idx) => (
                 <TripOptionCard
                   key={opt.id}
@@ -1733,6 +1777,8 @@ function AIPlannerContent() {
             label={
               tripOptions.length > 0
                 ? 'Back to 3 Trip Options'
+                : fromSource === 'saved'
+                ? 'Back to Saved Destinations'
                 : fromSource === 'home'
                 ? 'Back to Home Search Results'
                 : 'Back to Recommendations'
@@ -1740,14 +1786,18 @@ function AIPlannerContent() {
             description={
               tripOptions.length > 0
                 ? `Return to the 3 curated travel styles for ${selectedDestinationName}`
+                : fromSource === 'saved'
+                ? 'Return to your saved destinations'
                 : fromSource === 'home'
                 ? 'Return to your search options with all destination cards preserved'
                 : 'Return to your curated options with all preferences intact'
             }
-            mobileLabel={tripOptions.length > 0 ? 'Back to Options' : fromSource === 'home' ? 'Back to Search' : 'Back to Matches'}
+            mobileLabel={tripOptions.length > 0 ? 'Back to Options' : fromSource === 'saved' ? 'Back to Saved' : fromSource === 'home' ? 'Back to Search' : 'Back to Matches'}
             badgeText={
               tripOptions.length > 0
                 ? '3 Options Available'
+                : fromSource === 'saved'
+                ? 'Saved Places'
                 : fromSource === 'home'
                 ? 'Search Preserved'
                 : undefined
@@ -1761,13 +1811,15 @@ function AIPlannerContent() {
                   window.history.pushState({}, '', url.toString());
                 }
                 setMode('options_select');
+              } else if (fromSource === 'saved') {
+                router.push('/saved');
               } else if (fromSource === 'home') {
                 router.push('/');
               } else {
                 setMode('taste_matcher');
               }
             }}
-            fallbackHref={fromSource === 'home' && tripOptions.length === 0 ? '/' : undefined}
+            fallbackHref={fromSource === 'saved' && tripOptions.length === 0 ? '/saved' : fromSource === 'home' && tripOptions.length === 0 ? '/' : undefined}
           />
 
           {/* Selected Filter Preferences Strip (Point 3) */}
@@ -1902,20 +1954,23 @@ function AIPlannerContent() {
 
           {/* Result Content: Signature Plan Card + Day-by-Day Timeline */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Left: Signature M03 AI Travel Plan Card */}
+            {/* Left: Signature M03 Journi Travel Plan Card */}
             <div className="lg:col-span-4 lg:sticky lg:top-20 space-y-4">
               <AITravelPlanCard
                 title={currentTrip.title}
                 durationDays={currentTrip.daysCount}
                 peopleCount={companion ? `${companion}` : '2 People'}
                 tags={[selectedVibe, currentTrip.pace, currentTrip.destination]}
-                imageUrl={currentTrip.coverImage}
+                imageUrl={selectedOption?.imageUrl || currentTrip.coverImage}
                 bestTime="Oct - Apr (Optimal)"
                 estimatedBudget={currentTrip.estimatedBudget}
                 topExperiences={activeDay.activities.map((a) => a.title).slice(0, 3).join(', ')}
                 foodRecommendations="Local seafood, artisanal teas, authentic street eats & cafés"
                 isSaved={isSaved}
                 onSave={handleSaveTrip}
+                headerTitle="Your Journi Travel Plan"
+                stayInfo={selectedOption?.stayInfo}
+                curatedRestaurants={selectedOption?.curatedRestaurants}
               />
             </div>
 

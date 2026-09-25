@@ -110,7 +110,7 @@ export default function DestinationCard({
     <Card
       variant="elevated"
       isInteractive
-      onClick={() => onSelect ? onSelect(destination) : router.push(`/destinations?id=${destination.id}`)}
+      onClick={() => onSelect ? onSelect(destination) : router.push(`/ai?prompt=${encodeURIComponent(`Plan a ${destination.idealDays}-day trip to ${destination.name}, ${destination.country}`)}`)}
       className={`group flex flex-col h-full ${className}`}
     >
       {/* Visual Cover with Sunset Gradient Fallback & Overlay */}

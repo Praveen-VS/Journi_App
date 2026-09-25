@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -25,18 +25,6 @@ import {
 export default function LandingPage() {
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
-  // If a mobile device or mobile viewport reaches the desktop LandingPage, immediately forward to Splash Screen (M01)
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const isMobileWidth = window.innerWidth < 768;
-      const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(navigator.userAgent);
-      const urlParams = new URLSearchParams(window.location.search);
-      if ((isMobileWidth || isMobileUA) && urlParams.get('view') !== 'desktop') {
-        router.replace('/onboarding?splash=1');
-      }
-    }
-  }, [router]);
 
   const handleCategorySelect = (category: string) => {
     setSelectedCategory(category);

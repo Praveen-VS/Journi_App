@@ -5,15 +5,14 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import JourniLogo from '../shared/JourniLogo';
 import Button from '../ui/Button';
-import { Home, Compass, Sparkles, Map, Bookmark, Settings } from 'lucide-react';
+import { Home, Sparkles, Map, Bookmark, Settings } from 'lucide-react';
 
 export default function DesktopNavbar() {
   const pathname = usePathname();
 
-  // Primary navigation links in logical user order (Plan with AI removed; accessed via Home AI Console)
+  // Primary navigation links in logical user order (Plan with AI accessed via Home AI Console)
   const navLinks = [
     { label: 'Home', href: '/', icon: <Home className="w-4 h-4" /> },
-    { label: 'Destinations', href: '/destinations', icon: <Compass className="w-4 h-4" /> },
     { label: 'How It Works', href: '/how-it-works', icon: <Sparkles className="w-4 h-4" /> },
     { label: 'My Trips', href: '/trips', icon: <Map className="w-4 h-4" /> },
     { label: 'Saved Places', href: '/saved', icon: <Bookmark className="w-4 h-4" /> },

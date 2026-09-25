@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Map, Sparkles, Bookmark, Compass } from 'lucide-react';
+import { Home, Map, Sparkles, Bookmark, User } from 'lucide-react';
 
 export default function MobileBottomNav() {
   const pathname = usePathname();
@@ -20,10 +20,10 @@ export default function MobileBottomNav() {
 
   const items = [
     { label: 'Home', href: '/home', icon: Home },
-    { label: 'Destinations', href: '/destinations', icon: Compass },
-    { label: 'Plan Trip', href: '/home#plan', icon: Sparkles, isCenterCta: true },
     { label: 'Trips', href: '/trips', icon: Map },
+    { label: 'Plan Trip', href: '/home#plan', icon: Sparkles, isCenterCta: true },
     { label: 'Saved', href: '/saved', icon: Bookmark },
+    { label: 'Profile', href: '/profile', icon: User },
   ];
 
   return (

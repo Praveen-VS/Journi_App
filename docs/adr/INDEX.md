@@ -18,6 +18,10 @@
 | [ADR-0008](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0008-supabase-database-integration.md) | Supabase Database Integration & Mobile-First Routing | **Accepted** | 2026-09-24 | Database & Mobile Routing |
 | [ADR-0009](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0009-budget-math-child-policies-loaders-menu.md) | Dynamic Budget Math, Hotel Child Policies, Loaders & Menu | **Accepted** | 2026-09-25 | UI/UX & AI Options Flow |
 | [ADR-0010](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0010-ai-instinct-discovery-seed-catalog-and-token-caching.md) | Dynamic AI Instinct Discovery, 20-Destination Seed Catalog & Client-Side Token Caching | **Accepted** | 2026-09-25 | Catalog, AI Search & Token Caching |
+| [ADR-0011](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0011-saved-destination-planning-criteria-parity.md) | Saved Destination Planning Criteria Parity & Detail Modal | **Accepted** | 2026-09-25 | Saved Destinations & AI Planning Flow |
+| [ADR-0012](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0012-remove-destinations-page-and-catalog-routes.md) | Removal of Public Destinations Page and Catalog Routes | **Accepted** | 2026-09-25 | Navigation & Route Cleanup |
+| [ADR-0013](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0013-redesign-trip-options-selection-and-journi-plan.md) | Redesign 3 Trip Options Selection Page & Your Journi Travel Plan Sidebar | **Accepted** | 2026-09-25 | Selection Page & Plan Sidebar Redesign |
+| [ADR-0014](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0014-hide-v1-inspector-and-upgrade-how-it-works-workflow.md) | Hide V1 Inspector and Upgrade How It Works Workflow | **Accepted** | 2026-09-25 | Inspector & How It Works Page |
 
 ---
 
@@ -29,6 +33,7 @@ When asked to make a change, locate the feature below and modify **ONLY** the de
 - **Logo Display & Sizing**: [components/shared/JourniLogo.tsx](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/components/shared/JourniLogo.tsx)
 - **Top Mobile Header**: [components/navigation/MobileHeader.tsx](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/components/navigation/MobileHeader.tsx)
 - **Desktop Navbar**: [components/navigation/DesktopNavbar.tsx](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/components/navigation/DesktopNavbar.tsx)
+- **Mobile Bottom Navigation**: [components/navigation/MobileBottomNav.tsx](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/components/navigation/MobileBottomNav.tsx)
 - **Logo Images**: [public/images/logo/journi-official-logo.png](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/public/images/logo/journi-official-logo.png)
 
 ### 2. Plan with AI & Taste Profiler
@@ -41,10 +46,9 @@ When asked to make a change, locate the feature below and modify **ONLY** the de
 - **Heuristic Fallback Engine**: [lib/ai/fallbackEngine.ts](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/lib/ai/fallbackEngine.ts)
 - **AI Service Client**: [services/ai.service.ts](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/services/ai.service.ts)
 
-### 3. Destinations Database
-- **Raw 1,680+ Destinations Catalog**: [data/destinations.json](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/data/destinations.json)
+### 3. Destinations Database & Cards
+- **20 Iconic World Destinations Seed**: [data/destinations.json](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/data/destinations.json)
 - **Lookup Helpers & Re-export**: [constants/destinationsData.ts](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/constants/destinationsData.ts)
-- **Public Destinations Page**: [app/(public)/destinations/page.tsx](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/app/%28public%29/destinations/page.tsx)
 - **Destination Card Component**: [components/cards/DestinationCard.tsx](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/components/cards/DestinationCard.tsx)
 
 ### 4. Trips, Itinerary, Budget & Saved Places

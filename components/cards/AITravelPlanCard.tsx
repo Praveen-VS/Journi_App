@@ -2,8 +2,9 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Calendar, Wallet, Star, Utensils, ArrowRight, Bookmark } from 'lucide-react';
+import { Calendar, Wallet, Star, Utensils, ArrowRight, Bookmark, Bed } from 'lucide-react';
 import { formatINR } from '@/lib/utils';
+import { CuratedStayInfo, CuratedRestaurant } from '@/types';
 
 export interface AITravelPlanCardProps {
   title: string;
@@ -19,6 +20,9 @@ export interface AITravelPlanCardProps {
   onSave?: () => void;
   onExplore?: () => void;
   className?: string;
+  headerTitle?: string;
+  stayInfo?: CuratedStayInfo;
+  curatedRestaurants?: CuratedRestaurant[];
 }
 
 export default function AITravelPlanCard({
@@ -35,6 +39,9 @@ export default function AITravelPlanCard({
   onSave,
   onExplore,
   className = '',
+  headerTitle = 'Your Journi Travel Plan',
+  stayInfo,
+  curatedRestaurants,
 }: AITravelPlanCardProps) {
   const displayBudget =
     typeof estimatedBudget === 'number'
@@ -47,11 +54,11 @@ export default function AITravelPlanCard({
     <div
       className={`bg-white dark:bg-[#240612] rounded-[26px] p-5 sm:p-6 shadow-[0_12px_36px_rgba(230,30,80,0.12)] border border-[#FF4F7A]/20 transition-all hover:shadow-[0_16px_44px_rgba(230,30,80,0.18)] ${className}`}
     >
-      {/* Card Header matching M03 mockup: ✦ Your AI Travel Plan ✨ */}
+      {/* Card Header: ✦ Your Journi Travel Plan ✨ */}
       <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#F4EBEF] dark:border-[#FF4F7A]/15">
         <div className="flex items-center gap-1.5 text-xs font-bold text-[#C2185B] dark:text-[#FF8BA7] tracking-tight">
           <span className="text-[#FF2A6D] text-sm">✦</span>
-          <span>Your AI Travel Plan</span>
+          <span>{headerTitle}</span>
           <span className="text-amber-400">✨</span>
         </div>
         {onSave && (
@@ -140,6 +147,82 @@ export default function AITravelPlanCard({
             {foodRecommendations}
           </span>
         </div>
+
+        {/* Curated Accommodations & Stay Details */}
+        {stayInfo && (
+          <div className="pt-3 border-t border-[#FAF2F5] dark:border-white/5 space-y-2">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-[#FF4F7A]">
+              <Bed className="w-4 h-4 text-[#FF4F7A]" />
+              <span>Curated Accommodations</span>
+            </div>
+            <div className="p-3 rounded-2xl bg-[#FFF5F8] dark:bg-[#280814] border border-[#FF4F7A]/15 space-y-1.5">
+              <div className="flex items-baseline justify-between gap-2">
+                <span className="font-bold text-xs sm:text-sm text-[#3E0717] dark:text-[#FFF7FA]">
+                  {stayInfo.name}
+                </span>
+                {stayInfo.approxPerNight && (
+                  <span className="text-[11px] font-bold text-[#C2185B] dark:text-[#FF8BA7] shrink-0">
+                    ~₹{stayInfo.approxPerNight.toLocaleString('en-IN')}/night
+                  </span>
+                )}
+              </div>
+              {stayInfo.amenity && (
+                <p className="text-[11px] text-[#704250] dark:text-[#FFB3C6]/80 leading-relaxed">
+                  {stayInfo.amenity}
+                </p>
+              )}
+              {stayInfo.childPolicy && (
+                <div className="pt-1 border-t border-[#FF4F7A]/10">
+                  <span
+                    className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                      stayInfo.childPolicy.isFree
+                        ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20'
+                        : 'bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20'
+                    }`}
+                  >
+                    {stayInfo.childPolicy.isFree ? '✓ ' : '• '}
+                    {stayInfo.childPolicy.description}
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Handpicked Regional Dining & Local Eats */}
+        {curatedRestaurants && curatedRestaurants.length > 0 && (
+          <div className="pt-3 border-t border-[#FAF2F5] dark:border-white/5 space-y-2">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-[#FF7A3D]">
+              <Utensils className="w-4 h-4 text-[#FF7A3D]" />
+              <span>Handpicked Dining & Local Eats</span>
+            </div>
+            <div className="space-y-2">
+              {curatedRestaurants.map((r, i) => (
+                <div
+                  key={i}
+                  className="p-3 rounded-2xl bg-[#FFF9F5] dark:bg-[#250d18] border border-[#FF7A3D]/20 space-y-1"
+                >
+                  <div className="flex items-baseline justify-between gap-1">
+                    <span className="font-bold text-xs text-[#3E0717] dark:text-[#FFF7FA] truncate">
+                      {r.name}
+                    </span>
+                    <span className="text-[10px] font-semibold text-[#FF7A3D] shrink-0">
+                      ₹{r.priceForTwo} for 2
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-[#704250] dark:text-[#FFB3C6]/85">
+                    <span className="font-semibold text-[#5B0B24] dark:text-[#FFDFE7]">Specialty:</span>{' '}
+                    {r.signatureDish}
+                  </p>
+                  <div className="flex items-center justify-between text-[10px] text-[#5B0B24]/60 dark:text-[#FF8BA7]/60 pt-0.5">
+                    <span>{r.cuisine}</span>
+                    <span className="italic">{r.vibe}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Action Footer */}

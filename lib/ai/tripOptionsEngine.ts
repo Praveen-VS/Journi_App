@@ -651,6 +651,7 @@ export function generateTripOptions(input: TripOptionsInput): {
       highlights: tmpl.highlights,
       inclusions: tmpl.inclusions,
       days: optionDays,
+      imageUrl: getOptionDestinationImage(dest, optIdx),
       stayInfo: {
         name: stayAndDining.stayName,
         type: tmpl.stayType,
@@ -666,4 +667,120 @@ export function generateTripOptions(input: TripOptionsInput): {
   });
 
   return { options, curatorIntelligence };
+}
+
+/**
+ * High-quality, apt, and compressed (<150KB WebP) destination images for option variants
+ */
+export function getOptionDestinationImage(dest: string, optionIndex: number): string {
+  const dLower = (dest || '').toLowerCase();
+
+  if (dLower.includes('munnar')) {
+    const photos = [
+      'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=800&q=80',
+    ];
+    return photos[optionIndex % photos.length];
+  }
+  if (dLower.includes('alleppey') || dLower.includes('alappuzha')) {
+    const photos = [
+      'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+    ];
+    return photos[optionIndex % photos.length];
+  }
+  if (dLower.includes('goa')) {
+    const photos = [
+      'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1510414842594-a61782153f5b?auto=format&fit=crop&w=800&q=80',
+    ];
+    return photos[optionIndex % photos.length];
+  }
+  if (dLower.includes('ooty') || dLower.includes('nilgiri')) {
+    const photos = [
+      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80',
+    ];
+    return photos[optionIndex % photos.length];
+  }
+  if (dLower.includes('kyoto')) {
+    const photos = [
+      'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1528164344705-475426879c0d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=800&q=80',
+    ];
+    return photos[optionIndex % photos.length];
+  }
+  if (dLower.includes('paris')) {
+    const photos = [
+      'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1509356843151-3e7d96241e11?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1520939817895-060bdef4d18f?auto=format&fit=crop&w=800&q=80',
+    ];
+    return photos[optionIndex % photos.length];
+  }
+  if (dLower.includes('maldives')) {
+    const photos = [
+      'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80',
+    ];
+    return photos[optionIndex % photos.length];
+  }
+  if (dLower.includes('bali')) {
+    const photos = [
+      'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1559628233-eb1b1a45564b?auto=format&fit=crop&w=800&q=80',
+    ];
+    return photos[optionIndex % photos.length];
+  }
+  if (dLower.includes('dubai')) {
+    const photos = [
+      'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1451337516015-6b6e9a44a8a3?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=800&q=80',
+    ];
+    return photos[optionIndex % photos.length];
+  }
+  if (dLower.includes('amalfi') || dLower.includes('positano')) {
+    const photos = [
+      'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
+    ];
+    return photos[optionIndex % photos.length];
+  }
+  if (dLower.includes('santorini')) {
+    const photos = [
+      'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1510414842594-a61782153f5b?auto=format&fit=crop&w=800&q=80',
+    ];
+    return photos[optionIndex % photos.length];
+  }
+  if (dLower.includes('swiss') || dLower.includes('alps') || dLower.includes('zermatt')) {
+    const photos = [
+      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80',
+    ];
+    return photos[optionIndex % photos.length];
+  }
+
+  // Universal scenic fallback library indexed deterministically
+  const universal = [
+    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80',
+  ];
+  const charSum = (dest || 'travel').split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
+  return universal[(Math.abs(charSum) + optionIndex) % universal.length];
 }

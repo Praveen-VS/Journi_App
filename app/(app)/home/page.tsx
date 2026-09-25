@@ -4,7 +4,6 @@ import React, { useState, Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
-import AIPromptInput from '@/components/forms/AIPromptInput';
 import CompactTasteConsole from '@/components/forms/CompactTasteConsole';
 import TripCard from '@/components/cards/TripCard';
 import DestinationCard from '@/components/cards/DestinationCard';
@@ -15,12 +14,9 @@ import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
 import Skeleton from '@/components/ui/Skeleton';
 import EmptyState from '@/components/ui/EmptyState';
-import PromptSuggestionChip from '@/components/ui/PromptSuggestionChip';
 import {
-  MOCK_USER,
   MOCK_TRIPS,
   MOCK_DESTINATIONS,
-  SAMPLE_AI_PROMPTS,
 } from '@/constants';
 import {
   Sparkles,
@@ -201,61 +197,6 @@ function HomeContent() {
           Explore a Better Tomorrow
         </span>
       </div>
-
-      {/* ===================== HERO WELCOME & NATURAL LANGUAGE LAUNCHER ===================== */}
-      <section className="relative rounded-[32px] sm:rounded-[36px] overflow-hidden bg-gradient-to-tr from-[#3E0717] via-[#C2185B] to-[#FF7A3D] text-white p-6 sm:p-10 shadow-xl">
-        {/* Subtle background glow */}
-        <div className="absolute -right-10 -bottom-10 w-80 h-80 rounded-full bg-[#FFC83D]/20 blur-3xl pointer-events-none" />
-
-        <div className="relative z-10 max-w-3xl">
-          {/* Greeting Tag */}
-          <div className="flex items-center justify-between gap-2 mb-2">
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-[#FFC83D] uppercase tracking-wider">
-                Welcome back
-              </span>
-              <span className="text-xs text-white/50">•</span>
-              <span className="text-xs text-white/80 font-medium">
-                {MOCK_USER.homeCity}
-              </span>
-            </div>
-            <span
-              className="hidden sm:inline-block text-white/90 text-sm md:text-base font-bold rotate-[-6deg]"
-              style={{ fontFamily: 'var(--font-caveat, cursive)' }}
-            >
-              Explore a Better Tomorrow
-            </span>
-          </div>
-
-          <h1 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight mb-2 leading-tight">
-            Where to next, {MOCK_USER.name.split(' ')[0]}?
-          </h1>
-          <p className="text-xs sm:text-sm text-white/85 max-w-xl mb-6 leading-relaxed">
-            Type any travel idea in plain words. Journi crafts complete day-by-day itineraries with smart INR budgets in seconds.
-          </p>
-
-          {/* Central Natural Language Prompt Box */}
-          <div className="mb-4">
-            <AIPromptInput onSubmit={handlePromptSubmit} />
-          </div>
-
-          {/* Suggestion Chips with single-line truncation and hover popover */}
-          <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-2 pt-1 w-full max-w-full">
-            <span className="text-xs font-semibold text-white/80 mr-1 shrink-0 mb-0.5 sm:mb-0">
-              Try asking:
-            </span>
-            {SAMPLE_AI_PROMPTS.slice(0, 3).map((prompt, idx) => (
-              <PromptSuggestionChip
-                key={idx}
-                prompt={prompt}
-                onClick={handlePromptSubmit}
-                variant="glass"
-                popoverPosition="top"
-              />
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ===================== ASTRA 6 AI FILTER & TASTE CONSOLE ===================== */}
       <section id="plan" className="w-full max-w-4xl mx-auto scroll-mt-24 space-y-3">

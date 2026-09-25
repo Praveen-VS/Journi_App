@@ -213,6 +213,7 @@ export interface TripOptionVariant {
   highlights: string[];
   inclusions: string[];
   days: ItineraryDay[];
+  imageUrl?: string;
   stayInfo?: CuratedStayInfo;
   curatedRestaurants?: CuratedRestaurant[];
   adultsCount?: number;

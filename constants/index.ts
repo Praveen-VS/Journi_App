@@ -35,7 +35,7 @@ export const ROUTES = {
   public: {
     home: '/',
     howItWorks: '/how-it-works',
-    destinations: '/destinations',
+    destinations: '/home',
     onboarding: '/onboarding',
   },
   auth: {

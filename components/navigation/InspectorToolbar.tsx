@@ -22,13 +22,16 @@ export default function InspectorToolbar({
   currentMode = 'default',
   onModeChange,
 }: InspectorToolbarProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const router = useRouter();
-  const pathname = usePathname();
+  // Hidden across desktop and mobile as requested
+  if (true as boolean) return null;
+  const isExpanded = false;
+  const pathname = '';
+  const router = { push: (_: string) => {} };
+  const setIsExpanded = (_: any) => {};
 
   const mobileScreens = [
     { code: 'M01', label: 'Splash', href: '/onboarding?splash=1' },
-    { code: 'M02', label: 'Discover Places', href: '/destinations' },
+    { code: 'M02', label: 'Discover Places', href: '/onboarding?step=1' },
     { code: 'M03', label: 'Plan with AI', href: '/onboarding?step=2' },
     { code: 'M04', label: 'Save Every Journey', href: '/onboarding?step=3' },
     { code: 'M05', label: 'Login', href: '/login' },
@@ -51,7 +54,6 @@ export default function InspectorToolbar({
     { code: 'D01', label: 'Landing Page', href: '/' },
     { code: 'D02', label: 'How Journi Works', href: '/how-it-works' },
     { code: 'D03', label: 'AI Planner', href: '/ai' },
-    { code: 'D04', label: 'Destinations', href: '/destinations' },
     { code: 'D05', label: 'Login / Register', href: '/login' },
     { code: 'D06', label: 'AI Planning Result', href: '/ai?view=result' },
     { code: 'D07', label: 'Dashboard', href: '/home' },
@@ -100,7 +102,7 @@ export default function InspectorToolbar({
                     <button
                       key={item.mode}
                       type="button"
-                      onClick={() => onModeChange(item.mode as UIStateMode)}
+                      onClick={() => onModeChange?.(item.mode as UIStateMode)}
                       className={`flex flex-col items-center py-2 px-1 rounded-[14px] transition-all ${
                         isSelected
                           ? 'bg-[#5B0B24] text-white shadow-soft font-semibold'

@@ -54,9 +54,6 @@ export default function PublicLayout({
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-6 font-medium">
-            <Link href="/destinations" className="hover:text-[#5B0B24] dark:hover:text-white transition-colors">
-              Destinations
-            </Link>
             <Link href="/how-it-works" className="hover:text-[#5B0B24] dark:hover:text-white transition-colors">
               How It Works
             </Link>

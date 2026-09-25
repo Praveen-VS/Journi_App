@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Card from '../ui/Card';
@@ -15,8 +15,13 @@ export interface TripCardProps {
 }
 
 export default function TripCard({ trip, className = '' }: TripCardProps) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const { isSaved, toggleFavorite } = useSavedStore();
-  const isTripSaved = isSaved(trip.id) || isSaved(trip.title) || isSaved(trip.destination);
+  const isTripSaved = mounted ? (isSaved(trip.id) || isSaved(trip.title) || isSaved(trip.destination)) : false;
 
   const handleSaveClick = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -75,7 +80,8 @@ export default function TripCard({ trip, className = '' }: TripCardProps) {
               <button
                 type="button"
                 onClick={handleSaveClick}
-                aria-label={isTripSaved ? 'Remove from saved' : 'Save to favorites'}
+                aria-label="Save to favorites"
+                suppressHydrationWarning
                 className="w-7 h-7 rounded-full bg-black/40 hover:bg-black/70 backdrop-blur-md flex items-center justify-center text-white transition-all active:scale-90"
               >
                 <Heart
