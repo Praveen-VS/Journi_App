@@ -8,9 +8,8 @@ import { Home, Map, Sparkles, Bookmark, Compass } from 'lucide-react';
 export default function MobileBottomNav() {
   const pathname = usePathname();
 
-  // Hide bottom menu on onboarding flow (M01 Splash, M02 Discover, M03 AI Plan, M04 Save) and auth pages
+  // Hide bottom menu on auth pages
   if (
-    pathname?.startsWith('/onboarding') ||
     pathname === '/login' ||
     pathname === '/register' ||
     pathname === '/forgot-password' ||
@@ -20,9 +19,9 @@ export default function MobileBottomNav() {
   }
 
   const items = [
-    { label: 'Home', href: '/', icon: Home },
+    { label: 'Home', href: '/home', icon: Home },
     { label: 'Destinations', href: '/destinations', icon: Compass },
-    { label: 'Plan Trip', href: '/#plan', icon: Sparkles, isCenterCta: true },
+    { label: 'Plan Trip', href: '/home#plan', icon: Sparkles, isCenterCta: true },
     { label: 'Trips', href: '/trips', icon: Map },
     { label: 'Saved', href: '/saved', icon: Bookmark },
   ];
@@ -34,7 +33,12 @@ export default function MobileBottomNav() {
     >
       <div className="flex items-center justify-around max-w-md mx-auto relative h-16">
         {items.map((item) => {
-          const isActive = item.href === '/' ? (pathname === '/' || pathname === '/home') : item.href === '/#plan' ? false : pathname.startsWith(item.href);
+          const isActive =
+            item.href === '/home' || item.href === '/'
+              ? pathname === '/' || pathname === '/home'
+              : item.href.includes('#plan')
+              ? false
+              : pathname.startsWith(item.href);
           const Icon = item.icon;
 
           if (item.isCenterCta) {

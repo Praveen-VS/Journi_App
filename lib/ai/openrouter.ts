@@ -1,5 +1,6 @@
 import type { Destination, UserTasteProfile, TripSummary, ItineraryDay } from '@/types';
 import type { GeneratedTripPayload } from './fallbackEngine';
+import { resolveCustomLocationSearch } from './customDestinations';
 
 /**
  * OpenRouter & Astra 6 Intelligence Client for Journi
@@ -608,8 +609,10 @@ Rules:
   const filterDetails: string[] = [];
   if (customLocation && customLocation.trim()) {
     filterDetails.push(
-      `- TARGET GEOGRAPHY / LOCATION (ABSOLUTE REQUIREMENT): The traveler explicitly wants destinations strictly located inside "${customLocation.trim()}". All recommended destinations MUST be in "${customLocation.trim()}". If the target is "srilanka", strictly recommend authentic destinations inside Sri Lanka (e.g. Galle, Mirissa, Tangalle, Ella, Sigiriya, Bentota). Do NOT recommend places from other countries.`
+      `- TARGET GEOGRAPHY / LOCATION (ABSOLUTE REQUIREMENT): The traveler explicitly wants destinations strictly located inside or directly around "${customLocation.trim()}". All recommended destinations MUST be authentically in "${customLocation.trim()}". Do NOT recommend places from other countries or unrelated regions.`
     );
+  } else if (scope === 'custom') {
+    filterDetails.push(`- Distance & Scope: Open world destinations matching the traveler's custom travel desire.`);
   }
   if (query.trim()) filterDetails.push(`- Traveler desire/prompt: "${query.trim()}"`);
   if (scope && scope !== 'custom') {
@@ -771,7 +774,7 @@ Rules:
  * Intelligently scores and ranks a pool of candidate destinations
  * against the traveler's landscape, query, rhythm, vibes, and cuisines.
  */
-function filterAndRankCuratedDestinations(
+export function filterAndRankCuratedDestinations(
   pool: Destination[],
   params: AIDestinationSearchParams
 ): Destination[] {
@@ -923,7 +926,7 @@ function filterAndRankCuratedDestinations(
   });
 }
 
-function generateSearchSummary(
+export function generateSearchSummary(
   destinations: Destination[],
   params: AIDestinationSearchParams,
   scopeLabel: string
@@ -948,7 +951,7 @@ function generateSearchSummary(
   return `Astra 6 analyzed your preferences and curated ${count} premier ${categoryDesc} destinations across ${scopeLabel} tailored to your ${rhythmDesc}.`;
 }
 
-function generateFollowUps(
+export function generateFollowUps(
   destinations: Destination[],
   params: AIDestinationSearchParams
 ): string[] {
@@ -1002,9 +1005,10 @@ function performHeuristicDestinationSearch(
     limit = 8,
   } = params;
 
-  // 1. If user specified a custom location (e.g. "srilanka" or "sri lanka")
-  if (customLocation && customLocation.trim()) {
-    const locClean = customLocation.trim().toLowerCase().replace(/[^a-z0-9]/g, '');
+  // 1. If user specified a custom location or used "Other" scope
+  const effectiveCustom = (customLocation || '').trim() || (scope === 'custom' && (query || '').trim() ? (query || '').trim() : '');
+  if (effectiveCustom) {
+    const locClean = effectiveCustom.toLowerCase().replace(/[^a-z0-9]/g, '');
 
     if (locClean.includes('sri') || locClean.includes('lanka') || locClean.includes('ceylon')) {
       const sriLankaCurated: Destination[] = [
@@ -1157,17 +1161,20 @@ function performHeuristicDestinationSearch(
       const rankedSriLanka = filterAndRankCuratedDestinations(sriLankaCurated, params);
 
       return {
-        query: query || customLocation || 'Sri Lanka Escapes',
+        query: query || effectiveCustom || 'Sri Lanka Escapes',
         summary: generateSearchSummary(rankedSriLanka, params, 'Sri Lanka'),
         destinations: rankedSriLanka.slice(0, limit),
         suggestedFollowUps: generateFollowUps(rankedSriLanka, params),
         source: 'smart_taste_fallback',
       };
     }
+
+    // Resolve any other custom destination (Paris, Goa, Kyoto, Swiss Alps, Dubai, Bali, Fiji, etc.)
+    return resolveCustomLocationSearch(effectiveCustom, params);
   }
 
-  // 2. Global / International Fallback (8 items)
-  if (scope === 'international') {
+  // 2. Global / International Fallback (or unconstrained "Other" scope) (8 items)
+  if (scope === 'international' || scope === 'custom') {
     const internationalCurated: Destination[] = [
       {
         id: 'astra-kyoto-japan',
@@ -1354,8 +1361,12 @@ function performHeuristicDestinationSearch(
     const rankedInternational = filterAndRankCuratedDestinations(internationalCurated, params);
 
     return {
-      query: query || 'International Escapes',
-      summary: generateSearchSummary(rankedInternational, params, 'global destinations'),
+      query: query || (scope === 'custom' ? 'Custom Global Escapes' : 'International Escapes'),
+      summary: generateSearchSummary(
+        rankedInternational,
+        params,
+        scope === 'custom' ? 'custom global destinations' : 'global destinations'
+      ),
       destinations: rankedInternational.slice(0, limit),
       suggestedFollowUps: generateFollowUps(rankedInternational, params),
       source: 'smart_taste_fallback',

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -16,6 +16,11 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorText, setErrorText] = useState('');
 
+  // Pre-cache home route for instant transition
+  useEffect(() => {
+    router.prefetch('/home');
+  }, [router]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !password) {
@@ -24,20 +29,20 @@ export default function LoginPage() {
     }
     setErrorText('');
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      router.push('/home');
-    }, 600);
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('journi_authenticated', 'true');
+    }
+    router.replace('/home');
   };
 
   const handleDemoLogin = () => {
     setEmail('elena@journi.travel');
     setPassword('Journi2026!Explore');
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      router.push('/home');
-    }, 500);
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('journi_authenticated', 'true');
+    }
+    router.replace('/home');
   };
 
   return (

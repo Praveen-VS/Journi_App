@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import AIPromptInput from '@/components/forms/AIPromptInput';
+import CompactTasteConsole from '@/components/forms/CompactTasteConsole';
 import TripCard from '@/components/cards/TripCard';
 import DestinationCard from '@/components/cards/DestinationCard';
 import AITravelPlanCard from '@/components/cards/AITravelPlanCard';
@@ -30,33 +31,104 @@ import {
 import { UIStateMode, Destination } from '@/types';
 import { useSavedStore } from '@/store';
 
-export default function HomePage() {
+const categoryToLandscape: Record<string, string> = {
+  Mountains: 'mountains',
+  Beaches: 'beaches',
+  Cities: 'metropolis',
+  Nature: 'nature',
+};
+
+function HomeContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const initialCategoryParam = searchParams.get('category') || '';
+  const initialLandscapeParam = searchParams.get('landscape') || '';
+
   const { isSaved, toggleFavorite } = useSavedStore();
   const [uiState, setUiState] = useState<UIStateMode>('default');
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const resolvedInitialCat = initialCategoryParam
+    ? initialCategoryParam.charAt(0).toUpperCase() + initialCategoryParam.slice(1).toLowerCase()
+    : initialLandscapeParam === 'mountains'
+    ? 'Mountains'
+    : initialLandscapeParam === 'beaches'
+    ? 'Beaches'
+    : initialLandscapeParam === 'metropolis'
+    ? 'Cities'
+    : initialLandscapeParam === 'nature'
+    ? 'Nature'
+    : null;
+
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(resolvedInitialCat);
+  const [selectedLandscape, setSelectedLandscape] = useState<string | null>(
+    initialLandscapeParam || (resolvedInitialCat ? categoryToLandscape[resolvedInitialCat] : null)
+  );
+  const [consoleQuery, setConsoleQuery] = useState<string>('');
+  const [consoleTrigger, setConsoleTrigger] = useState<number>(0);
 
   const upcomingTrip = MOCK_TRIPS[0];
 
   const handlePromptSubmit = (prompt: string) => {
     if (prompt && prompt.trim()) {
-      router.push(`/ai?prompt=${encodeURIComponent(prompt.trim())}`);
+      const q = prompt.trim();
+      setConsoleQuery(q);
+      const lower = q.toLowerCase();
+      if (lower.includes('beach') || lower.includes('coast')) {
+        setSelectedLandscape('beaches');
+        setSelectedCategory('Beaches');
+      } else if (lower.includes('mountain') || lower.includes('alpine') || lower.includes('hike')) {
+        setSelectedLandscape('mountains');
+        setSelectedCategory('Mountains');
+      } else if (lower.includes('city') || lower.includes('urban')) {
+        setSelectedLandscape('metropolis');
+        setSelectedCategory('Cities');
+      } else if (lower.includes('nature') || lower.includes('forest') || lower.includes('wild')) {
+        setSelectedLandscape('nature');
+        setSelectedCategory('Nature');
+      }
+      setConsoleTrigger((prev) => prev + 1);
+      const el = document.getElementById('plan');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     } else {
-      router.push('/#plan');
+      const el = document.getElementById('plan');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        router.push('/home#plan');
+      }
     }
   };
 
   const handleCategorySelect = (category: string) => {
-    setSelectedCategory(category === selectedCategory ? null : category);
-    router.push(`/ai?prompt=${encodeURIComponent(`Plan a scenic trip focused on ${category.toLowerCase()} with serene landscapes and authentic stays.`)}`);
+    const isTogglingOff = selectedCategory === category;
+    const newCat = isTogglingOff ? null : category;
+    setSelectedCategory(newCat);
+
+    const mappedLandscape = newCat ? (categoryToLandscape[newCat] || 'beaches') : 'beaches';
+    setSelectedLandscape(mappedLandscape);
+    setConsoleTrigger((prev) => prev + 1);
+
+    const el = document.getElementById('plan');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   // Filter destinations if category selected
   const filteredDestinations = selectedCategory
-    ? MOCK_DESTINATIONS.filter((d) =>
-        d.vibes.some((v) => v.toLowerCase().includes(selectedCategory.toLowerCase())) ||
-        d.name.toLowerCase().includes(selectedCategory.toLowerCase())
-      )
+    ? MOCK_DESTINATIONS.filter((d) => {
+        const cat = selectedCategory.toLowerCase();
+        return (
+          d.vibes.some((v) => v.toLowerCase().includes(cat)) ||
+          d.name.toLowerCase().includes(cat) ||
+          (cat === 'mountains' && (d.landscape?.toLowerCase().includes('alpine') || d.landscape?.toLowerCase().includes('mountain'))) ||
+          (cat === 'beaches' && (d.landscape?.toLowerCase().includes('beach') || d.landscape?.toLowerCase().includes('coast'))) ||
+          (cat === 'cities' && (d.landscape?.toLowerCase().includes('metropolis') || d.landscape?.toLowerCase().includes('historic'))) ||
+          (cat === 'nature' && (d.landscape?.toLowerCase().includes('nature') || d.landscape?.toLowerCase().includes('forest')))
+        );
+      })
     : MOCK_DESTINATIONS;
 
   // Loading Skeleton State
@@ -185,6 +257,40 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ===================== ASTRA 6 AI FILTER & TASTE CONSOLE ===================== */}
+      <section id="plan" className="w-full max-w-4xl mx-auto scroll-mt-24 space-y-3">
+        <div className="flex items-center justify-between px-1">
+          <div className="flex items-center gap-2">
+            <Badge variant="sunset" size="sm">
+              <Sparkles className="w-3.5 h-3.5 mr-1" />
+              Astra 6 AI Engine
+            </Badge>
+            <span className="text-xs font-bold text-[#5B0B24] dark:text-[#FFF7FA]">
+              Smart Filter & Travel Taste Search
+            </span>
+          </div>
+          <span
+            className="text-[#FF2A6D] text-xs font-bold rotate-[-4deg] hidden sm:inline"
+            style={{ fontFamily: 'var(--font-caveat, cursive)' }}
+          >
+            Live AI Recommendations
+          </span>
+        </div>
+
+        <CompactTasteConsole
+          externalLandscape={selectedLandscape}
+          initialQuery={consoleQuery}
+          searchTrigger={consoleTrigger}
+          onLandscapeChange={(l) => {
+            setSelectedLandscape(l);
+            const matchedCat = Object.entries(categoryToLandscape).find(([, val]) => val === l);
+            if (matchedCat) {
+              setSelectedCategory(matchedCat[0]);
+            }
+          }}
+        />
+      </section>
+
       {/* ===================== M02 DISCOVER CATEGORY BOXES (Mountains, Beaches, Cities, Nature) ===================== */}
       <section>
         <div className="flex items-center justify-between mb-4">
@@ -193,7 +299,7 @@ export default function HomePage() {
               Discover by Style
             </h2>
             <p className="text-xs text-[#704250] dark:text-[#FFB3C6]">
-              Handpicked destinations crafted for your travel rhythm
+              Tap any style to instantly filter and consult Astra AI
             </p>
           </div>
           <Link
@@ -386,5 +492,28 @@ export default function HomePage() {
         </div>
       </section>
     </main>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+          <MobileHeader title="Journi Home" />
+          <div className="space-y-4">
+            <Skeleton height={140} className="w-full rounded-[28px]" />
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <Skeleton height={100} className="rounded-2xl" />
+              <Skeleton height={100} className="rounded-2xl" />
+              <Skeleton height={100} className="rounded-2xl" />
+              <Skeleton height={100} className="rounded-2xl" />
+            </div>
+          </div>
+        </main>
+      }
+    >
+      <HomeContent />
+    </Suspense>
   );
 }

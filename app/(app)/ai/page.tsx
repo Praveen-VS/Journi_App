@@ -62,6 +62,8 @@ function AIPlannerContent() {
   const initialPrompt = searchParams.get('prompt') || '';
   const initialView = searchParams.get('view') || '';
   const initialAction = searchParams.get('action') || '';
+  const initialMode = searchParams.get('mode') || '';
+  const initialLandscapeParam = searchParams.get('landscape') || '';
   const initialDays = searchParams.get('days') ? parseInt(searchParams.get('days')!, 10) : 5;
   const initialVibe = searchParams.get('vibe') || 'Cultural';
   const initialBudget = searchParams.get('budget') || 'Moderate';
@@ -90,6 +92,7 @@ function AIPlannerContent() {
   const determineInitialMode = (): AIPlannerMode => {
     if (initialView === 'result') return 'result';
     if (initialAction === 'generate') return 'options_select';
+    if (initialMode === 'taste_matcher') return 'taste_matcher';
     if (initialPrompt && initialAction !== 'generate') return 'prompt_composer';
     return 'taste_matcher';
   };
@@ -100,7 +103,7 @@ function AIPlannerContent() {
   // If visiting /ai directly without specific trip generation intent, redirect to Home AI console
   useEffect(() => {
     if (!initialAction && !initialView && !initialDest && !initialPrompt) {
-      router.replace('/#plan');
+      router.replace('/home#plan');
     }
   }, [initialAction, initialView, initialDest, initialPrompt, router]);
 
@@ -150,7 +153,18 @@ function AIPlannerContent() {
     'authentic_spicy',
     'cafes_bakeries',
   ]);
-  const [landscape, setLandscape] = useState<string>('historic');
+
+  const detectedLandscape = useMemo(() => {
+    if (initialLandscapeParam) return initialLandscapeParam;
+    const p = initialPrompt.toLowerCase();
+    if (p.includes('beach') || p.includes('coast')) return 'beaches';
+    if (p.includes('mountain') || p.includes('alpine') || p.includes('hike')) return 'mountains';
+    if (p.includes('nature') || p.includes('forest') || p.includes('wild')) return 'nature';
+    if (p.includes('city') || p.includes('metropolis')) return 'metropolis';
+    return 'historic';
+  }, [initialLandscapeParam, initialPrompt]);
+
+  const [landscape, setLandscape] = useState<string>(detectedLandscape);
   const [tasteBudget, setTasteBudget] = useState<string>('Moderate');
   const [tasteCompanion, setTasteCompanion] = useState<string>('Couple');
   const [tasteDays, setTasteDays] = useState<number>(5);
@@ -803,8 +817,8 @@ function AIPlannerContent() {
               description="Return to your home search console with all options preserved"
               mobileLabel="Back to Home Results"
               badgeText="Home Search Preserved"
-              onBack={() => router.push('/')}
-              fallbackHref="/"
+              onBack={() => router.push('/home')}
+              fallbackHref="/home"
             />
           )}
 

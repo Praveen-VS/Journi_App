@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -16,6 +16,11 @@ export default function RegisterPage() {
   const [agreed, setAgreed] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorText, setErrorText] = useState('');
+
+  // Pre-cache home route for instant transition
+  useEffect(() => {
+    router.prefetch('/home');
+  }, [router]);
 
   // Password strength calculation
   const getPasswordStrength = () => {
@@ -39,10 +44,10 @@ export default function RegisterPage() {
     }
     setErrorText('');
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      router.push('/home');
-    }, 600);
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('journi_authenticated', 'true');
+    }
+    router.replace('/home');
   };
 
   return (

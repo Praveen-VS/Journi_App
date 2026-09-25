@@ -11,17 +11,32 @@ import {
   Loader2,
   Check,
   Compass,
+  ArrowRight,
 } from 'lucide-react';
 import TasteMatchCard from '@/components/cards/TasteMatchCard';
 import Badge from '@/components/ui/Badge';
 import type { UserTasteProfile, TasteMatchResult, LocationScope, Destination } from '@/types';
 import { detectUserLocation } from '@/lib/location';
 
-export default function CompactTasteConsole() {
+export interface CompactTasteConsoleProps {
+  initialLandscape?: string;
+  initialQuery?: string;
+  externalLandscape?: string | null;
+  searchTrigger?: number;
+  onLandscapeChange?: (landscape: string) => void;
+}
+
+export default function CompactTasteConsole({
+  initialLandscape,
+  initialQuery,
+  externalLandscape,
+  searchTrigger,
+  onLandscapeChange,
+}: CompactTasteConsoleProps = {}) {
   const router = useRouter();
 
   // Search input state
-  const [promptQuery, setPromptQuery] = useState('');
+  const [promptQuery, setPromptQuery] = useState(initialQuery || '');
 
   // Taste Profiler states
   const [locationScope, setLocationScope] = useState<LocationScope>('interstate');
@@ -30,7 +45,7 @@ export default function CompactTasteConsole() {
   const [isDetectingLocation, setIsDetectingLocation] = useState(false);
 
   const [energyRhythm, setEnergyRhythm] = useState('chill');
-  const [landscape, setLandscape] = useState('beaches');
+  const [landscape, setLandscape] = useState(initialLandscape || 'beaches');
   const [budgetTier, setBudgetTier] = useState('Moderate');
   const [companion, setCompanion] = useState('Couple');
   const [adultsCount, setAdultsCount] = useState<number>(2);
@@ -226,8 +241,26 @@ export default function CompactTasteConsole() {
     }
   }, [showMoreResults, tripDays, adultsCount, childrenCount, astraMatches]);
 
+  // Synchronize externalLandscape
+  useEffect(() => {
+    if (externalLandscape && externalLandscape !== landscape) {
+      setLandscape(externalLandscape);
+    }
+  }, [externalLandscape, landscape]);
+
+  // Synchronize initialQuery
+  useEffect(() => {
+    if (initialQuery !== undefined && initialQuery !== promptQuery) {
+      setPromptQuery(initialQuery);
+    }
+  }, [initialQuery, promptQuery]);
+
   // Execute Astra 6 Plan Search
-  const handlePlanWithAstra = async (e?: React.FormEvent) => {
+  const handlePlanWithAstra = async (
+    e?: React.FormEvent,
+    overrideLandscape?: string,
+    overrideQuery?: string
+  ) => {
     if (e) e.preventDefault();
     setIsPlanning(true);
     setHasSearched(true);
@@ -235,7 +268,8 @@ export default function CompactTasteConsole() {
     setShowMoreResults(false);
 
     try {
-      const q = promptQuery.trim();
+      const activeLandscape = overrideLandscape || landscape;
+      const q = (overrideQuery !== undefined ? overrideQuery : promptQuery).trim();
       const res = await fetch('/api/ai/search', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -243,9 +277,9 @@ export default function CompactTasteConsole() {
           query: q,
           scope: locationScope,
           origin: userOrigin,
-          customLocation: locationScope === 'custom' ? customLocation : undefined,
+          customLocation: locationScope === 'custom' ? (customLocation || '').trim() : undefined,
           rhythm: energyRhythm,
-          landscape,
+          landscape: activeLandscape,
           budgetTier,
           companion,
           adultsCount,
@@ -279,7 +313,7 @@ export default function CompactTasteConsole() {
                   userOrigin,
                   customLocation,
                   energyRhythm,
-                  landscape,
+                  landscape: activeLandscape,
                   budgetTier,
                   companion,
                   adultsCount,
@@ -309,6 +343,20 @@ export default function CompactTasteConsole() {
     } finally {
       setIsPlanning(false);
     }
+  };
+
+  // Trigger search on external searchTrigger
+  const prevTriggerRef = useRef(searchTrigger);
+  useEffect(() => {
+    if (searchTrigger !== undefined && searchTrigger > 0 && searchTrigger !== prevTriggerRef.current) {
+      prevTriggerRef.current = searchTrigger;
+      handlePlanWithAstra(undefined, externalLandscape || undefined, initialQuery !== undefined ? initialQuery : undefined);
+    }
+  }, [searchTrigger, externalLandscape, initialQuery]);
+
+  const handleSelectLandscape = (lId: string) => {
+    setLandscape(lId);
+    onLandscapeChange?.(lId);
   };
 
   const handlePlanTripCard = (match: TasteMatchResult) => {
@@ -447,9 +495,25 @@ export default function CompactTasteConsole() {
                 type="text"
                 value={customLocation}
                 onChange={(e) => setCustomLocation(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handlePlanWithAstra();
+                  }
+                }}
+                autoFocus
                 placeholder="Enter exact destination: e.g. Kyoto, Japan or Swiss Alps or Goa..."
                 className="flex-1 text-xs px-3.5 py-2 rounded-xl bg-white dark:bg-[#280814] text-[#5B0B24] dark:text-[#FFF7FA] placeholder-[#5B0B24]/40 dark:placeholder-[#FF8BA7]/40 border border-[#FF4F7A]/30 focus:outline-none focus:ring-1 focus:ring-[#FF4F7A]"
               />
+              <button
+                type="button"
+                onClick={() => handlePlanWithAstra()}
+                disabled={isPlanning}
+                className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#FF4F7A] to-[#FF7A3D] text-white font-bold text-xs shadow-xs hover:scale-105 active:scale-95 transition-all flex items-center gap-1 cursor-pointer shrink-0 disabled:opacity-50"
+              >
+                <span>Find</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
             </div>
           )}
         </div>
@@ -489,7 +553,7 @@ export default function CompactTasteConsole() {
                 <button
                   key={l.id}
                   type="button"
-                  onClick={() => setLandscape(l.id)}
+                  onClick={() => handleSelectLandscape(l.id)}
                   className={`px-3 py-1.5 rounded-xl text-[11px] font-semibold border transition-all cursor-pointer ${
                     landscape === l.id
                       ? 'bg-[#C2185B] text-white border-[#C2185B] shadow-xs'
