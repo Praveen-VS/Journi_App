@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import MobileHeader from '@/components/navigation/MobileHeader';
 import UnifiedBackButton from '@/components/navigation/UnifiedBackButton';
 import { FilterPreferencesStrip } from '@/components/shared/FilterPreferencesStrip';
+import { resolveScopeForDestination, getCachedUserLocation } from '@/lib/location';
 import BudgetCard from '@/components/cards/BudgetCard';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
@@ -38,7 +39,8 @@ function BudgetPlannerContent() {
   const childrenParam = searchParams.get('children');
   const adultsCount = adultsParam ? parseInt(adultsParam, 10) : undefined;
   const childrenCount = childrenParam ? parseInt(childrenParam, 10) : undefined;
-  const scope = searchParams.get('scope') || 'in_state';
+  const scopeParam = searchParams.get('scope');
+  const scope = scopeParam || resolveScopeForDestination(dest, country, getCachedUserLocation()).scope;
   const optionId = searchParams.get('optionId') || '';
   const from = searchParams.get('from') || '';
   const totalParam = searchParams.get('total');

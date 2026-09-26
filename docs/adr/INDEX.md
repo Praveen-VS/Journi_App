@@ -22,6 +22,7 @@
 | [ADR-0012](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0012-remove-destinations-page-and-catalog-routes.md) | Removal of Public Destinations Page and Catalog Routes | **Accepted** | 2026-09-25 | Navigation & Route Cleanup |
 | [ADR-0013](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0013-redesign-trip-options-selection-and-journi-plan.md) | Redesign 3 Trip Options Selection Page & Your Journi Travel Plan Sidebar | **Accepted** | 2026-09-25 | Selection Page & Plan Sidebar Redesign |
 | [ADR-0014](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0014-hide-v1-inspector-and-upgrade-how-it-works-workflow.md) | Hide V1 Inspector and Upgrade How It Works Workflow | **Accepted** | 2026-09-25 | Inspector & How It Works Page |
+| [ADR-0015](file:///c:/Users/NETCOM/Desktop/Journi%20App%20V1/docs/adr/0015-origin-aware-distance-scope-resolver.md) | Origin-Aware Dynamic Distance & Scope Resolver | **Accepted** | 2026-09-26 | Scope Resolution & Saved Trips |
 
 ---
 

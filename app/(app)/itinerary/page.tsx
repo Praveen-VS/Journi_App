@@ -15,16 +15,21 @@ import { Calendar, Compass, ArrowLeft, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import UnifiedBackButton from '@/components/navigation/UnifiedBackButton';
 import { FilterPreferencesStrip } from '@/components/shared/FilterPreferencesStrip';
+import { resolveScopeForDestination, getCachedUserLocation } from '@/lib/location';
 
 function ItineraryContent() {
   const searchParams = useSearchParams();
   const tripIdParam = searchParams.get('tripId');
+  const scopeParam = searchParams.get('scope');
 
   const { activeTripId, getTripById, getItineraryForTrip } = useTripStore();
   const tripId = tripIdParam || activeTripId || 'trip-kyoto-autumn';
 
   const currentTrip = getTripById(tripId) || MOCK_TRIPS[0];
   const itineraryDays = getItineraryForTrip(tripId) || MOCK_ITINERARY_DAYS;
+
+  // Resolve authentic origin-aware scope if not explicitly passed
+  const effectiveScope = scopeParam || resolveScopeForDestination(currentTrip.destination, currentTrip.country, getCachedUserLocation()).scope;
 
   const [selectedDayNumber, setSelectedDayNumber] = useState(1);
   const [showEmptySim, setShowEmptySim] = useState(false);
@@ -52,7 +57,8 @@ function ItineraryContent() {
 
       {/* Selected Filter Preferences Strip */}
       <FilterPreferencesStrip
-        scope="in_state"
+        destination={currentTrip.destination}
+        scope={effectiveScope}
         daysCount={itineraryDays.length}
         companion="Curated"
         budgetTier="Moderate"

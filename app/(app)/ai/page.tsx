@@ -21,7 +21,7 @@ import { TripOptionCard } from '@/components/cards/TripOptionCard';
 import { FilterPreferencesStrip } from '@/components/shared/FilterPreferencesStrip';
 import { generateTripOptions } from '@/lib/ai/tripOptionsEngine';
 import { getScenicPhoto } from '@/lib/ai/openrouter';
-import { detectUserLocation } from '@/lib/location';
+import { detectUserLocation, getCachedUserLocation, resolveScopeForDestination } from '@/lib/location';
 import { useTripStore } from '@/store';
 import { aiService } from '@/services/ai.service';
 import type { GeneratedTripPayload } from '@/lib/ai/fallbackEngine';
@@ -90,6 +90,7 @@ function AIPlannerContent() {
   const initialOptionId = searchParams.get('optionId') || '';
   const fromSource = searchParams.get('from') || '';
   const initialRhythm = searchParams.get('rhythm') || 'peace';
+  const initialScope = (searchParams.get('scope') as LocationScope | null) || null;
 
   // Determine initial mode - route to result if view is result, else options_select if action is generate
   const determineInitialMode = (): AIPlannerMode => {
@@ -175,7 +176,14 @@ function AIPlannerContent() {
   // Location & Radius Scope State
   const [userOrigin, setUserOrigin] = useState<string>('Kerala, India');
   const [isDetectingLocation, setIsDetectingLocation] = useState<boolean>(false);
-  const [locationScope, setLocationScope] = useState<LocationScope>('in_state');
+  const [locationScope, setLocationScope] = useState<LocationScope>(() => {
+    if (initialScope) return initialScope;
+    if (initialDest) {
+      const cached = getCachedUserLocation();
+      return resolveScopeForDestination(initialDest, initialCountry, cached).scope;
+    }
+    return 'in_state';
+  });
   const [customLocation, setCustomLocation] = useState<string>('');
 
   // Astra 6 Search on Taste Profiler
@@ -192,11 +200,15 @@ function AIPlannerContent() {
         if (loc?.display) {
           setUserOrigin(loc.display);
         }
+        if (initialDest && !initialScope && loc) {
+          const resolved = resolveScopeForDestination(initialDest, initialCountry, loc);
+          setLocationScope(resolved.scope);
+        }
       })
       .catch(() => {
         setUserOrigin('Kerala, India');
       });
-  }, []);
+  }, [initialDest, initialCountry, initialScope]);
 
   const handleDetectLocation = async () => {
     setIsDetectingLocation(true);
@@ -1888,7 +1900,7 @@ function AIPlannerContent() {
                   textToRead={`${currentTrip.title}. Day ${activeDay.dayNumber}: ${activeDay.title}. Morning: ${activeDay.activities[0]?.title || ''}. Afternoon: ${activeDay.activities[1]?.title || ''}. Evening: ${activeDay.activities[2]?.title || ''}.`}
                 />
 
-                <Link href={`/itinerary?tripId=${currentTrip.id}`}>
+                <Link href={`/itinerary?tripId=${currentTrip.id}&scope=${locationScope}`}>
                   <Button variant="secondary" size="md" className="bg-white/10 text-white border-white/20 hover:bg-white/20">
                     Full Itinerary Flow
                   </Button>

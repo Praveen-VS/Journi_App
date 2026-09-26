@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import MobileHeader from '@/components/navigation/MobileHeader';
@@ -14,6 +14,7 @@ import { MOCK_SAVED_PLACES } from '@/constants';
 import { useSavedStore } from '@/store';
 import { Bookmark, Sparkles, LayoutGrid, Layers, ArrowRight, Trash2, X, MapPin, Sliders } from 'lucide-react';
 import type { SavedPlace } from '@/types';
+import { detectUserLocation, getCachedUserLocation, resolveScopeForDestination, type DetectedLocation } from '@/lib/location';
 
 export default function SavedPlacesPage() {
   const router = useRouter();
@@ -31,6 +32,26 @@ export default function SavedPlacesPage() {
   const [companion, setCompanion] = useState<string>('Couple');
   const [adultsCount, setAdultsCount] = useState<number>(2);
   const [childrenCount, setChildrenCount] = useState<number>(0);
+  const [userLocation, setUserLocation] = useState<DetectedLocation>(() => getCachedUserLocation());
+
+  // Detect real traveler location on mount
+  useEffect(() => {
+    detectUserLocation()
+      .then((loc) => {
+        if (loc) setUserLocation(loc);
+      })
+      .catch(() => {});
+  }, []);
+
+  // Compute apt distance & scope for the selected saved destination
+  const resolvedScopeInfo = useMemo(() => {
+    if (!selectedPlaceForDetail) return null;
+    return resolveScopeForDestination(
+      selectedPlaceForDetail.destination || selectedPlaceForDetail.name,
+      selectedPlaceForDetail.country,
+      userLocation
+    );
+  }, [selectedPlaceForDetail, userLocation]);
 
   // Restore saved search preferences from home console if available
   useEffect(() => {
@@ -69,6 +90,7 @@ export default function SavedPlacesPage() {
 
   const handlePlanThisTrip = (place: SavedPlace) => {
     const destName = place.destination || place.name;
+    const scopeInfo = resolveScopeForDestination(destName, place.country, userLocation);
     const craftedPrompt = `Plan a ${tripDays}-day ${energyRhythm || 'curated'} trip to ${destName}, ${place.country} featuring ${place.name} with authentic regional experiences.`;
 
     if (typeof window !== 'undefined') {
@@ -82,6 +104,7 @@ export default function SavedPlacesPage() {
             adultsCount,
             childrenCount,
             tripDays,
+            scope: scopeInfo.scope,
           })
         );
       } catch {}
@@ -99,6 +122,7 @@ export default function SavedPlacesPage() {
       adults: String(adultsCount),
       children: String(childrenCount),
       rhythm: energyRhythm || 'peace',
+      scope: scopeInfo.scope,
       from: 'saved',
       reason: place.notes || `Curated escape to ${place.name} in ${destName}, ${place.country}`,
     });
@@ -471,8 +495,44 @@ export default function SavedPlacesPage() {
                   </h3>
                 </div>
                 <span className="text-[10px] font-bold text-[#FF4F7A] bg-[#FF4F7A]/10 px-2 py-0.5 rounded-full">
-                  Same as Home Search
+                  Origin-Aware Scope
                 </span>
+              </div>
+
+              {/* Distance & Scope Resolver (Dynamic User Location) */}
+              <div className="p-3 rounded-2xl bg-gradient-to-r from-[#FFF5F8] to-[#FFF9F5] dark:from-[#2B0818] dark:to-[#220612] border border-[#FF4F7A]/25 flex items-center justify-between gap-3 shadow-2xs">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-xl bg-white dark:bg-[#3D0A22] border border-[#FF4F7A]/25 flex items-center justify-center text-[#E61E50] shrink-0 shadow-2xs">
+                    <MapPin className="w-4 h-4 text-[#FF4F7A]" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-extrabold text-xs text-[#3E0717] dark:text-white">
+                        {resolvedScopeInfo?.label || 'In-State'}
+                      </span>
+                      {resolvedScopeInfo?.distanceKm !== undefined && (
+                        <span className="text-[10px] font-bold text-[#FF7A3D]">
+                          (~{resolvedScopeInfo.distanceKm} km)
+                        </span>
+                      )}
+                    </div>
+                    <span className="text-[10px] text-[#704250] dark:text-[#FFB3C6]/75 block">
+                      From origin: {userLocation.city || userLocation.state}, {userLocation.country}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-1">
+                  <Badge variant="sunset" size="sm" className="font-black text-[10px] uppercase tracking-wider shadow-2xs">
+                    {resolvedScopeInfo?.scope === 'nearby_200km'
+                      ? 'Within 200 km'
+                      : resolvedScopeInfo?.scope === 'in_state'
+                      ? 'In-State'
+                      : resolvedScopeInfo?.scope === 'interstate'
+                      ? 'Interstate'
+                      : 'International'}
+                  </Badge>
+                </div>
               </div>
 
               {/* 1. Trip Rhythm */}
